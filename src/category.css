@@ -1,0 +1,147 @@
+.cat_navbar{
+    display: inline-block;
+    width: 80%;
+    background: darkslateblue;
+}
+.cat_nav{
+    text-align: center;
+    justify-items: flex-start;
+}
+.search { float: right; }
+.cat_container {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background : darkslateblue;
+    display : flex;/**/
+    flex-direction:row;/**/
+}
+
+.cat_item {
+    position:relative;
+    display: inline-block;
+    padding: 0;
+}
+
+.sub_item{
+    border-bottom: 3px solid white;
+    border-top: 3px solid white;
+    padding : 10px 20px;
+}
+.link{
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    color: white;
+}
+.sub_link{
+    text-decoration: none;
+    color: white;
+    size : inherit;
+}
+
+.cat_item:hover { background: darkblue; }
+.sub_item:hover { background: mediumblue; }
+
+.cat_item:hover .sub{
+    display:block;
+}
+
+.sub{
+    position: absolute;
+    top: 40px;
+    /*width: 100%;*/
+    /*border: 1px solid #000;*/
+    padding : 0;
+    display: none;
+    box-sizing: content-box;
+    z-index:10;
+    list-style: none;
+    background : darkslateblue;
+}
+
+.cat_carousel{
+    text-align : center;
+}
+
+#cat_carousel_inner{
+    width : 70%;
+    height : 70%;
+    display : inline-block;
+}
+
+.my_ss_product{
+    text-align : center;
+    margin : 30px;
+}
+.my_ss_product h2{
+    color: white;
+    display : inline-block;
+    width : 70%;
+    margin : 30px;
+    height : 80px;
+    background : darkslateblue;
+}
+
+.star_product_total{
+    text-align : center;
+}
+
+.star_product_list{
+    display: table;
+    padding: 0;
+    margin : 0;
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+.star_product_total1{
+    text-align : center;
+}
+
+.star_product_list1{
+    display: table;
+    padding: 0;
+    margin : 0;
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+li.empty{
+    display:table-cell;
+    list-style: none;
+}
+.star_product{
+    display: table-cell;
+    list-style: none;
+    text-align: center;
+}
+.star_product_list:before{
+    display:table-cell;
+}
+.star_product_list:after{
+    display:table-cell;
+}
+
+.lifestyle_btn_list{
+    text-align:center;
+}
+
+#lifestyle_btn{
+    padding : 40px;
+    margin : 50px;
+    font-weight : 800;
+    font-size : 30px;
+    border-radius : 50px;
+}
+
+#lifestyle_btn:hover{
+    background-color : coral;
+}
+
+.best_category{
+    background-color : coral;
+}

@@ -8,13 +8,15 @@ export function Header(){
         <header className="header">
             <div>
                 <nav className="navbar">
-                    <ul className="container">
+                    <ul className="head_container">
                         <li className="item"><Link to="/mypage">마이페이지</Link></li>
                         <li className="item"><Link to="/login">로그인</Link></li>
                     </ul>
-                    <div><a href="/"><BsDoorOpenFill/>홈</a></div>
+                    <div><Link to="/"><BsDoorOpenFill/>홈</Link></div>
                 </nav>
             </div>
         </header>
     )
 }
+
+export default Header;

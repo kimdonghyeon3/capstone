@@ -1,10 +1,14 @@
 import React from "react";
+import {Header} from './laydout/header';
+import {Footer} from './laydout/footer';
 
 function Mypage(){
 
     return(
         <div>
-          <h2> 마에피이지</h2>
+            <Header></Header>
+            <h2> 마이페이지</h2>
+            <Footer/>
         </div>
     )
 }

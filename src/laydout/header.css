@@ -8,7 +8,7 @@ body{
     background: darkslateblue;
 }
 .navbar>div { float: left; }
-.container {
+.head_container {
     float: right;
     margin: 0;
     padding: 0;
