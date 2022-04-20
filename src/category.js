@@ -805,8 +805,9 @@ function Category_content(){
 
     var selected_category ={
         title : 'sorry',
-        description : 'not found'
+        description : <Category_content_main/>
     }
+    console.log("real national main : ",selected_category);
     for(let i = 0 ; i < contents.length ; i++){
         if(contents[i].title === category_id){
             selected_category = contents[i];
@@ -895,7 +896,6 @@ function Category(){
                 <Routes>
                     <Route path="/:category_id" element={<Category_content/>}></Route>
                 </Routes>
-
 
                 <Footer/>
             </div>

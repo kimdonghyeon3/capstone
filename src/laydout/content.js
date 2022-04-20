@@ -8,7 +8,7 @@ export function Content(){
             <div>
                 <h2> 메인 </h2>
                 <div className="door">
-                    <NavLink to="/category">
+                    <NavLink to="/category/main">
                         <img src={require("../img/door.jpg")} />
                     </NavLink>
                 </div>
