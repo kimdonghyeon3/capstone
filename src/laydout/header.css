@@ -1,33 +1,40 @@
 
-body{
-    margin:0;/*body의 바깥 여백을 없앰으로 nav bar가 페이지에 바짝붙게함*/
-}
-.navbar {
-    display: inline-block;
-    width: 100%;
-    background: darkslateblue;
-}
-.navbar>div { float: left; }
-.head_container {
-    float: right;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background : darkslateblue;
-}
-.item {
-    display: inline-block;
-    padding: 0;
-}
-.navbar a {
-    display: block;
-    text-decoration: none;
-    padding: 10px 20px;
-    color: white;
-}
-.navbar a:hover { background: darkblue; }
-
 .header{
-    width:100%;
-    background-color : darkslateblue;
+    box-shadow : 0 3px 0 0 #EFEFEF;
+}
+
+.header_navbar{
+    display : inline-block;
+    width : 100%;
+    height: 100%;
+    background : white;
+}
+
+.head_container{
+    float : right;
+    list-style : none;
+    margin-bottom : 0 !important;
+    margin-right : 10% !important;
+}
+.header_link{
+    display:block;
+    text-decoration: none;
+    color : black;
+    font-weight: 600;
+    font-size : 18px;
+}
+
+.header_link:hover{
+    color : #2AC1BC;
+}
+
+.header_item_left{
+    float : left;
+    margin-left : 10%;
+    margin-top : 6px;
+}
+
+.header_item_right{
+    display : inline-block;
+    margin : 21px 17px 17px 17px;
 }

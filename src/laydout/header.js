@@ -6,15 +6,21 @@ export function Header(){
 
     return(
         <header className="header">
-            <div>
-                <nav className="navbar">
+                <nav className="header_navbar">
+
+                    <div className="header_item_left">
+                        <Link className="header_link" to="/"><img src={require("../img/logo.png")} alt="" width="80" height="60"/></Link>
+                    </div>
+
                     <ul className="head_container">
-                        <li className="item"><Link to="/mypage">마이페이지</Link></li>
-                        <li className="item"><Link to="/login">로그인</Link></li>
+                        <li className="header_item_right">
+                            <Link className="header_link" to="/mypage">마이페이지</Link>
+                        </li>
+                        <li className="header_item_right">
+                            <Link className="header_link" to="/login">로그인</Link>
+                        </li>
                     </ul>
-                    <div><Link to="/"><BsDoorOpenFill/>홈</Link></div>
                 </nav>
-            </div>
         </header>
     )
 }

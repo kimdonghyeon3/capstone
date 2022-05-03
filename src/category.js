@@ -14,106 +14,56 @@ import Login from "./login";
 function Category_content_main(){
 
     return(<div>
-        <div className="cat_content">
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total1">
-                <ul className='star_product_list1'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
 
-                </ul>
+        <div className="product_container">
+            <div className="product">
+                <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                <h5 className="product_title"> 상품 제목</h5>
+                <p className="product_des"> 상품 내용 요약</p>
+                <div className="product_mon"> 월 : 15,000￦</div>
+                <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
             </div>
 
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total">
-                <ul className='star_product_list'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-
-                </ul>
+            <div className="product">
+                <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                <h5 className="product_title"> 상품 제목</h5>
+                <p className="product_des"> 상품 내용 요약</p>
+                <div className="product_mon"> 월 : 15,000￦</div>
+                <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
             </div>
+
+            <div className="product">
+                <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                <h5 className="product_title"> 상품 제목</h5>
+                <p className="product_des"> 상품 내용 요약</p>
+                <div className="product_mon"> 월 : 15,000￦</div>
+                <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+            </div>
+
+            <div className="product">
+                <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                <h5 className="product_title"> 상품 제목</h5>
+                <p className="product_des"> 상품 내용 요약</p>
+                <div className="product_mon"> 월 : 15,000￦</div>
+                <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+            </div>
+
+            <div className="product">
+                <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                <h5 className="product_title"> 상품 제목</h5>
+                <p className="product_des"> 상품 내용 요약</p>
+                <div className="product_mon"> 월 : 15,000￦</div>
+                <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+            </div>
+
+            <div className="product">
+                <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                <h5 className="product_title"> 상품 제목</h5>
+                <p className="product_des"> 상품 내용 요약</p>
+                <div className="product_mon"> 월 : 15,000￦</div>
+                <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+            </div>
+
         </div>
     </div>)
 }
@@ -122,113 +72,64 @@ function Category_content_lifestyle(){
 
     return(
         <div>
+
             {/*라이프스타일 네비바*/}
-            <div className="lifestyle_btn_list">
-            <Button variant="warning" id="lifestyle_btn">생활</Button>{' '}
-            <Button variant="warning" id="lifestyle_btn">멤버쉽</Button>{' '}
-            <Button variant="warning" id="lifestyle_btn">건강</Button>{' '}
+            <div className="category_sub_navbar">
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/lifestyle/life">생활</Link></div>
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/lifestyle/life">멤버쉽</Link></div>
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/lifestyle/life">건강</Link></div>
             </div>
 
-            <div className="cat_content">
-                {/* 구독 상품 리스트*/}
-                <div className="star_product_total1">
-                    <ul className='star_product_list1'>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-
-                    </ul>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
 
-                {/* 구독 상품 리스트*/}
-                <div className="star_product_total">
-                    <ul className='star_product_list'>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-
-                    </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
         </div>
@@ -238,113 +139,63 @@ function Category_content_lifestyle(){
 function Category_content_content(){
     return(
         <div>
-            {/*라이프스타일 네비바*/}
-            <div className="lifestyle_btn_list">
-                <Button variant="warning" id="lifestyle_btn">도서</Button>{' '}
-                <Button variant="warning" id="lifestyle_btn">음악</Button>{' '}
-                <Button variant="warning" id="lifestyle_btn">영상</Button>{' '}
+            {/*컨텐츠 네비바*/}
+            <div className="category_sub_navbar">
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/book">도서</Link></div>
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/music">음악</Link></div>
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/video">영상</Link></div>
             </div>
 
-            <div className="cat_content">
-                {/* 구독 상품 리스트*/}
-                <div className="star_product_total1">
-                    <ul className='star_product_list1'>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-
-                    </ul>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
 
-                {/* 구독 상품 리스트*/}
-                <div className="star_product_total">
-                    <ul className='star_product_list'>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-
-                    </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
         </div>
@@ -354,113 +205,64 @@ function Category_content_content(){
 function Category_content_food(){
     return(
         <div>
-            {/*라이프스타일 네비바*/}
-            <div className="lifestyle_btn_list">
-                <Button variant="warning" id="lifestyle_btn">빵</Button>{' '}
-                <Button variant="warning" id="lifestyle_btn">유제품</Button>{' '}
-                <Button variant="warning" id="lifestyle_btn">죽</Button>{' '}
+
+            {/*음식 네비바*/}
+            <div className="category_sub_navbar">
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/bread">빵</Link></div>
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/milk">유제품</Link></div>
+                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/juk">죽</Link></div>
             </div>
 
-            <div className="cat_content">
-                {/* 구독 상품 리스트*/}
-                <div className="star_product_total1">
-                    <ul className='star_product_list1'>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-
-                    </ul>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
 
-                {/* 구독 상품 리스트*/}
-                <div className="star_product_total">
-                    <ul className='star_product_list'>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-                        <li className='empty'></li>
-                        <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                            <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                            <Card.Body>
-                                <Card.Title>상품 제목</Card.Title>
-                                <Card.Text>
-                                    상품 요약
-                                </Card.Text>
-                                <Button variant="primary">구독하러가기</Button>
-                            </Card.Body>
-                        </Card></li>
-
-                    </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
         </div>
@@ -471,157 +273,115 @@ function Category_content_best(){
     return(<div>
         <div className="cat_content">
 
-            <h2 className="best_category lifestyle"> 라이프 스타일 </h2>
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total1">
-                <ul className='star_product_list1'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
+            <h2 className="category_name lifestyle"> 라이프 스타일 </h2>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
 
-                </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
-            <h2 className="best_category content"> 컨텐츠 </h2>
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total">
-                <ul className='star_product_list'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
+            <h2 className="category_name content"> 컨텐츠 </h2>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
 
-                </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
-            <h2 className="best_category food"> 음식 </h2>
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total">
-                <ul className='star_product_list'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
+            <h2 className="category_name food"> 음식 </h2>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
 
-                </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
         </div>
@@ -632,157 +392,115 @@ function Category_content_sale_event(){
     return(<div>
         <div className="cat_content">
 
-            <h2 className="best_category lifestyle"> 라이프 스타일 </h2>
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total1">
-                <ul className='star_product_list1'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
+            <h2 className="category_name lifestyle"> 라이프 스타일 </h2>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
 
-                </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
-            <h2 className="best_category content"> 컨텐츠 </h2>
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total">
-                <ul className='star_product_list'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
+            <h2 className="category_name content"> 컨텐츠 </h2>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
 
-                </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
-            <h2 className="best_category food"> 음식 </h2>
-            {/* 구독 상품 리스트*/}
-            <div className="star_product_total">
-                <ul className='star_product_list'>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
-                    <li className='empty'></li>
-                    <li className='star_product'><Card style={{ width: '15rem',padding : '10px' }}>
-                        <Card.Img variant="top" src={require("./img/ad.png")} style={{height : '12rem'}} />
-                        <Card.Body>
-                            <Card.Title>상품 제목</Card.Title>
-                            <Card.Text>
-                                상품 요약
-                            </Card.Text>
-                            <Button variant="primary">구독하러가기</Button>
-                        </Card.Body>
-                    </Card></li>
+            <h2 className="category_name food"> 음식 </h2>
+            {/*상품 리스트*/}
+            <div className="product_container">
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
 
-                </ul>
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
+                <div className="product">
+                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
+                    <h5 className="product_title"> 상품 제목</h5>
+                    <p className="product_des"> 상품 내용 요약</p>
+                    <div className="product_mon"> 월 : 15,000￦</div>
+                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
+                </div>
+
             </div>
 
         </div>
@@ -827,65 +545,62 @@ function Category(){
     return(
             <div>
                 <Header/>
-                <h2> 카테고리 페이지</h2>
 
+                {/* 캐로셀 이미지 참고*/}
+                <div className="carousel">
+                    <Carousel id="carousel_container">
+                        <Carousel.Item className="carousel_item">
+                            <img
+                                className="d-block w-100"
+                                src={require("./img/ad1.png")}
+                                alt="First slide"
+                                height="300"
+                            />
+                        </Carousel.Item>
+
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={require("./img/ad2.png")}
+                                alt="Second slide"
+                                height="300"
+                            />
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={require("./img/ad3.png")}
+                                alt="Third slide"
+                                height="300"
+                            />
+                        </Carousel.Item>
+                    </Carousel>
+                </div>
+
+                <div className="category_layout">
                 {/*카테고리 navbar*/}
-                <div className="cat_nav">
-                    <nav className="cat_navbar">
-                        <ul className="cat_container">
-                            <li className="cat_item"><Link className='link' to="/category/main">카테고리</Link>
-                                <ul className="sub">
-                                    <li className="sub_item"><Link className='sub_link' to='/category/lifestyle'>라이프스타일</Link></li>
-                                    <li className="sub_item"><Link className='sub_link' to='/category/content'>컨텐츠</Link></li>
-                                    <li className="sub_item"><Link className='sub_link' to='/category/food'>음식</Link></li>
+                <div className="category_navbar">
+                    <nav className="category_container">
+                        <ul className="category_list">
+                            <li className="category_item dropdown"><Link className='category_link' to="/category/main">카테고리</Link>
+                                <ul className="category_sub_list">
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle'>라이프스타일</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/content'>컨텐츠</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/food'>음식</Link></li>
                                 </ul>
                             </li>
-                            <li className="cat_item"><Link className='link' to="/category/best">베스트</Link></li>
-                            <li className="cat_item"><Link className='link'to="/category/sale_event">할인/이벤트</Link></li>
+                            <li className="category_item"><Link className='category_link' to="/category/best">베스트</Link></li>
+                            <li className="category_item"><Link className='category_link'to="/category/sale_event">할인/이벤트</Link></li>
                         </ul>
-                        <div className="search"><Link className="link" to="/"><BsSearch/>검색</Link></div>
+                        {/*<div className="search"><Link className="link" to="/"><BsSearch/>검색</Link></div>*/}
                     </nav>
                 </div>
 
-                {/* 캐로셀 이미지 참고*/}
-                <div className="cat_carousel">
-                <Carousel id="cat_carousel_inner">
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src={require("./img/ad.png")}
-                            alt="First slide"
-                        />
-                        <Carousel.Caption>
-                            <h3>광고 1 </h3>
-                            <p>광고 1 comment.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
+                <div className="category_layout_right">
 
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src={require("./img/ad.png")}
-                            alt="Second slide"
-                        />
+                {/* 검색 */}
+                <div className="search_product">
 
-                        <Carousel.Caption>
-                            <h3>광고 2 </h3>
-                            <p>광고 2 comment</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src={require("./img/ad.png")}
-                            alt="Third slide"
-                        />
-                        <Carousel.Caption>
-                            <h3>광고 3</h3>
-                            <p>광고 3 comment</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
                 </div>
 
                 {/* 내가 구독한 상품*/}
@@ -896,6 +611,8 @@ function Category(){
                 <Routes>
                     <Route path="/:category_id" element={<Category_content/>}></Route>
                 </Routes>
+                    </div>
+                </div>
 
                 <Footer/>
             </div>

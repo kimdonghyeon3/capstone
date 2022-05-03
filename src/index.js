@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {BsDoorOpenFill} from 'react-icons/bs';
@@ -11,11 +11,17 @@ import {Content} from './laydout/content';
 import Mypage from './mypage';
 import Login from './login';
 import Category from "./category";
+import axios from 'axios';
 
-function Home(){
+
+function Home(props){
+
+    const params = useParams();
+
     return(
         <div>
             <Header><BsDoorOpenFill/></Header>
+            <div> {params.id}</div>
             <Content/>
             <Footer/>
         </div>
@@ -23,23 +29,37 @@ function Home(){
 }
 
 function App(){
+
+    const baseUrl = "http://localhost:8080";
+
+    let data;
+
+    useEffect(() => {
+        getTodos();
+    }, []);
+
+    async function getTodos(){
+        await axios.get(baseUrl + "/todo")
+            .then((response) => {
+                console.log(response.data)
+                data = response.data;
+            })
+            .catch((error) =>{
+                console.error(error)
+            })
+    }
+
+
+
     return(
         <div>
             <Routes>
                 <Route path="/" element={<Home />}></Route>
-                <Route path="/mypage" element={<Mypage/>}></Route>
+                <Route path="/mypage/*" element={<Mypage/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/category/*" element={<Category/>}></Route>
-                {/*<Route path="/category/lifestyle" element={<Category/>}></Route>*/}
-                {/*<Route path="/category/content" element={<Category/>}></Route>*/}
-                {/*<Route path="/category/food" element={<Category/>}></Route>*/}
-                {/*<Route path="/category/best" element={<Category/>}></Route>*/}
-                {/*<Route path="/category/sale" element={<Category/>}></Route>*/}
             </Routes>
-
         </div>
-
-
     )
 }
 
