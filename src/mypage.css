@@ -1,4 +1,126 @@
-.User_title{
+
+.user_container{
+    display:flex;
+}
+
+/*유저 navbar*/
+.user_navbar{
+    float:left;
+    width : 10%;
+    margin-left: 8%;
+    margin-right : 5%;
+}
+
+.user_navbar_list{
+    width:100%;
+}
+
+.user_navbar_li{
+    padding : 5% 5% 5% 5%;
+    font-weight: 600;
+    background:#fafafa;
+    border-bottom:1px solid #e4e4e4;
+    border-left:1px solid #e4e4e4;
+    border-right:1px solid #e4e4e4;
+    border-top:1px solid #e4e4e4;
+    list-style : none;
+    text-align: center;
+}
+
+.user_navbar_link{
+    text-decoration:none;
+    color:black;
+    font-size: 1.2rem;
+}
+
+/* 유저 content*/
+.user_content{
+    float:right;
+    width:65%;
+    border:1px solid #e4e4e4;
+    padding : 2%;
+    box-shadow: 3px 3px 5px #000808;
+    margin-bottom : 5%;
+}
+
+/* 유저 profile*/
+.user_profile_h2{
+    font-weight: bold;
+}
+.user_profile_dt{
+    font-size: 1.6rem;
+    margin-bottom : 1%;
+}
+
+.user_profile_dd{
+    font-size : 1.2rem;
+    margin-bottom : 3%;
+}
+
+/* 유저 edit*/
+
+.user_edit_dd input{
+    border: 0.1rem solid #d3d3d3;
+    padding : 0 1.6rem;
+    font-size : 1rem;
+    padding: 0.5rem 1rem;
+    border-radius : 0.4rem;
+}
+
+.user_edit_btn{
+    padding: 0.5rem 1rem;
+    margin-left: 2%;
+    border-color : #6e6e73;
+    background-color : #fff;
+    color : #6e6e73;
+    border-radius : 0.4rem;
+    font-size : 1rem;
+    font-weight: bold;
+}
+
+/* 유저 manage*/
+.product_th_btn{
+    font-size : 1rem;
+    font-weight: bold;
+    border-color : #6e6e73;
+    background-color : #fff;
+    color : #6e6e73;
+    border-radius : 0.4rem;
+}
+.product_th_btn:hover{
+    color : red;
+    border-color : red;
+}
+
+/* 유저 bascket*/
 
 
+/* 유저 withdraw*/
+.user_withdraw_guide{
+    font-size: 1.5rem;
+    font-weight:bold;
+    margin-bottom : 2%;
+}
+.strong{
+    margin-left : 3%;
+    color : red;
+}
+.user_withdraw_text{
+    font-size : 1rem;
+    font-weight : bold;
+    padding : 0.7%;
+}
+.user_withdraw_btn_div{
+    text-align: center;
+}
+.user_withdraw_btn{
+    font-weight: bold;
+    border-color : #1DC078;
+    background-color : #fff;
+    color : #1DC078;
+    border-radius : 0.4rem;
+}
+.user_withdraw_btn:hover{
+    border-color : red;
+    color : red;
 }

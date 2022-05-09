@@ -30,24 +30,24 @@ function Home(props){
 
 function App(){
 
-    const baseUrl = "http://localhost:8080";
-
-    let data;
-
-    useEffect(() => {
-        getTodos();
-    }, []);
-
-    async function getTodos(){
-        await axios.get(baseUrl + "/todo")
-            .then((response) => {
-                console.log(response.data)
-                data = response.data;
-            })
-            .catch((error) =>{
-                console.error(error)
-            })
-    }
+    // const baseUrl = "http://localhost:8080";
+    //
+    // let data;
+    //
+    // useEffect(() => {
+    //     getTodos();
+    // }, []);
+    //
+    // async function getTodos(){
+    //     await axios.get(baseUrl + "/todo")
+    //         .then((response) => {
+    //             console.log(response.data)
+    //             data = response.data;
+    //         })
+    //         .catch((error) =>{
+    //             console.error(error)
+    //         })
+    // }
 
 
 
