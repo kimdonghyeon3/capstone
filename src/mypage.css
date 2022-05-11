@@ -124,3 +124,25 @@
     border-color : red;
     color : red;
 }
+
+/* 기업 프로필*/
+.company_profile_h2{
+    font-weight: bold;
+}
+.company_product_enroll_div{
+    text-align: center;
+}
+.company_product_enroll_btn{
+    font-weight: bold;
+    padding : 1% 5%;
+    font-size:1.5rem;
+    border-color : black;
+    background-color : #fff;
+    color : black;
+    border-radius : 0.4rem;
+}
+.company_product_enroll_btn:hover{
+    border-color : #1DC078;
+    background-color : #fff;
+    color : #1DC078;
+}

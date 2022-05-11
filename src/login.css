@@ -1,0 +1,56 @@
+.gap{
+    display: inline-block
+}
+.user_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+
+}
+
+.company_btn{
+    text-align: center;
+    /*display:center;*/
+    min-height: 0vh;
+}
+.user_id{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user_pw{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.login_config{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_bt{
+    font-size:18px;
+}
+
+.company_bt{
+    font-size:18px;
+}
+.findid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.findpw{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
