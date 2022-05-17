@@ -5,7 +5,6 @@ import {BrowserRouter, Routes, Route, Link, useParams } from 'react-router-dom';
 import {Row, Tab, Col, Nav} from "react-bootstrap";
 import './mypage.css';
 
-
 //기업페이지
 function Company_profile(){
     return(

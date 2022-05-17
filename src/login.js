@@ -4,8 +4,16 @@ import {Footer} from './laydout/footer';
 import {BrowserRouter, Routes, Route, Link, useParams} from 'react-router-dom';
 import './login.css';
 
+function Selectmode(){
+    return(
+        <div className="user_btn"><Link to="/login/"><button className="user_bt"> 개인 로그인</button></Link>
+            <div className="company_btn"><Link to="/login//"><button className="company_bt"> 기업 로그인</button></Link></div>
+        </div>
+    )
+}
 
-function Login(props){
+function Loginform(props){
+
     const [state, setState] = useState({
         email: "",
         password: "",
@@ -20,15 +28,7 @@ function Login(props){
     };
 
     return(
-
         <div>
-            <Header></Header>
-            <div className="gap"></div>
-            <h2><center><strong>문앞에</strong></center></h2>
-            <div className="user_btn"><button className="user_bt"> 개인 로그인</button>
-                <div className="company_btn"><button className="company_bt"> 기업 로그인</button></div>
-            </div>
-
             <dd className="user_id">
                 <input
                     type="email"
@@ -36,7 +36,6 @@ function Login(props){
                     placeholder="아이디"
                     value={state.email}
                     onChange={handleChange}/>
-
             </dd>
 
             <dd className="user_pw">
@@ -45,44 +44,55 @@ function Login(props){
                     id="password"
                     placeholder="비밀번호"
                     value={state.password}
-                    onChange={handleChange}
-                />
+                    onChange={handleChange}/>
             </dd>
-
             <div className="login_config"><button className="login_configbt"> 로그인</button></div>
+
             <div className="gap"></div>
-            <div className="findid"><button className="findid_bt"> 아이디찾기</button>
-                <div className="findpw"><button className="findpw_bt"> 비밀번호찾기</button>
-                    <div className="signup"><button className="signup_bt"> 회원가입</button></div>
-                </div>
+        </div>
+    )
+}
+
+
+function Findany(){
+    return(
+        <div className="findid"><button className="findid_bt"> 아이디찾기</button>
+            <div className="findpw"><button className="findpw_bt"> 비밀번호찾기</button>
+                <div className="signup"><Link to="/register/main"><button className="signup_bt"> 회원가입</button></Link></div>
             </div>
-            <div className="'loginnn'"><Link className="category_sub_link" to="/">로그인</Link></div>
+        </div>
+    )
+
+}
+function Login(){
+
+    return(
+
+        <div>
+            <Header></Header>
+            <div className="gap"></div>
+            <h2><center><strong>문앞에</strong></center></h2>
+
+
+
+            <div className="gap"></div>
+            <Routes>
+                <Route path="/" element={<Selectmode/>}/>
+            </Routes>
+
+            <Routes>
+                <Route path="/" element={<Loginform/>}/>
+            </Routes>
+
+            <Routes>
+                <Route path="/" element={<Findany/>}/>
+            </Routes>
+
             <div className="gap"></div>
             <Footer></Footer>
         </div>
 
     );
-
-
-    function company(){
-//라우터 링크 연결 및 로그인 누르면 메인 페이지로 가게
-        return(
-            <div>
-                <Header></Header>
-                <h2> aa</h2>
-                <ul>
-                    <li><Link to="/login/user"> 유저</Link></li>
-                    <li><Link to="/login/company">기업</Link></li>
-                </ul>
-
-                {/*<Routes>*/}
-                {/*    <Route path="/:login_id/*" element={login}></Route>*/}
-                {/*</Routes>*/}
-
-                <Footer/>
-
-            </div>
-        )
-    }
 }
+
 export default Login;

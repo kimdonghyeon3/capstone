@@ -11,6 +11,7 @@ import {Content} from './laydout/content';
 import Mypage from './mypage';
 import Login from './login';
 import Category from "./category";
+import Register from './register';
 import axios from 'axios';
 
 
@@ -58,6 +59,7 @@ function App(){
                 <Route path="/mypage/*" element={<Mypage/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/category/*" element={<Category/>}></Route>
+                <Route path="/register/:register_id" element={<Register/>}></Route>
             </Routes>
         </div>
     )

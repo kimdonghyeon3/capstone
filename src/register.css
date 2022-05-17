@@ -1,0 +1,54 @@
+.register_main_container{
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    margin-top : 7%;
+    margin-bottom : 7%;
+}
+
+.register_main_item{
+    text-decoration: none;
+    list-style: none;
+    color : black;
+}
+.register_main_item_div{
+    font-size : 2rem;
+    background:white;
+    padding:5% 3% 5% 3%;
+    /*margin-top : 10%;*/
+    /*margin-bottom : 10%;*/
+}
+.register_main_left{
+    margin: 5% 0 5% 5%;
+    background:orange;
+    border-right : 0.1rem solid black;
+}
+.register_main_right{
+    margin: 5% 5% 5% 0;
+    background: #1DC078;
+    border-left : 0.1rem solid black;
+}
+
+.user_enroll_text{
+    display:block;
+    width : 100%;
+    padding:0.0375rem 0.75rem;
+    font-size:1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color:#212529;
+    border:1px solid #ced4da;
+    border-radius:0.25rem;
+}
+
+.user_enroll_form{
+    margin-top : 7%;
+    margin-bottom : 7%;
+    text-align: center;
+    justify-content: center;
+}
+
+.user_enroll_form div{
+    display:flex;
+    justify-content: center;
+}
