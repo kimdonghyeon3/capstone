@@ -24,14 +24,14 @@ function Register_user(){
 
     const[enroll_user, setEnroll_user] = useState({
         id:'',
-        role:'USER',
+        role:'Basic',
         userName:'',
         birth:'',
         phoneNumber:'',
         userId:'',
         password:'',
         email:'',
-        userYN:'Y',
+        userYN:'Yes',
     });
 
     //const  {id, role, userName, birth, phoneNumber, userId, password, email, userYN} = temp;
@@ -86,14 +86,14 @@ function Register_company(){
 
     const[enroll_company, setEnroll_company] = useState({
         id:'',
-        role:'COMPANY',
+        role:'Enterprise',
         companyName:'',
         companyNum:'',
         phoneNumber:'',
         companyId:'',
         password:'',
         email:'',
-        userYN:'Y',
+        userYN:'Yes',
     });
 
     //const  {id, role, userName, birth, phoneNumber, userId, password, email, userYN} = temp;
@@ -204,7 +204,6 @@ function Register(){
                 <Route path="/register/user" element={<Register_user/>}></Route>
                 <Route path="/register/company" element={<Register_company/>}></Route>
             </Routes>
-
 
             <Footer></Footer>
         </div>

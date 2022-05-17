@@ -3,90 +3,60 @@ import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {BrowserRouter, Routes, Route, Link, useParams} from 'react-router-dom';
 import './login.css';
+import axios from "axios";
 
-function Selectmode(){
-    return(
-        <div className="user_btn"><Link to="/login/"><button className="user_bt"> 개인 로그인</button></Link>
-            <div className="company_btn"><Link to="/login//"><button className="company_bt"> 기업 로그인</button></Link></div>
-        </div>
-    )
-}
+function Login(){
 
-function Loginform(props){
+    const baseUrl = "http://localhost:8080";
 
     const [state, setState] = useState({
-        email: "",
+        userId: "",
         password: "",
+        role:"",
     });
     console.log("렌더링");
     const handleChange = (e) => {
-        const { id, value } = e.target;
-        setState((prevState) => ({
-            ...prevState,
-            [id]: value,
-        }));
+        setState({
+            ...state,
+            [e.target.name]: e.target.value,
+        });
     };
 
-    return(
-        <div>
-            <dd className="user_id">
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="아이디"
-                    value={state.email}
-                    onChange={handleChange}/>
-            </dd>
-
-            <dd className="user_pw">
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="비밀번호"
-                    value={state.password}
-                    onChange={handleChange}/>
-            </dd>
-            <div className="login_config"><button className="login_configbt"> 로그인</button></div>
-
-            <div className="gap"></div>
-        </div>
-    )
-}
-
-
-function Findany(){
-    return(
-        <div className="findid"><button className="findid_bt"> 아이디찾기</button>
-            <div className="findpw"><button className="findpw_bt"> 비밀번호찾기</button>
-                <div className="signup"><Link to="/register/main"><button className="signup_bt"> 회원가입</button></Link></div>
-            </div>
-        </div>
-    )
-
-}
-function Login(){
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(state);
+        await axios
+            .post(baseUrl + "/login", state)
+            .then((response) =>{
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     return(
-
         <div>
             <Header></Header>
+
             <div className="gap"></div>
             <h2><center><strong>문앞에</strong></center></h2>
 
-
-
             <div className="gap"></div>
-            <Routes>
-                <Route path="/" element={<Selectmode/>}/>
-            </Routes>
 
-            <Routes>
-                <Route path="/" element={<Loginform/>}/>
-            </Routes>
+            <form onSubmit={handleSubmit} className="login_form">
+                <div><input type="radio" name="role" value="Enterprise" onChange={handleChange}></input>기업 로그인</div>
+                <div><input type="radio" name="role" value="Basic" onChange={handleChange}></input>일반 로그인</div>
+                <div><input type="email" name="userId" placeholder="아이디" onChange={handleChange}></input></div>
+                <div><input type="password" name="password" placeholder="비밀번호" onChange={handleChange}></input></div>
+                <div><button type="submit">로그인</button></div>
+            </form>
 
-            <Routes>
-                <Route path="/" element={<Findany/>}/>
-            </Routes>
+            <div className="findid"><button className="findid_bt"> 아이디찾기</button>
+                <div className="findpw"><button className="findpw_bt"> 비밀번호찾기</button>
+                    <div className="signup"><Link to="/register/main"><button className="signup_bt"> 회원가입</button></Link></div>
+                </div>
+            </div>
 
             <div className="gap"></div>
             <Footer></Footer>
