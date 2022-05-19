@@ -29,6 +29,7 @@ function Register_user(){
         userId:'',
         password:'',
         email:'',
+        role:'U',
     });
 
     const [nameMessage, setNamemessage] = useState('이름은 2 글자 이상으로 작성해 주세요');
@@ -258,35 +259,36 @@ function Register_company(){
     const baseUrl = "http://localhost:8080";
 
     const[enroll_company, setEnroll_company] = useState({
-        companyName:'',
-        companyNum:'',
+        enterpriseName:'',
+        enterpriseNumber:'',
         phoneNumber:'',
-        adress:'',
-        acountNumber:'',
+        address:'',
+        accountNumber:'',
         bankName:'',
-        companyId:'',
+        enterpriseId:'',
         password:'',
         email:'',
+        role:'E',
     });
 
     const [nameMessage, setNamemessage] = useState('이름은 1 글자 이상으로 작성해 주세요');
     const [numMessage, setNummessage] = useState('사업자번호 형식으로 입력 해 주세요.');
     const [phoneMessage, setPhonemessage] = useState("유효하지 않은 휴대폰 번호입니다.");
-    const [companyIdMessage, setCompanyIdmessage] = useState('유저아이디는 6글자 이상으로 작성해 주세요');
+    const [enterpriseIdMessage, setenterpriseIdmessage] = useState('유저아이디는 6글자 이상으로 작성해 주세요');
     const [passwordMessage, setPasswordmessage] = useState('비밀전호는 8글자 이상으로 작성해 주세요');
     const [emailMessage, setEmailmessage] = useState("이메일이 올바른 형식이 아닙니다.");
-    const [adressMessage, setAdressmessage] = useState("입력해라");
-    const [acountNumberMessage, setAcountnumbermessage] = useState("입력해라");
+    const [addressMessage, setaddressmessage] = useState("입력해라");
+    const [accountNumberMessage, setaccountNumbermessage] = useState("입력해라");
     const [bankNameMessage, setBanknamemessage] = useState();
 
     const [isname, setIsname] = useState(false);
     const [isnum, setIsnum] = useState(false);
     const [isphone, setIsphone] = useState(false);
-    const [iscompanyId, setIscompanyId] = useState(false);
+    const [isenterpriseId, setIsenterpriseId] = useState(false);
     const [ispassword, setIspassword] = useState(false);
     const [isemail, setIsemail] = useState(false);
-    const [isadress, setIsadress] = useState(false);
-    const [isacountnumber, setIsacounternumbermessage] = useState(false);
+    const [isaddress, setIsaddress] = useState(false);
+    const [isaccountNumber, setIsacounternumbermessage] = useState(false);
     const [isbankname, setIsbankname] = useState(false);
 
     //폼 입력시 변경되는 사항
@@ -295,7 +297,7 @@ function Register_company(){
         console.log("??");
 
         //아이디 이름 유효성 검사
-        if(e.target.name === 'companyName'){
+        if(e.target.name === 'enterpriseName'){
             if(e.target.value.length < 2){
                 setNamemessage('이름은 1글자 이상으로 작성해 주세요');
                 setIsname(false);
@@ -306,7 +308,7 @@ function Register_company(){
         }
 
         //사업자 번호 유효성 검사
-        if(e.target.name === 'companyNum'){
+        if(e.target.name === 'enterpriseNumber'){
             if(e.target.value.length != 8){
                 setNummessage('사업자번호 형식으로 입력 해 주세요.');
                 setIsnum(false);
@@ -326,13 +328,13 @@ function Register_company(){
         }
 
         //유저 아이디 유효성 검사
-        if(e.target.name === 'companyId'){
+        if(e.target.name === 'enterpriseId'){
             if(e.target.value.length < 6){
-                setCompanyIdmessage('기업아이디는 6글자 이상으로 작성해 주세요');
-                setIscompanyId(false);
+                setenterpriseIdmessage('기업아이디는 6글자 이상으로 작성해 주세요');
+                setIsenterpriseId(false);
             }else{
-                setCompanyIdmessage('올바른 형식입니다. 중복성 검사를 확인하세요');
-                setIscompanyId( false);
+                setenterpriseIdmessage('올바른 형식입니다. 중복성 검사를 확인하세요');
+                setIsenterpriseId( false);
             }
         }
 
@@ -390,19 +392,19 @@ function Register_company(){
     }
 
     //회사 아이디 중복성 검사
-    const companyId_check = async (e) => {
+    const enterpriseId_check = async (e) => {
         e.preventDefault();
-        console.log(enroll_company.companyId);
+        console.log(enroll_company.enterpriseId);
         await axios
             .post(baseUrl + "/register/company", {
-                companyId: enroll_company.id,
+                enterpriseId: enroll_company.id,
             })
             .then((response) => {
                 console.log(response.data);
                 //데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
                 // if(response.data.id === enroll_company.id){
-                //     setCompanyIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
-                //     setIscompanyId(true);
+                //     setenterpriseIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
+                //     setIsenterpriseId(true);
                 // }else{
                 //     alert("중복된 아이디 입니다. 다른 아이디를 입력하세요")
                 // }
@@ -415,28 +417,28 @@ function Register_company(){
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
-                <div><p>companyName
-                    <input className="user_enroll_text" placeholder="회사명"  type="text" required={true} name="companyName" onChange={handleInput}/>
+                <div><p>enterpriseName
+                    <input className="user_enroll_text" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
                     {<span>{nameMessage}</span>}</p></div>
-                <div><p>companyNum
-                    <input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="companyNum" onChange={handleInput}/>
+                <div><p>enterpriseNumber
+                    <input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
                     {<span>{numMessage}</span>}</p></div>
                 <div><p>phone
                     <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
                     <span>{phoneMessage}</span>}</p></div>
-                <div><p>adress
-                    <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="adress" onChange={handleInput} value={enroll_company.adress}/>
-                    <span>{adressMessage}</span>}</p></div>
-                <div><p>acountNumber
-                    <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="acountNumber" onChange={handleInput} value={enroll_company.acountNumber}/>
-                    <span>{acountNumberMessage}</span>}</p></div>
+                <div><p>address
+                    <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                    <span>{addressMessage}</span>}</p></div>
+                <div><p>accountNumber
+                    <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
+                    <span>{accountNumberMessage}</span>}</p></div>
                 <div><p>bankName
                     <input className="user_enroll_text" placeholder="은행이름"  type="text" required={true} name="bankName" onChange={handleInput} value={enroll_company.bankName}/>
                     <span>{bankNameMessage}</span>}</p></div>
-                <div><p>companyId
-                    <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="companyId" onChange={handleInput}/>
-                    {<span>{companyIdMessage}</span>}
-                    <button onClick={companyId_check}>중복성 검사</button>
+                <div><p>enterpriseId
+                    <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
+                    {<span>{enterpriseIdMessage}</span>}
+                    <button onClick={enterpriseId_check}>중복성 검사</button>
                 </p></div>
                 <div><p>password
                     <input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
