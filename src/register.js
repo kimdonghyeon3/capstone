@@ -261,14 +261,18 @@ function Register_company(){
     const[enroll_company, setEnroll_company] = useState({
         enterpriseName:'',
         enterpriseNumber:'',
-        phoneNumber:'',
         address:'',
-        accountNumber:'',
-        bankName:'',
         enterpriseId:'',
         password:'',
+        phoneNumber:'',
         email:'',
-        role:'E',
+        bankName:'',
+        accountNumber:'',
+
+
+
+
+
     });
 
     const [nameMessage, setNamemessage] = useState('이름은 1 글자 이상으로 작성해 주세요');
@@ -384,10 +388,11 @@ function Register_company(){
         await axios
             .post(baseUrl + "/register/company", enroll_company)
             .then((response) =>{
-                console.log(response.data);
+//                console.log(response.data);
+                  console.log("성공~!");
             })
             .catch((error) => {
-                console.log(error);
+//                console.log(error);
             })
     }
 
@@ -396,8 +401,8 @@ function Register_company(){
         e.preventDefault();
         console.log(enroll_company.enterpriseId);
         await axios
-            .post(baseUrl + "/register/company", {
-                enterpriseId: enroll_company.id,
+            .post(baseUrl + "/register/company/check", {
+                enterpriseId: enroll_company.enterpriseId,
             })
             .then((response) => {
                 console.log(response.data);
