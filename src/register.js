@@ -247,9 +247,6 @@ function Register_user(){
                     <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
                     {<span>{emailMessage}</span>}
                 </p></div>
-                <div><p>인증코드
-                    <input className="user_enroll_text" placeholder="인증코드입력"  type="text" required={true} name="secret" onChange={handlesecret}/>
-                </p></div>
                 <div><button type="submit">회원가입</button></div>
             </form>
 
@@ -264,6 +261,8 @@ function Register_company(){
         companyName:'',
         companyNum:'',
         phoneNumber:'',
+        adress:'',
+        acountNumber:'',
         companyId:'',
         password:'',
         email:'',
@@ -275,6 +274,8 @@ function Register_company(){
     const [companyIdMessage, setCompanyIdmessage] = useState('유저아이디는 6글자 이상으로 작성해 주세요');
     const [passwordMessage, setPasswordmessage] = useState('비밀전호는 8글자 이상으로 작성해 주세요');
     const [emailMessage, setEmailmessage] = useState("이메일이 올바른 형식이 아닙니다.");
+    const [adressMessage, setAdressmessage] = useState("입력해라");
+    const [acountNumberMessage, setAcountnumbermessage] = useState("입력해라");
 
     const [isname, setIsname] = useState(false);
     const [isnum, setIsnum] = useState(false);
@@ -282,6 +283,8 @@ function Register_company(){
     const [iscompanyId, setIscompanyId] = useState(false);
     const [ispassword, setIspassword] = useState(false);
     const [isemail, setIsemail] = useState(false);
+    const [isadress, setAdress] = useState(false);
+    const [isacountnumber, setAcounternumbermessage] = useState("");
 
     //폼 입력시 변경되는 사항
     const handleInput = (e)=>{
@@ -418,6 +421,12 @@ function Register_company(){
                 <div><p>phone
                     <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
                     <span>{phoneMessage}</span>}</p></div>
+                <div><p>adress
+                    <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="adress" onChange={handleInput} value={enroll_company.adress}/>
+                    <span>{adressMessage}</span>}</p></div>
+                <div><p>acountNumber
+                    <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="acountNumber" onChange={handleInput} value={enroll_company.acountNumber}/>
+                    <span>{acountNumberMessage}</span>}</p></div>
                 <div><p>companyId
                     <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="companyId" onChange={handleInput}/>
                     {<span>{companyIdMessage}</span>}
@@ -430,9 +439,6 @@ function Register_company(){
                 <div><p>email
                     <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
                     {<span>{emailMessage}</span>}
-                </p></div>
-                <div><p>인증코드
-                    <input className="user_enroll_text" placeholder="인증코드입력"  type="text" required={true} name="secret"/>
                 </p></div>
                 <div><button type="submit">회원가입</button></div>
             </form>
