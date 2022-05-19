@@ -16,10 +16,12 @@ function Login(){
     });
     console.log("렌더링");
     const handleChange = (e) => {
+
         setState({
             ...state,
             [e.target.name]: e.target.value,
         });
+
     };
 
     const handleSubmit = async (e) => {
