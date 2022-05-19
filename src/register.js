@@ -263,6 +263,7 @@ function Register_company(){
         phoneNumber:'',
         adress:'',
         acountNumber:'',
+        bankName:'',
         companyId:'',
         password:'',
         email:'',
@@ -276,6 +277,7 @@ function Register_company(){
     const [emailMessage, setEmailmessage] = useState("이메일이 올바른 형식이 아닙니다.");
     const [adressMessage, setAdressmessage] = useState("입력해라");
     const [acountNumberMessage, setAcountnumbermessage] = useState("입력해라");
+    const [bankNameMessage, setBanknamemessage] = useState();
 
     const [isname, setIsname] = useState(false);
     const [isnum, setIsnum] = useState(false);
@@ -283,8 +285,9 @@ function Register_company(){
     const [iscompanyId, setIscompanyId] = useState(false);
     const [ispassword, setIspassword] = useState(false);
     const [isemail, setIsemail] = useState(false);
-    const [isadress, setAdress] = useState(false);
-    const [isacountnumber, setAcounternumbermessage] = useState("");
+    const [isadress, setIsadress] = useState(false);
+    const [isacountnumber, setIsacounternumbermessage] = useState(false);
+    const [isbankname, setIsbankname] = useState(false);
 
     //폼 입력시 변경되는 사항
     const handleInput = (e)=>{
@@ -427,6 +430,9 @@ function Register_company(){
                 <div><p>acountNumber
                     <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="acountNumber" onChange={handleInput} value={enroll_company.acountNumber}/>
                     <span>{acountNumberMessage}</span>}</p></div>
+                <div><p>bankName
+                    <input className="user_enroll_text" placeholder="은행이름"  type="text" required={true} name="bankName" onChange={handleInput} value={enroll_company.bankName}/>
+                    <span>{bankNameMessage}</span>}</p></div>
                 <div><p>companyId
                     <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="companyId" onChange={handleInput}/>
                     {<span>{companyIdMessage}</span>}
