@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {BrowserRouter, Routes, Route, Link, useParams} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row';
@@ -268,11 +268,7 @@ function Register_company(){
         email:'',
         bankName:'',
         accountNumber:'',
-
-
-
-
-
+        role:'E',
     });
 
     const [nameMessage, setNamemessage] = useState('이름은 1 글자 이상으로 작성해 주세요');
@@ -291,9 +287,9 @@ function Register_company(){
     const [isenterpriseId, setIsenterpriseId] = useState(false);
     const [ispassword, setIspassword] = useState(false);
     const [isemail, setIsemail] = useState(false);
-    const [isaddress, setIsaddress] = useState(false);
-    const [isaccountNumber, setIsacounternumbermessage] = useState(false);
-    const [isbankname, setIsbankname] = useState(false);
+    const [isaddress, setIsaddress] = useState(true);
+    const [isaccountNumber, setIsacounternumbermessage] = useState(true);
+    const [isbankname, setIsbankname] = useState(true);
 
     //폼 입력시 변경되는 사항
     const handleInput = (e)=>{
@@ -381,19 +377,27 @@ function Register_company(){
         });
     }
 
+    const navigate = useNavigate();
     //회원가입 누를 시 작동 코드
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(enroll_company);
-        await axios
-            .post(baseUrl + "/register/company", enroll_company)
-            .then((response) =>{
+        if(isname && isnum && isphone && isenterpriseId && ispassword && isemail && isaddress && isaccountNumber && isbankname){
+            await axios
+                .post(baseUrl + "/register/company", enroll_company)
+                .then((response) =>{
 //                console.log(response.data);
-                  console.log("성공~!");
-            })
-            .catch((error) => {
-//                console.log(error);
-            })
+                    console.log("성공~!");
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                    navigate('/login');
+                })
+                .catch((error) => {
+               console.log(error);
+                })
+        }else{
+            alert(" 올바른 입력을 넣어주세요");
+        }
+
     }
 
     //회사 아이디 중복성 검사
