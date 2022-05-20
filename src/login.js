@@ -32,7 +32,13 @@ function Login(){
             .post(baseUrl + "/login", state)
             .then((response) =>{
                 console.log(response.data);
-                navigate("/category",response.data);
+
+                if(response.data.enid === state.userId){
+                    navigate("/category",response.data);
+                }else{
+                    alert("아이디와 비밀번호가 잘못되었습니다.");
+                }
+
             })
             .catch((error) => {
                 console.log(error);
@@ -51,7 +57,7 @@ function Login(){
             <form onSubmit={handleSubmit} className="login_form">
                 <div><input type="radio" name="role" value="E" onChange={handleChange}></input>기업 로그인</div>
                 <div><input type="radio" name="role" value="U" onChange={handleChange}></input>일반 로그인</div>
-                <div><input type="email" name="userId" placeholder="아이디" onChange={handleChange}></input></div>
+                <div><input type="text" name="userId" placeholder="아이디" onChange={handleChange}></input></div>
                 <div><input type="password" name="password" placeholder="비밀번호" onChange={handleChange}></input></div>
                 <div><button type="submit">로그인</button></div>
             </form>
