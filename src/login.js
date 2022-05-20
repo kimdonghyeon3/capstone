@@ -33,7 +33,7 @@ function Login(){
             .then((response) =>{
                 console.log(response.data);
 
-                if(response.data.enid === state.userId){
+                if(response.data.enterpriseId === state.userId){
                     navigate("/category",response.data);
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");
