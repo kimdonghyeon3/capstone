@@ -1,12 +1,8 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {Link, Routes, Route, useParams} from "react-router-dom";
-import {BsSearch} from "react-icons/bs";
-import React from "react";
+import {Link, Routes, Route, useParams, useNavigate, useLocation} from "react-router-dom";
+import React, {useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
-import Card from 'react-bootstrap/Card'
-import {Button} from "react-bootstrap";
-import Nav from 'react-bootstrap/Nav'
 import './category.css';
 import Mypage from "./mypage";
 import Login from "./login";
@@ -516,7 +512,8 @@ const contents = [
     {id:6, title:'sale_event', description:<Category_content_sale_event/>}
 ]
 
-function Category_content(){
+function Category_content(props){
+
     var params = useParams();
     var category_id = params.category_id;
     console.log('params.category_id ', params, params.category_id);
@@ -541,6 +538,12 @@ function Category_content(){
 }
 
 function Category(){
+
+        const navstate = useLocation();
+
+        console.log("로그인 후");
+        console.log(navstate);
+        console.log(navstate);
 
     return(
             <div>

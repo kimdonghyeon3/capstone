@@ -2,13 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {BrowserRouter, Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import DaumPostCode from 'react-daum-postcode';
 import './register.css';
 import axios from "axios";
+import Post from "./modals/post";
 
 function Register_main(){
     return(
@@ -272,7 +269,7 @@ function Register_company(){
     });
 
     const [nameMessage, setNamemessage] = useState('이름은 1 글자 이상으로 작성해 주세요');
-    const [numMessage, setNummessage] = useState('사업자번호 형식으로 입력 해 주세요.');
+    const [numMessage, setNummessage] = useState('사업자번호 형식으로 입력 해 주세요. (10자리)');
     const [phoneMessage, setPhonemessage] = useState("유효하지 않은 휴대폰 번호입니다.");
     const [enterpriseIdMessage, setenterpriseIdmessage] = useState('유저아이디는 6글자 이상으로 작성해 주세요');
     const [passwordMessage, setPasswordmessage] = useState('비밀전호는 8글자 이상으로 작성해 주세요');
@@ -284,13 +281,14 @@ function Register_company(){
     const [isname, setIsname] = useState(false);
     const [isnum, setIsnum] = useState(false);
     const [isphone, setIsphone] = useState(false);
-    const [isenterpriseId, setIsenterpriseId] = useState(false);
+    const [isenterpriseId, setIsenterpriseId] = useState(true);
     const [ispassword, setIspassword] = useState(false);
     const [isemail, setIsemail] = useState(false);
-    const [isaddress, setIsaddress] = useState(true);
-    const [isaccountNumber, setIsacounternumbermessage] = useState(true);
-    const [isbankname, setIsbankname] = useState(true);
+    const [isaddress, setIsaddress] = useState(false);
+    const [isaccountNumber, setIsacounternumbermessage] = useState(false);
+    const [isbankname, setIsbankname] = useState(false);
 
+    const [popup, setPopup] = useState(false);  //팝업
     //폼 입력시 변경되는 사항
     const handleInput = (e)=>{
         e.preventDefault();
@@ -309,12 +307,31 @@ function Register_company(){
 
         //사업자 번호 유효성 검사
         if(e.target.name === 'enterpriseNumber'){
-            if(e.target.value.length != 8){
-                setNummessage('사업자번호 형식으로 입력 해 주세요.');
+            if(e.target.value.length != 10){
+                setNummessage('사업자번호 형식으로 입력 해 주세요.(10자리)');
                 setIsnum(false);
             }else{
+                const regsplitNum = e.target.value.replace(/-/gi, '').split('').map(function(item) {
+                    return parseInt(item, 10);
+                });
+
+                const regkey = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+                let regNumSum = 0;
+                for (var i = 0; i < regkey.length; i++) {
+                    regNumSum += regkey[i] * regsplitNum[i];
+                }
+                regNumSum += parseInt((regkey[8] * regsplitNum[8]) / 10, 10);
+                const regCheck = (Math.floor(regsplitNum[9])) === ((10 - (regNumSum % 10) ) % 10);
+
+                if(regCheck){
                     setNummessage('올바른 형식 입니다.');
                     setIsnum(true);
+                }else{
+                    setNummessage('사업자 번호가 유효하지 않습니다.');
+                    setIsnum(false);
+                }
+
+
             }
         }
 
@@ -322,7 +339,7 @@ function Register_company(){
         if(e.target.name === 'phoneNumber'){
             const regex = /^[0-9\b -]{0,13}$/;
             if (regex.test(e.target.value)) {
-                setPhonemessage("유효한 유대폰 번호입니다.");
+                setPhonemessage('올바른 형식 입니다.');
                 setIsphone(true);
             }
         }
@@ -371,6 +388,30 @@ function Register_company(){
             }
         }
 
+        //주소 유효성 검사
+        if(e.target.name === 'address'){
+            if(enroll_company.address === ''){
+                setaddressmessage("입력하세요")
+                setIsaddress(false);
+            }else{
+                setaddressmessage("올바른 형식입니다.")
+                setIsaddress(true);
+            }
+        }
+
+        //계좌 & 은행 유효송 검사
+        if(e.target.name === 'bankName' || e.target.name === 'accountNumber'){
+            if(enroll_company.bankName === '' || enroll_company.accountNumber === ''){
+                setaccountNumbermessage("계좌번호와 은행을 입력하세요")
+                setIsbankname(false);
+                setIsacounternumbermessage(false);
+            }else{
+                setaccountNumbermessage("올바른 입력입니다")
+                setIsbankname(true);
+                setIsacounternumbermessage(true);
+            }
+        }
+
         setEnroll_company({
             ...enroll_company,
             [e.target.name]:e.target.value,
@@ -386,10 +427,15 @@ function Register_company(){
             await axios
                 .post(baseUrl + "/register/company", enroll_company)
                 .then((response) =>{
-//                console.log(response.data);
+                    console.log(response.data);
                     console.log("성공~!");
+                    if(response.data.message === 'Success'){
+                        navigate('/login');
+                    }else{
+                        alert("오류났습니다.");
+                    }
                     // eslint-disable-next-line react-hooks/rules-of-hooks
-                    navigate('/login');
+
                 })
                 .catch((error) => {
                console.log(error);
@@ -424,6 +470,11 @@ function Register_company(){
             })
     }
 
+    //주소 팝업 변경
+    const handleComplete = (data) => {
+        setPopup(!popup);
+    }
+
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
@@ -436,15 +487,27 @@ function Register_company(){
                 <div><p>phone
                     <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
                     <span>{phoneMessage}</span>}</p></div>
-                <div><p>address
+                <div className="address_search" >address
                     <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                    <span>{addressMessage}</span>}</p></div>
+                    <span>{addressMessage}</span>}
+                    <button onClick={handleComplete}>우편번호 찾기</button>
+                    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+                </div>
                 <div><p>accountNumber
                     <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
-                    <span>{accountNumberMessage}</span>}</p></div>
-                <div><p>bankName
-                    <input className="user_enroll_text" placeholder="은행이름"  type="text" required={true} name="bankName" onChange={handleInput} value={enroll_company.bankName}/>
-                    <span>{bankNameMessage}</span>}</p></div>
+                    <span>{accountNumberMessage}</span>}
+                    <select name="bankName" onChange={handleInput}>
+                        <option value="none"> 은행 </option>
+                        <option value="우리은행">우리은행</option>
+                        <option value="KB국민은행">KB국민은행</option>
+                        <option value="신한은행">신한은행"</option>
+                        <option value="하나은행">하나은행</option>
+                        <option value="NH농협은행">NH농협은행</option>
+                        <option value="Sh수협은행">Sh수협은행</option>
+                        <option value="SC제일은행">SC제일은행</option>
+                        <option value="한국씨티은행">한국씨티은행</option>
+                    </select>
+                </p></div>
                 <div><p>enterpriseId
                     <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
                     {<span>{enterpriseIdMessage}</span>}

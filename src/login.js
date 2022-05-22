@@ -34,7 +34,12 @@ function Login(){
                 console.log(response.data);
 
                 if(response.data.enterpriseId === state.userId){
-                    navigate("/category",response.data);
+                    navigate("/category/main", { state :{
+                            uid:response.data.enid,
+                            id:response.data.enterpriseId,
+                            role:'E',
+                        },
+                    });
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");
                 }
