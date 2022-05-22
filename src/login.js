@@ -37,7 +37,7 @@ function Login(){
                     navigate("/category/main", { state :{
                             uid:response.data.enid,
                             id:response.data.enterpriseId,
-                            role:'E',
+                            role:response.data.role,
                         },
                     });
                 }else{
