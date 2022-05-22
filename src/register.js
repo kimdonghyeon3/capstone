@@ -207,13 +207,13 @@ function Register_user(){
             })
             .then((response) =>{
                 console.log(response.data);
-                //데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
-                // if(response.data.id === enroll_user.id){
-                //     setUserIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
-                //     setIsuserId(true);
-                // }else{
-                //     alert("중복된 아이디 입니다. 다른 아이디를 입력하세요")
-                // }
+                // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
+                if(response.data.userId === '0'){
+                    setUserIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
+                    setIsuserId(true);
+                }else{
+                    alert("중복된 아이디 입니다. 다른 아이디를 입력하세요")
+                }
             })
             .catch((error) => {
                 console.log(error);
