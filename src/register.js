@@ -19,6 +19,8 @@ function Register_user(){
 
     const baseUrl = "http://localhost:8080";
 
+    const navigate = useNavigate();
+
     const[enroll_user, setEnroll_user] = useState({
         userName:'',
         birth:'',
@@ -191,10 +193,13 @@ function Register_user(){
             .post(baseUrl + "/register/user", enroll_user)
             .then((response) =>{
                 console.log(response.data);
+                navigate("/login");
             })
             .catch((error) => {
                 console.log(error);
             })
+
+
     }
 
     //아이디 중복성 검사
@@ -202,13 +207,13 @@ function Register_user(){
         e.preventDefault();
         console.log(enroll_user.userId);
         await axios
-            .post(baseUrl + "/register/user", {
-                userId:enroll_user.id,
+            .post(baseUrl + "/register/check", {
+                inputId:enroll_user.userId,
             })
             .then((response) =>{
                 console.log(response.data);
                 // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
-                if(response.data.userId === '0'){
+                if(response.data.returnvalue === '0'){
                     setUserIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
                     setIsuserId(true);
                 }else{

@@ -522,6 +522,7 @@ function Category_content(props){
         title : 'sorry',
         description : <Category_content_main/>
     }
+
     console.log("real national main : ",selected_category);
     for(let i = 0 ; i < contents.length ; i++){
         if(contents[i].title === category_id){
@@ -543,7 +544,12 @@ function Category(){
 
         console.log("로그인 후");
         console.log(navstate);
-        console.log(navstate);
+
+        if(navstate.state === null){
+            console.log("아직 로그인 전")
+        }else{
+            console.log("state 받기완료");
+        }
 
     return(
             <div>
