@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {Link, useNavigate} from 'react-router-dom';
 import './login.css';
 import axios from "axios";
-import Userinfo from "./userinfo";
+import Userinfo, {Userlogin} from "./userinfo";
 
 function Login({children}){
 
@@ -18,12 +18,10 @@ function Login({children}){
         role:"",
     });
 
-    const [userinfo, setUserinfo] = useState({
-        uid : "",
-        id : "",
-        role : "",
-    });
+    const userdata = useContext(Userlogin);
 
+    console.log(userdata);
+    const {userinfo, setUserinfo} = userdata;
     const handleChange = (e) => {
         setState({
             ...state,
@@ -41,33 +39,14 @@ function Login({children}){
 
                 if(response.data.enterpriseId === state.userId){
 
-
-                    setUserinfo({
-                        ...userinfo,
+                    console.log(userdata);
+                    navigate("/category/main")
+                    console.log("retur이 실해오디니?")
+                    userdata.edituser({
                         uid : response.data.enid,
                         id : response.data.enterpriseId,
                         role : "E",
                     })
-
-                    console.log(userinfo);
-
-                    // return(
-                    //     <Userinfo.Provider value={{
-                    //         uid : response.data.enid,
-                    //         id : response.data.enterpriseId,
-                    //         role : "E",
-                    //     }}>
-                    //         {children}
-                    //     </Userinfo.Provider>
-                    // )
-
-                    navigate("/category/main")
-                    // navigate("/", { state :{
-                    //         uid:response.data.enid,
-                    //         id:response.data.enterpriseId,
-                    //         role:'E',
-                    //     },
-                    // });
 
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");
@@ -80,6 +59,8 @@ function Login({children}){
 
     return(
         <div>
+            <Userlogin.Provider value={{userinfo, setUserinfo}}>
+
             <Header></Header>
 
             <div className="gap"></div>
@@ -103,6 +84,7 @@ function Login({children}){
 
             <div className="gap"></div>
             <Footer></Footer>
+            </Userlogin.Provider>
         </div>
 
     );

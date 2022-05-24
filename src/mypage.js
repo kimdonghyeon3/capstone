@@ -1,11 +1,35 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {Routes, Route, Link, useParams} from 'react-router-dom';
+import {Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
 import './mypage.css';
+import {Userlogin} from "./userinfo";
+import axios from "axios";
 
 //기업페이지
 function Company_profile(){
+
+    const baseUrl = "http://localhost:8080";
+
+    useEffect(()=>{
+        console.log("마이페이지 유저 정보 받아오기");
+        getuserinfo();
+    },[]);
+
+    async function getuserinfo(){
+        await axios
+            .get(baseUrl + "/company/profile", {})
+            .then((response) => {
+                console.log("씨발1");
+                console.log(response.data);
+            })
+            .catch((error)=>{
+                console.log("씨발");
+                console.log(error);
+            })
+    }
+
+
     return(
         <div>
             <h2 className="company_profile_h2"> 기업 프로필</h2>
@@ -435,17 +459,50 @@ function Mypage_content(){
 
 function Mypage(){
 
+    const userlogin = useContext(Userlogin);
+    const navigate = useNavigate();
+    // console.log(userlogin.uid);
+    // console.log(userlogin.id);
+    // console.log(userlogin.role);
+    // console.log(userlogin.login);
+
+    const [login_role,setLogin_role] =useState("");
+
+    useEffect(() => {
+
+        if(userlogin.login){
+
+            if(userlogin.role === "E")
+                setLogin_role("/company");
+            else{
+                setLogin_role("/user");
+            }
+        }else{
+            // console.log("여기?");
+            navigate("/login");
+        }
+    },[])
+
+
     return(
         <div>
             <Header></Header>
-            <h2> 마이페이지</h2>
-            <ul>
-                <li><Link to="/mypage/user"> 유저 마이페이지</Link></li>
-                <li><Link to="/mypage/company">기업 마이페이지</Link></li>
-            </ul>
+            {/*<h2> 마이페이지</h2>*/}
+            {/*<ul>*/}
+            {/*    <li><Link to="/mypage/user"> 유저 마이페이지</Link></li>*/}
+            {/*    <li><Link to="/mypage/company">기업 마이페이지</Link></li>*/}
+            {/*</ul>*/}
+
+            {/*{login_role === "user" ? < User/>:< Company/> }*/}
+
+            {/*<Routes>*/}
+            {/*    /!*<Route path={"/" + } element={< Mypage_content/>}></Route>*!/*/}
+            {/*    <Route path={login_role === "user" ? "/user":"/company"} element={login_role === "user" ? < User/>:< Company/> }></Route>*/}
+
+            {/*</Routes>*/}
 
             <Routes>
-                <Route path="/:mypage_id/*" element={< Mypage_content/>}></Route>
+                <Route path="/:mypage_id/*" element={<Mypage_content/>}/>
             </Routes>
 
             <Footer/>

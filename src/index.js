@@ -12,7 +12,7 @@ import Mypage from './mypage';
 import Login from './login';
 import Category from "./category";
 import Register from './register';
-import Userinfo from "./userinfo";
+import Userinfo, {UserPovider} from "./userinfo";
 
 function Home(){
 
@@ -32,7 +32,7 @@ function App(){
 
     return(
         <div>
-            <Userinfo>
+            <UserPovider>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/mypage/*" element={<Mypage/>}></Route>
@@ -40,7 +40,7 @@ function App(){
                     <Route path="/category/*" element={<Category/>}></Route>
                     <Route path="/register/:register_id" element={<Register/>}></Route>
                 </Routes>
-            </Userinfo>
+            </UserPovider>
         </div>
 
     )
