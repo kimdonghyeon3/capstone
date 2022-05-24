@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {BrowserRouter, Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
-import DaumPostCode from 'react-daum-postcode';
+import {Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
 import './register.css';
 import axios from "axios";
 import Post from "./modals/post";
@@ -543,13 +542,12 @@ function Register(){
 
     var params = useParams();
     var category_id = params.register_id;
-    console.log('params.register_id ', params, params.register_id);
 
     var selected_category ={
         title : 'sorry',
         description : "no page",
     }
-    console.log("selecteddd : ",selected_category);
+
     for(let i = 0 ; i < Register_content.length ; i++){
         if(Register_content[i].title === category_id){
             selected_category.description = Register_content[i].des;

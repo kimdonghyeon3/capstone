@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {BrowserRouter, Routes, Route, Link, useParams } from 'react-router-dom';
-import {Row, Tab, Col, Nav} from "react-bootstrap";
+import {Routes, Route, Link, useParams} from 'react-router-dom';
 import './mypage.css';
 
 //기업페이지
@@ -429,7 +428,6 @@ function Mypage_content(){
         <div>
             <h2>{selected_category.description}</h2>
         </div>
-
 
     )
 

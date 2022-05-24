@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
@@ -12,10 +12,9 @@ import Mypage from './mypage';
 import Login from './login';
 import Category from "./category";
 import Register from './register';
-import axios from 'axios';
+import Userinfo from "./userinfo";
 
-
-function Home(props){
+function Home(){
 
     const params = useParams();
 
@@ -31,35 +30,19 @@ function Home(props){
 
 function App(){
 
-    // const baseUrl = "http://localhost:8080";
-    //
-    // let data;
-    //
-    // useEffect(() => {
-    //     getTodos();
-    // }, []);
-    //
-    // async function getTodos(){
-    //     await axios.get(baseUrl + "/todo")
-    //         .then((response) => {
-    //             console.log(response.data)
-    //             data = response.data;
-    //         })
-    //         .catch((error) =>{
-    //             console.error(error)
-    //         })
-    // }
-
     return(
         <div>
-            <Routes>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/mypage/*" element={<Mypage/>}></Route>
-                <Route path="/login" element={<Login/>}></Route>
-                <Route path="/category/*" element={<Category/>}></Route>
-                <Route path="/register/:register_id" element={<Register/>}></Route>
-            </Routes>
+            <Userinfo>
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/mypage/*" element={<Mypage/>}></Route>
+                    <Route path="/login" element={<Login/>}></Route>
+                    <Route path="/category/*" element={<Category/>}></Route>
+                    <Route path="/register/:register_id" element={<Register/>}></Route>
+                </Routes>
+            </Userinfo>
         </div>
+
     )
 }
 

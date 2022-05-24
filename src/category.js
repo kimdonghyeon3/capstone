@@ -1,11 +1,10 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {Link, Routes, Route, useParams, useNavigate, useLocation} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
-import Mypage from "./mypage";
-import Login from "./login";
+import {Userlogin} from "./userinfo";
 
 function Category_content_main(){
 
@@ -516,14 +515,12 @@ function Category_content(props){
 
     var params = useParams();
     var category_id = params.category_id;
-    console.log('params.category_id ', params, params.category_id);
 
     var selected_category ={
         title : 'sorry',
         description : <Category_content_main/>
     }
 
-    console.log("real national main : ",selected_category);
     for(let i = 0 ; i < contents.length ; i++){
         if(contents[i].title === category_id){
             selected_category = contents[i];
@@ -538,18 +535,13 @@ function Category_content(props){
     );
 }
 
-function Category(){
+function Category({children}){
 
-        const navstate = useLocation();
-
-        console.log("로그인 후");
-        console.log(navstate);
-
-        if(navstate.state === null){
-            console.log("아직 로그인 전")
-        }else{
-            console.log("state 받기완료");
-        }
+        // const navstate = useLocation();
+        const userlogin = useContext(Userlogin);
+        console.log(userlogin.uid);
+        console.log(userlogin.id);
+        console.log(userlogin.role);
 
     return(
             <div>
@@ -609,7 +601,6 @@ function Category(){
 
                 {/* 검색 */}
                 <div className="search_product">
-
                 </div>
 
                 {/* 내가 구독한 상품*/}

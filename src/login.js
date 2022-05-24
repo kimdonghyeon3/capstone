@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {BrowserRouter, Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './login.css';
 import axios from "axios";
+import Userinfo from "./userinfo";
 
-function Login(){
+function Login({children}){
 
     const navigate = useNavigate();
 
@@ -17,7 +18,12 @@ function Login(){
         role:"",
     });
 
-    console.log("렌더링");
+    const [userinfo, setUserinfo] = useState({
+        uid : "",
+        id : "",
+        role : "",
+    });
+
     const handleChange = (e) => {
         setState({
             ...state,
@@ -34,16 +40,38 @@ function Login(){
                 console.log(response.data);
 
                 if(response.data.enterpriseId === state.userId){
-                    navigate("/category/main", { state :{
-                            uid:response.data.enid,
-                            id:response.data.enterpriseId,
-                            role:response.data.role,
-                        },
-                    });
+
+
+                    setUserinfo({
+                        ...userinfo,
+                        uid : response.data.enid,
+                        id : response.data.enterpriseId,
+                        role : "E",
+                    })
+
+                    console.log(userinfo);
+
+                    // return(
+                    //     <Userinfo.Provider value={{
+                    //         uid : response.data.enid,
+                    //         id : response.data.enterpriseId,
+                    //         role : "E",
+                    //     }}>
+                    //         {children}
+                    //     </Userinfo.Provider>
+                    // )
+
+                    navigate("/category/main")
+                    // navigate("/", { state :{
+                    //         uid:response.data.enid,
+                    //         id:response.data.enterpriseId,
+                    //         role:'E',
+                    //     },
+                    // });
+
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");
                 }
-
             })
             .catch((error) => {
                 console.log(error);
