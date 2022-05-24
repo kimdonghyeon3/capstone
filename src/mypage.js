@@ -247,7 +247,7 @@ function User_profile(){
 
     useEffect(()=>{
         console.log("마이페이지 유저 정보 받아오기");
-        getuserinfo();s
+        getuserinfo();
     },[]);
 
     async function getuserinfo(){
