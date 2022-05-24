@@ -240,19 +240,20 @@ function User_profile(){
     const logininfo = useContext(Userlogin);
 
     const [userinfo, setUserinfo] = useState({
-       enid:logininfo.uid,
+        enid:logininfo.uid,
        enterpriseId:logininfo.id,
        role:logininfo.role,
     });
 
     useEffect(()=>{
         console.log("마이페이지 유저 정보 받아오기");
-        getuserinfo();
+        getuserinfo();s
     },[]);
 
     async function getuserinfo(){
+
         await axios
-            .get(baseUrl + "/company/profile", userinfo)
+            .get(baseUrl + "/mypage/user/profile", userinfo)
             .then((response) => {
                 console.log("씨발1");
                 console.log(response.data);
