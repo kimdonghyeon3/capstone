@@ -9,25 +9,25 @@ import axios from "axios";
 //기업페이지
 function Company_profile(){
 
-    const baseUrl = "http://localhost:8080";
-
-    useEffect(()=>{
-        console.log("마이페이지 유저 정보 받아오기");
-        getuserinfo();
-    },[]);
-
-    async function getuserinfo(){
-        await axios
-            .get(baseUrl + "/company/profile", {})
-            .then((response) => {
-                console.log("씨발1");
-                console.log(response.data);
-            })
-            .catch((error)=>{
-                console.log("씨발");
-                console.log(error);
-            })
-    }
+    // const baseUrl = "http://localhost:8080";
+    //
+    // useEffect(()=>{
+    //     console.log("마이페이지 유저 정보 받아오기");
+    //     getuserinfo();
+    // },[]);
+    //
+    // async function getuserinfo(){
+    //     await axios
+    //         .get(baseUrl + "/company/profile", {})
+    //         .then((response) => {
+    //             console.log("씨발1");
+    //             console.log(response.data);
+    //         })
+    //         .catch((error)=>{
+    //             console.log("씨발");
+    //             console.log(error);
+    //         })
+    // }
 
 
     return(
@@ -234,6 +234,34 @@ function Company_content(){
 
 //유저페이지
 function User_profile(){
+
+    const baseUrl = "http://localhost:8080";
+
+    const logininfo = useContext(Userlogin);
+
+    const [userinfo, setUserinfo] = useState({
+       enid:logininfo.uid,
+       enterpriseId:logininfo.id,
+       role:logininfo.role,
+    });
+
+    useEffect(()=>{
+        console.log("마이페이지 유저 정보 받아오기");
+        getuserinfo();
+    },[]);
+
+    async function getuserinfo(){
+        await axios
+            .get(baseUrl + "/company/profile", userinfo)
+            .then((response) => {
+                console.log("씨발1");
+                console.log(response.data);
+            })
+            .catch((error)=>{
+                console.log("씨발");
+                console.log(error);
+            })
+    }
 
     return(
         <div>
