@@ -45,7 +45,7 @@ function Login({children}){
                     userdata.edituser({
                         uid : response.data.enid,
                         id : response.data.enterpriseId,
-                        role : "E",
+                        role : response.data.role,
                     })
 
                 }else{
