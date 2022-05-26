@@ -39,7 +39,6 @@ function Login({children}){
 
                 if(response.data.enterpriseId === state.userId){
 
-                    console.log(userdata);
                     navigate("/category/main")
                     console.log("retur이 실해오디니?")
                     userdata.edituser({
@@ -47,6 +46,7 @@ function Login({children}){
                         id : response.data.enterpriseId,
                         role : response.data.role,
                     })
+                    console.log(userdata);
 
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");

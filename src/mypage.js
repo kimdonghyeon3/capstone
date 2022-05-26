@@ -6,9 +6,6 @@ import './mypage.css';
 import {Userlogin} from "./userinfo";
 import axios from "axios";
 
-
-
-
 //기업페이지
 function Company_profile(){
     const baseUrl = "http://localhost:8080";
@@ -17,8 +14,8 @@ function Company_profile(){
 
     const [companyinfo, setCompanyinfo] = useState({
         enid:logininfo.uid,
-        enterpriseId:logininfo.id,
-        role:logininfo.role,
+        // enterpriseId:logininfo.id,
+        // role:logininfo.role,
     });
 
     const[companyprofile, setCompnayprofile] = useState({});
@@ -33,15 +30,10 @@ function Company_profile(){
         await axios
             .post(baseUrl + "/mypage/company/profile", companyinfo)
             .then((response) => {
-                console.log("씨발1");
                 console.log(response.data);
-                setCompnayprofile({
-                    ...companyprofile,
 
-                })
             })
             .catch((error)=>{
-                console.log("씨발");
                 console.log(error);
             })
     }
@@ -59,6 +51,8 @@ function Company_profile(){
                 <dd className="user_profile_dd"><span>기업명</span></dd>
                 <dt className="user_profile_dt"><label>사업자번호</label></dt>
                 <dd className="user_profile_dd"><span>사업자번호</span></dd>
+                <dt className="user_profile_dt"><label>이메일</label></dt>
+                <dd className="user_profile_dd"><span>이메일</span></dd>
                 <dt className="user_profile_dt"><label>전화번호</label></dt>
                 <dd className="user_profile_dd"><span>전화번호</span></dd>
                 <dt className="user_profile_dt"><label>주소</label></dt>
@@ -71,26 +65,126 @@ function Company_profile(){
 }
 
 function Company_edit(){
+    const baseUrl = "http://localhost:8080";
+
+    const logininfo = useContext(Userlogin);
+
+    const [companyinfo, setCompanyinfo] = useState({
+        enid:logininfo.uid,
+    });
+    const[edit_company, setEdit_company] = useState({
+        enterpriseName:'',
+        address:'',
+        password:'',
+        phoneNumber:'',
+        email:'',
+        bankName:'',
+        accountNumber:'',
+    });
+
+    useEffect(()=>{
+        console.log("마이페이지 유저 정보 받아오기");
+        getcompanyinfo();
+    },[]);
+
+    async function getcompanyinfo(){
+        await axios
+            .post(baseUrl + "/mypage/company/edit", companyinfo)
+            .then((response) => {
+                console.log(response.data);
+                setEdit_company({
+                    ...edit_company,
+                    enterpriseName:response.data.enterpriseName,
+                    address:response.data.address,
+                    password:response.data.password,
+                    phoneNumber:response.data.phoneNumber,
+                    email:response.data.email,
+                    bankName:response.data.bankName,
+                    accountNumber:response.data.accountNumber,
+                })
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+
+
+    const handleInput = (e)=>{
+        e.preventDefault();
+        console.log("??");
+
+        setEdit_company({
+            ...edit_company,
+            [e.target.name]:e.target.value,
+        });
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(edit_company);
+            await axios
+                .post(baseUrl + "/register/company/edit", edit_company)
+                .then((response) =>{
+                    console.log(response.data);
+                    // if(response.data.message === 'Success'){
+                    //
+                    // }else{
+                    //     alert("오류났습니다.");
+                    // }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+    }
 
     return(
 
     <div>
         <h2 className="company_profile_h2"> 기업 프로필</h2>
         <hr/>
+        <form onSubmit={handleSubmit}>
         <dl>
             <dt className="user_profile_dt"><label>기업명</label></dt>
-            <dd className="user_edit_dd"><input type="text" placeholder="기업명"></input>
-                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dd className="user_edit_dd">
+                <input className="user_enroll_text" placeholder={edit_company.enterpriseName}  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
+                </dd>
             <dt className="user_profile_dt"><label>이메일</label></dt>
-            <dd className="user_edit_dd"><input type="text" placeholder="이메일"></input>
-                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dd className="user_edit_dd">
+                <input className="user_enroll_text" placeholder={edit_company.email} type="text" required={true} name="email" onChange={handleInput}/>
+                </dd>
             <dt className="user_profile_dt"><label>주소</label></dt>
-            <dd className="user_edit_dd"><input type="text" placeholder="주소"></input>
-                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dd className="user_edit_dd">
+                <input className="user_enroll_text" placeholder={edit_company.address}  type="text" required={true} name="address" onChange={handleInput} value={edit_company.address}/>
+                </dd>
             <dt className="user_profile_dt"><label>상담번호</label></dt>
-            <dd className="user_edit_dd"><input type="text" placeholder="상담번호"></input>
-                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dd className="user_edit_dd">
+                <input className="user_enroll_text" placeholder={edit_company.phoneNumber}  type="text" required={true} name="phoneNumber" onChange={handleInput} value={edit_company.phoneNumber}/>
+                </dd>
+            <dt className="user_profile_dt"><label>계좌번호</label></dt>
+            <dd className="user_edit_dd">
+                <input className="user_enroll_text" placeholder={edit_company.accountNumber}  type="text" required={true} name="accountNumber" onChange={handleInput} value={edit_company.accountNumber}/>
+            </dd>
+            <dt className="user_profile_dt"><label>은행</label></dt>
+            <dd className="user_edit_dd">
+                <select name="bankName" onChange={handleInput}>
+                    <option value="none"> 은행 </option>
+                    <option value="우리은행">우리은행</option>
+                    <option value="KB국민은행">KB국민은행</option>
+                    <option value="신한은행">신한은행"</option>
+                    <option value="하나은행">하나은행</option>
+                    <option value="NH농협은행">NH농협은행</option>
+                    <option value="Sh수협은행">Sh수협은행</option>
+                    <option value="SC제일은행">SC제일은행</option>
+                    <option value="한국씨티은행">한국씨티은행</option>
+                </select>            </dd>
+            <dt className="user_profile_dt"><label>비밀번호</label></dt>
+            <dd className="user_edit_dd">
+                <input className="user_enroll_text" placeholder={edit_company.password}  type="text" required={true} name="password" onChange={handleInput}/>
+            </dd>
+            <button type="submit" className="user_edit_btn"> 변경 </button>
         </dl>
+        </form>
     </div>
     )
 }
@@ -236,6 +330,7 @@ function Company(){
                 <div className="user_navbar">
                     <ul className="user_navbar_list">
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/profile"> 기업 프로필</Link></li>
+                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/edit"> 기업 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/manage"> 상품 관리</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/deliver"> 배송 조회</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/product"> 상품 등록</Link></li>
