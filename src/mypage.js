@@ -156,15 +156,15 @@ function Company_edit(){
                 </dd>
             <dt className="user_profile_dt"><label>주소</label></dt>
             <dd className="user_edit_dd">
-                <input className="user_enroll_text" placeholder={edit_company.e_address}  type="text" required={true} name="e_address" onChange={handleInput} value={edit_company.address}/>
+                <input className="user_enroll_text" placeholder={edit_company.e_address}  type="text" required={true} name="e_address" onChange={handleInput} value={edit_company.e_address}/>
                 </dd>
             <dt className="user_profile_dt"><label>상담번호</label></dt>
             <dd className="user_edit_dd">
-                <input className="user_enroll_text" placeholder={edit_company.e_phonenumber}  type="text" required={true} name="e_phonenumber" onChange={handleInput} value={edit_company.phoneNumber}/>
+                <input className="user_enroll_text" placeholder={edit_company.e_phone}  type="text" required={true} name="e_phonenumber" onChange={handleInput} value={edit_company.e_phone}/>
                 </dd>
             <dt className="user_profile_dt"><label>계좌번호</label></dt>
             <dd className="user_edit_dd">
-                <input className="user_enroll_text" placeholder={edit_company.e_accountnumber}  type="text" required={true} name="e_accountnumber" onChange={handleInput} value={edit_company.accountNumber}/>
+                <input className="user_enroll_text" placeholder={edit_company.e_accountnumber}  type="text" required={true} name="e_accountnumber" onChange={handleInput} value={edit_company.e_accountnumber}/>
             </dd>
             <dt className="user_profile_dt"><label>은행</label></dt>
             <dd className="user_edit_dd">
