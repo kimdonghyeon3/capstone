@@ -15,7 +15,7 @@ export const UserPovider = ({children}) => {
         setUid(data.uid);
         setId(data.id);
         setRole(data.role);
-        setLogin(!login);
+        setLogin(data.login);
     }
 
     return(

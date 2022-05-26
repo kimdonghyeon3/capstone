@@ -89,7 +89,7 @@ function Company_edit(){
 
     async function getcompanyinfo(){
         await axios
-            .post(baseUrl + "/mypage/company/edit", companyinfo)
+            .post(baseUrl + "/mypage/company/edit/get", companyinfo)
             .then((response) => {
                 console.log(response.data);
                 setEdit_company({
@@ -98,7 +98,7 @@ function Company_edit(){
                     address:response.data.address,
                     password:response.data.password,
                     phoneNumber:response.data.phoneNumber,
-                    email:response.data.email,
+                    email:response.data.emailAddress,
                     bankName:response.data.bankName,
                     accountNumber:response.data.accountNumber,
                 })
@@ -124,7 +124,7 @@ function Company_edit(){
         e.preventDefault();
         console.log(edit_company);
             await axios
-                .post(baseUrl + "/register/company/edit", edit_company)
+                .post(baseUrl + "/mypage/company/edit", edit_company)
                 .then((response) =>{
                     console.log(response.data);
                     // if(response.data.message === 'Success'){
