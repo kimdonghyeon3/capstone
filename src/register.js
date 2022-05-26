@@ -179,10 +179,6 @@ function Register_user(){
         console.log("enroll)user" + enroll_user);
     }
 
-    //인증코드 맞는지 확인하는 코드
-    const handlesecret = (e) =>{
-    }
-
     //회원가입 누르면 작동되는 코드
     const handleSubmit = async (e) => {
         e.preventDefault();

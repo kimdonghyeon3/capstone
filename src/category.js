@@ -4,7 +4,6 @@ import {Link, Routes, Route, useParams, useNavigate, useLocation} from "react-ro
 import React, {useContext, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
-import {Userlogin} from "./userinfo";
 
 function Category_content_main(){
 
@@ -536,13 +535,6 @@ function Category_content(props){
 }
 
 function Category({children}){
-
-        // const navstate = useLocation();
-        // const userlogin = useContext(Userlogin);
-        // console.log(userlogin.uid);
-        // console.log(userlogin.id);
-        // console.log(userlogin.role);
-        // console.log(userlogin.login);
 
     return(
             <div>

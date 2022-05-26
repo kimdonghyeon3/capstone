@@ -6,49 +6,92 @@ import './mypage.css';
 import {Userlogin} from "./userinfo";
 import axios from "axios";
 
+
+
+
 //기업페이지
 function Company_profile(){
+    const baseUrl = "http://localhost:8080";
 
-    // const baseUrl = "http://localhost:8080";
-    //
-    // useEffect(()=>{
-    //     console.log("마이페이지 유저 정보 받아오기");
-    //     getuserinfo();
-    // },[]);
-    //
-    // async function getuserinfo(){
-    //     await axios
-    //         .get(baseUrl + "/company/profile", {})
-    //         .then((response) => {
-    //             console.log("씨발1");
-    //             console.log(response.data);
-    //         })
-    //         .catch((error)=>{
-    //             console.log("씨발");
-    //             console.log(error);
-    //         })
-    // }
+    const logininfo = useContext(Userlogin);
 
+    const [companyinfo, setCompanyinfo] = useState({
+        enid:logininfo.uid,
+        enterpriseId:logininfo.id,
+        role:logininfo.role,
+    });
+
+    const[companyprofile, setCompnayprofile] = useState({});
+
+    useEffect(()=>{
+        console.log("마이페이지 유저 정보 받아오기");
+        getcompanyinfo();
+    },[]);
+
+    async function getcompanyinfo(){
+
+        await axios
+            .post(baseUrl + "/mypage/company/profile", companyinfo)
+            .then((response) => {
+                console.log("씨발1");
+                console.log(response.data);
+                setCompnayprofile({
+                    ...companyprofile,
+
+                })
+            })
+            .catch((error)=>{
+                console.log("씨발");
+                console.log(error);
+            })
+    }
 
     return(
         <div>
-            <h2 className="company_profile_h2"> 기업 프로필</h2>
+            <h2 className="user_profile_h2"> 기본정보</h2>
             <hr/>
             <dl>
+                <dt className="user_profile_dt"><label>아이디</label></dt>
+                <dd className="user_profile_dd"><span>아이디</span></dd>
+                <dt className="user_profile_dt"><label>비밀번호</label></dt>
+                <dd className="user_profile_dd"><span>비밀번호</span></dd>
                 <dt className="user_profile_dt"><label>기업명</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="기업명"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-                <dt className="user_profile_dt"><label>이메일</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="이메일"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
+                <dd className="user_profile_dd"><span>기업명</span></dd>
+                <dt className="user_profile_dt"><label>사업자번호</label></dt>
+                <dd className="user_profile_dd"><span>사업자번호</span></dd>
+                <dt className="user_profile_dt"><label>전화번호</label></dt>
+                <dd className="user_profile_dd"><span>전화번호</span></dd>
                 <dt className="user_profile_dt"><label>주소</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="주소"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-                <dt className="user_profile_dt"><label>상담번호</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="상담번호"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
+                <dd className="user_profile_dd"><span>주소</span></dd>
+                <dt className="user_profile_dt"><label>계좌번호</label></dt>
+                <dd className="user_profile_dd"><span>계좌번호</span></dd>
             </dl>
         </div>
+    )
+}
+
+function Company_edit(){
+
+    return(
+
+    <div>
+        <h2 className="company_profile_h2"> 기업 프로필</h2>
+        <hr/>
+        <dl>
+            <dt className="user_profile_dt"><label>기업명</label></dt>
+            <dd className="user_edit_dd"><input type="text" placeholder="기업명"></input>
+                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dt className="user_profile_dt"><label>이메일</label></dt>
+            <dd className="user_edit_dd"><input type="text" placeholder="이메일"></input>
+                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dt className="user_profile_dt"><label>주소</label></dt>
+            <dd className="user_edit_dd"><input type="text" placeholder="주소"></input>
+                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+            <dt className="user_profile_dt"><label>상담번호</label></dt>
+            <dd className="user_edit_dd"><input type="text" placeholder="상담번호"></input>
+                <button type="button" className="user_edit_btn"> 변경 </button></dd>
+        </dl>
+    </div>
     )
 }
 
@@ -176,6 +219,7 @@ function Company_product(){
 
 const company_content=[
     {id:1, title:'profile', description:<Company_profile/>},
+    {id:1, title:'edit', description:<Company_edit/>},
     {id:2, title:'manage', description:<Company_manage/>},
     {id:1, title:'deliver', description:<Company_deliver/>},
     {id:2, title:'product', description:<Company_product/>},
@@ -241,9 +285,11 @@ function User_profile(){
 
     const [userinfo, setUserinfo] = useState({
         enid:logininfo.uid,
-       enterpriseId:logininfo.id,
-       role:logininfo.role,
+        enterpriseId:logininfo.id,
+        role:logininfo.role,
     });
+
+    const [userprofile, setUserprofile] = useState({});
 
     useEffect(()=>{
         console.log("마이페이지 유저 정보 받아오기");
@@ -253,10 +299,23 @@ function User_profile(){
     async function getuserinfo(){
 
         await axios
-            .get(baseUrl + "/mypage/user/profile", userinfo)
+            .post(baseUrl + "/mypage/user/profile", userinfo)
             .then((response) => {
                 console.log("씨발1");
                 console.log(response.data);
+
+                setUserprofile({
+                    ...userprofile,
+                    id : response.data.id,
+                    birth : response.data.birth,
+                    email : response.data.email,
+                    password : response.data.password,
+                    phoneNumber : response.data.phoneNumber,
+                    role : response.data.role,
+                    userYN : response.data.userYN,
+                    userId : response.data.userId,
+                    userName : response.data.userName,
+                })
             })
             .catch((error)=>{
                 console.log("씨발");
@@ -270,15 +329,15 @@ function User_profile(){
             <hr/>
             <dl>
                 <dt className="user_profile_dt"><label>사용자명</label></dt>
-                <dd className="user_profile_dd"><span>사용자명</span></dd>
+                <dd className="user_profile_dd"><span>{userprofile.userName}</span></dd>
                 <dt className="user_profile_dt"><label>이메일</label></dt>
-                <dd className="user_profile_dd"><span>사용자명</span></dd>
+                <dd className="user_profile_dd"><span>{userprofile.email}</span></dd>
                 <dt className="user_profile_dt"><label>아이디</label></dt>
-                <dd className="user_profile_dd"><span>사용자명</span></dd>
+                <dd className="user_profile_dd"><span>{userprofile.userId}</span></dd>
                 <dt className="user_profile_dt"><label>생년월일</label></dt>
-                <dd className="user_profile_dd"><span>사용자명</span></dd>
+                <dd className="user_profile_dd"><span>{userprofile.birth}</span></dd>
                 <dt className="user_profile_dt"><label>전화번호</label></dt>
-                <dd className="user_profile_dd"><span>사용자명</span></dd>
+                <dd className="user_profile_dd"><span>{userprofile.phoneNumber}</span></dd>
             </dl>
         </div>
     )
