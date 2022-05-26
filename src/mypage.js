@@ -172,7 +172,7 @@ function Company_edit(){
                     <option value="none"> 은행 </option>
                     <option value="우리은행">우리은행</option>
                     <option value="KB국민은행">KB국민은행</option>
-                    <option value="신한은행">신한은행"</option>
+                    <option value="신한은행">신한은행</option>
                     <option value="하나은행">하나은행</option>
                     <option value="NH농협은행">NH농협은행</option>
                     <option value="Sh수협은행">Sh수협은행</option>
