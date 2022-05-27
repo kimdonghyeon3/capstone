@@ -10,28 +10,46 @@ import axios from "axios";
 function Company_profile(){
     const baseUrl = "http://localhost:8080";
 
-    const logininfo = useContext(Userlogin);
+    const logininfo = useContext(Userlogin);    //전역변수 관리 변수
 
     const [companyinfo, setCompanyinfo] = useState({
         enid:logininfo.uid,
-        // enterpriseId:logininfo.id,
-        // role:logininfo.role,
-    });
+    }); //프로필 정보가져오기 위한 uid
 
-    const[companyprofile, setCompnayprofile] = useState({});
+    const[companyprofile, setCompanyprofile] = useState({
+        accountNumber:'',
+        address:'',
+        bankName:'',
+        emailAddress:'',
+        enterpriseId:'',
+        enterpriseNumber:'',
+        enterpriseName:'',
+        password:'',
+        phoneNumber:'',
+    });    //프로필 정보 담을 변수
 
-    useEffect(()=>{
-        console.log("마이페이지 유저 정보 받아오기");
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getcompanyinfo();
     },[]);
 
-    async function getcompanyinfo(){
+    async function getcompanyinfo(){            //spring 연동 값 받아오기
 
         await axios
             .post(baseUrl + "/mypage/company/profile", companyinfo)
             .then((response) => {
                 console.log(response.data);
-
+                setCompanyprofile({
+                    ...companyprofile,
+                    accountNumber:response.data.accountNumber,
+                    address:response.data.address,
+                    bankName:response.data.bankName,
+                    emailAddress:response.data.emailAddress,
+                    enterpriseId:response.data.enterpriseId,
+                    enterpriseName:response.data.enterpriseName,
+                    enterpriseNumber:response.data.enterpriseNumber,
+                    password:response.data.password,
+                    phoneNumber:response.data.phoneNumber,
+                })
             })
             .catch((error)=>{
                 console.log(error);
@@ -44,21 +62,21 @@ function Company_profile(){
             <hr/>
             <dl>
                 <dt className="user_profile_dt"><label>아이디</label></dt>
-                <dd className="user_profile_dd"><span>아이디</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.enterpriseId}</span></dd>
                 <dt className="user_profile_dt"><label>비밀번호</label></dt>
-                <dd className="user_profile_dd"><span>비밀번호</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.password}</span></dd>
                 <dt className="user_profile_dt"><label>기업명</label></dt>
-                <dd className="user_profile_dd"><span>기업명</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.enterpriseName}</span></dd>
                 <dt className="user_profile_dt"><label>사업자번호</label></dt>
-                <dd className="user_profile_dd"><span>사업자번호</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.enterpriseNumber}</span></dd>
                 <dt className="user_profile_dt"><label>이메일</label></dt>
-                <dd className="user_profile_dd"><span>이메일</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.emailAddress}</span></dd>
                 <dt className="user_profile_dt"><label>전화번호</label></dt>
-                <dd className="user_profile_dd"><span>전화번호</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.phoneNumber}</span></dd>
                 <dt className="user_profile_dt"><label>주소</label></dt>
-                <dd className="user_profile_dd"><span>주소</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.address}</span></dd>
                 <dt className="user_profile_dt"><label>계좌번호</label></dt>
-                <dd className="user_profile_dd"><span>계좌번호</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.accountNumber + " " + companyprofile.bankName}</span></dd>
             </dl>
         </div>
     )
@@ -109,11 +127,8 @@ function Company_edit(){
             })
     }
 
-
-
     const handleInput = (e)=>{
         e.preventDefault();
-        console.log("??");
 
         setEdit_company({
             ...edit_company,
@@ -128,11 +143,6 @@ function Company_edit(){
                 .post(baseUrl + "/mypage/company/edit", edit_company)
                 .then((response) =>{
                     console.log(response.data);
-                    // if(response.data.message === 'Success'){
-                    //
-                    // }else{
-                    //     alert("오류났습니다.");
-                    // }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -169,7 +179,7 @@ function Company_edit(){
             <dt className="user_profile_dt"><label>은행</label></dt>
             <dd className="user_edit_dd">
                 <select name="e_bankname" onChange={handleInput}>
-                    <option value="none"> 은행 </option>
+                    <option value={edit_company.e_bankname}> {edit_company.e_bankname} </option>
                     <option value="우리은행">우리은행</option>
                     <option value="KB국민은행">KB국민은행</option>
                     <option value="신한은행">신한은행</option>
@@ -313,11 +323,11 @@ function Company_product(){
 }
 
 const company_content=[
-    {id:1, title:'profile', description:<Company_profile/>},
-    {id:1, title:'edit', description:<Company_edit/>},
-    {id:2, title:'manage', description:<Company_manage/>},
-    {id:1, title:'deliver', description:<Company_deliver/>},
-    {id:2, title:'product', description:<Company_product/>},
+    {title:'profile', description:<Company_profile/>},
+    {title:'edit', description:<Company_edit/>},
+    {title:'manage', description:<Company_manage/>},
+    {title:'deliver', description:<Company_deliver/>},
+    {title:'product', description:<Company_product/>},
 ]
 
 function Company(){
@@ -340,7 +350,7 @@ function Company(){
 
                 <div className="user_content">
                     <Routes>
-                        <Route path="/:company_nav" element={< Company_content/>}></Route>
+                        <Route path="/:company_nav/*" element={< Company_content/>}></Route>
                     </Routes>
                 </div>
             </div>
@@ -353,9 +363,8 @@ function Company_content(){
     var user_nav = params.company_nav;
     var selected_category ={
         title : 'sorry',
-        description : "No Script"
+        description : 'No script'
     }
-    console.log("real national main : ",selected_category);
     for(let i = 0 ; i < company_content.length ; i++){
         if(company_content[i].title === user_nav){
             selected_category = company_content[i];
@@ -397,7 +406,6 @@ function User_profile(){
         await axios
             .post(baseUrl + "/mypage/user/profile", userinfo)
             .then((response) => {
-                console.log("씨발1");
                 console.log(response.data);
 
                 setUserprofile({
@@ -414,7 +422,6 @@ function User_profile(){
                 })
             })
             .catch((error)=>{
-                console.log("씨발");
                 console.log(error);
             })
     }
@@ -430,6 +437,8 @@ function User_profile(){
                 <dd className="user_profile_dd"><span>{userprofile.email}</span></dd>
                 <dt className="user_profile_dt"><label>아이디</label></dt>
                 <dd className="user_profile_dd"><span>{userprofile.userId}</span></dd>
+                <dt className="user_profile_dt"><label>비밀번호</label></dt>
+                <dd className="user_profile_dd"><span>{userprofile.password}</span></dd>
                 <dt className="user_profile_dt"><label>생년월일</label></dt>
                 <dd className="user_profile_dd"><span>{userprofile.birth}</span></dd>
                 <dt className="user_profile_dt"><label>전화번호</label></dt>
@@ -441,27 +450,110 @@ function User_profile(){
 
 function User_edit(){
 
+    const baseUrl = "http://localhost:8080";
+
+    const logininfo = useContext(Userlogin);
+
+    const [userinfo, setUserinfo] = useState({
+        enid:logininfo.uid,
+        enterpriseId:logininfo.id,
+        role:logininfo.role,
+    });
+    const[edit_user, setEdit_user] = useState({
+        usid:logininfo.uid,
+        phoneNumber:'',
+        birth:'',
+        userName:'',
+        userId:'',
+        password:'',
+        email:'',
+    });
+
+    useEffect(()=>{
+        console.log("마이페이지 유저 정보 받아오기");
+        getcompanyinfo();
+    },[]);
+
+    async function getcompanyinfo(){
+        await axios
+            .post(baseUrl + "/mypage/user/profile", userinfo)
+            .then((response) => {
+                console.log(response.data);
+                setEdit_user({
+                    ...edit_user,
+                    userName:response.data.userName,
+                    phoneNumber:response.data.phoneNumber,
+                    birth:response.data.birth,
+                    userId:response.data.userId,
+                    password:response.data.password,
+                    email:response.data.email,
+                })
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+    const handleInput = (e)=>{
+        e.preventDefault();
+
+        setEdit_user({
+            ...edit_user,
+            [e.target.name]:e.target.value,
+        });
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(edit_user);
+        await axios
+            .post(baseUrl + "/mypage/user/edit", edit_user)
+            .then((response) =>{
+                console.log(response.data);
+                // if(response.data.message === 'Success'){
+                //
+                // }else{
+                //     alert("오류났습니다.");
+                // }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     return(
         <div>
             <h2 className="user_profile_h2"> 프로필 수정</h2>
             <hr />
-            <dl>
-                <dt className="user_profile_dt"><label>사용자명</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="사용자명"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-                <dt className="user_profile_dt"><label>이메일</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="이메일"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-                <dt className="user_profile_dt"><label>아이디</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="아이디"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-                <dt className="user_profile_dt"><label>생년월일</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="생년월일"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-                <dt className="user_profile_dt"><label>전화번호</label></dt>
-                <dd className="user_edit_dd"><input type="text" placeholder="전화번호"></input>
-                    <button type="button" className="user_edit_btn"> 변경 </button></dd>
-            </dl>
+            <form onSubmit={handleSubmit}>
+                <dl>
+                    <dt className="user_profile_dt"><label>사용자명</label></dt>
+                    <dd className="user_edit_dd">
+                        <input className="user_enroll_text" placeholder={edit_user.userName}  type="text" required={true} name="userName" onChange={handleInput} value={edit_user.userName||''}/>
+                    </dd>
+                    <dt className="user_profile_dt"><label>이메일</label></dt>
+                    <dd className="user_edit_dd">
+                        <input className="user_enroll_text" placeholder={edit_user.email} type="text" required={true} name="email" onChange={handleInput} value={edit_user.email||''}/>
+                    </dd>
+                    <dt className="user_profile_dt"><label>아이디</label></dt>
+                    <dd className="user_edit_dd">
+                        <input className="user_enroll_text" placeholder={edit_user.userId}  type="text" required={true} name="userId" onChange={handleInput} value={edit_user.userId||''}/>
+                    </dd>
+                    <dt className="user_profile_dt"><label>비밀번호</label></dt>
+                    <dd className="user_edit_dd">
+                        <input className="user_enroll_text" placeholder={edit_user.password}  type="text" required={true} name="phoneNumber" onChange={handleInput} value={edit_user.phoneNumber||''}/>
+                    </dd>
+                    <dt className="user_profile_dt"><label>생년월일</label></dt>
+                    <dd className="user_edit_dd">
+                        <input className="user_enroll_text" placeholder={edit_user.birth}  type="text" required={true} name="birth" onChange={handleInput} value={edit_user.birth||''}/>
+                    </dd>
+                    <dt className="user_profile_dt"><label>전화번호</label></dt>
+                    <dd className="user_edit_dd">
+                        <input className="user_enroll_text" placeholder={edit_user.phoneNumber}  type="text" required={true} name="password" onChange={handleInput} value={edit_user.password||''}/>
+                    </dd>
+                    <button type="submit" className="user_edit_btn"> 변경 </button>
+                </dl>
+            </form>
         </div>
     )
 }
@@ -551,11 +643,11 @@ function User_withdraw(){
 }
 
 const user_contents=[
-    {id:1, title:'profile', description:<User_profile/>},
-    {id:2, title:'edit', description:<User_edit/>},
-    {id:1, title:'manage', description:<User_manage/>},
-    {id:2, title:'bascket', description:<User_bascket/>},
-    {id:1, title:'withdraw', description:<User_withdraw/>}
+    {title:'profile', description:<User_profile/>},
+    {title:'edit', description:<User_edit/>},
+    {title:'manage', description:<User_manage/>},
+    {title:'bascket', description:<User_bascket/>},
+    {title:'withdraw', description:<User_withdraw/>}
 ]
 
 function User_content(){
@@ -565,7 +657,7 @@ function User_content(){
         title : 'sorry',
         description : "No Script"
     }
-    console.log("real national main : ",selected_category);
+
     for(let i = 0 ; i < user_contents.length ; i++){
         if(user_contents[i].title === user_nav){
             selected_category = user_contents[i];
@@ -602,7 +694,7 @@ function User(){
 
                 <div className="user_content">
                     <Routes>
-                        <Route path="/:user_nav" element={< User_content/>}></Route>
+                        <Route path="/:user_nav" element={< User_content/>}/>
                     </Routes>
                 </div>
             </div>
@@ -610,11 +702,10 @@ function User(){
     )
 }
 
-
 //메인 마이페이지
 const contents = [
-    {id:1, title:'user', description:<User/>},
-    {id:2, title:'company', description:<Company/>},
+    {title:'user', description:<User/>},
+    {title:'company', description:<Company/>},
 ]
 
 function Mypage_content(){
@@ -624,7 +715,7 @@ function Mypage_content(){
         title : 'sorry',
         description : "No Script"
     }
-    console.log("mypage_content : ",selected_category);
+
     for(let i = 0 ; i < contents.length ; i++){
         if(contents[i].title === mypage_id){
             selected_category = contents[i];
@@ -645,52 +736,29 @@ function Mypage(){
 
     const userlogin = useContext(Userlogin);
     const navigate = useNavigate();
-    // console.log(userlogin.uid);
-    // console.log(userlogin.id);
-    // console.log(userlogin.role);
-    // console.log(userlogin.login);
 
     const [login_role,setLogin_role] =useState("");
 
     useEffect(() => {
 
         if(userlogin.login){
-
             if(userlogin.role === "E")
                 setLogin_role("/company");
             else{
                 setLogin_role("/user");
             }
         }else{
-            // console.log("여기?");
             navigate("/login");
         }
     },[])
 
-
     return(
         <div>
-            <Header></Header>
-            {/*<h2> 마이페이지</h2>*/}
-            {/*<ul>*/}
-            {/*    <li><Link to="/mypage/user"> 유저 마이페이지</Link></li>*/}
-            {/*    <li><Link to="/mypage/company">기업 마이페이지</Link></li>*/}
-            {/*</ul>*/}
-
-            {/*{login_role === "user" ? < User/>:< Company/> }*/}
-
-            {/*<Routes>*/}
-            {/*    /!*<Route path={"/" + } element={< Mypage_content/>}></Route>*!/*/}
-            {/*    <Route path={login_role === "user" ? "/user":"/company"} element={login_role === "user" ? < User/>:< Company/> }></Route>*/}
-
-            {/*</Routes>*/}
-
+            <Header/>
             <Routes>
                 <Route path="/:mypage_id/*" element={<Mypage_content/>}/>
             </Routes>
-
             <Footer/>
-
         </div>
     )
 }

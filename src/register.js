@@ -79,7 +79,7 @@ function Register_user(){
 
         //생년월일 유효성 검사
         if(e.target.name === 'birth'){
-            if(e.target.value.length != 8){
+            if(e.target.value.length !== 8){
                 setBirthmessage('날짜를 20200101 형식으로 입력 해 주세요.');
                 setIsbirth(false);
             }else{
@@ -99,12 +99,12 @@ function Register_user(){
                 }else if (dtDay < 1 || dtDay > 31) {
                     setBirthmessage('일을 잘못 입력하셨습니다.');
                     setIsbirth(false);
-                } else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31) {
+                } else if ((dtMonth === 4 || dtMonth === 6 || dtMonth === 9 || dtMonth === 11) && dtDay === 31) {
                     setBirthmessage('일을 잘못 입력하셨습니다.');
                     setIsbirth(false);
-                } else if (dtMonth == 2) {
-                    var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
-                    if (dtDay > 29 || (dtDay == 29 && !isleap)) {
+                } else if (dtMonth === 2) {
+                    var isleap = (dtYear % 4 === 0 && (dtYear % 100 !== 0 || dtYear % 400 === 0));
+                    if (dtDay > 29 || (dtDay === 29 && !isleap)) {
                         setBirthmessage('일을 잘못 입력하셨습니다.');
                         setIsbirth(false);
                     }
@@ -174,9 +174,6 @@ function Register_user(){
             ...enroll_user,
             [e.target.name]:e.target.value,
         });
-
-        console.log("...enroll_user" + {...enroll_user});
-        console.log("enroll)user" + enroll_user);
     }
 
     //회원가입 누르면 작동되는 코드
@@ -184,15 +181,20 @@ function Register_user(){
         e.preventDefault();
         console.log(enroll_user);
 
-        await axios
-            .post(baseUrl + "/register/user", enroll_user)
-            .then((response) =>{
-                console.log(response.data);
-                navigate("/login");
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+        if(isname && isbirth && isphone && isuserId && ispassword && isemail){
+            await axios
+                .post(baseUrl + "/register/user", enroll_user)
+                .then((response) =>{
+                    console.log("회원가입 성공");
+                    navigate("/login");
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }else{
+            alert("올바른 입력을 해주세요");
+        }
+
 
 
     }
@@ -206,9 +208,10 @@ function Register_user(){
                 inputId:enroll_user.userId,
             })
             .then((response) =>{
-                console.log(response.data);
+
                 // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
                 if(response.data.returnvalue === '0'){
+                    console.log("아이디 중복성 검사 성공");
                     setUserIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
                     setIsuserId(true);
                 }else{
@@ -289,10 +292,28 @@ function Register_company(){
     const [isbankname, setIsbankname] = useState(false);
 
     const [popup, setPopup] = useState(false);  //팝업
+
+    //은행이름 유효성 검사
+    useEffect(() => {
+        setIsbankname(true);
+    },[enroll_company.bankName]);
+
+    //주소 유효성 검사
+    useEffect(() => {
+        if(enroll_company.address === ''){
+            setaddressmessage("입력하세요")
+            setIsaddress(false);
+        }else{
+            setaddressmessage("올바른 형식입니다.")
+            setIsaddress(true);
+        }
+    },[enroll_company.address]);
+
     //폼 입력시 변경되는 사항
     const handleInput = (e)=>{
         e.preventDefault();
-        console.log("??");
+        console.log("handleInput 실행");
+        console.log(e.target.value);
 
         //아이디 이름 유효성 검사
         if(e.target.name === 'enterpriseName'){
@@ -388,26 +409,21 @@ function Register_company(){
             }
         }
 
-        //주소 유효성 검사
-        if(e.target.name === 'address'){
-            if(enroll_company.address === ''){
-                setaddressmessage("입력하세요")
-                setIsaddress(false);
-            }else{
-                setaddressmessage("올바른 형식입니다.")
-                setIsaddress(true);
-            }
-        }
-
         //계좌 & 은행 유효송 검사
-        if(e.target.name === 'bankName' || e.target.name === 'accountNumber'){
-            if(enroll_company.bankName === '' || enroll_company.accountNumber === ''){
-                setaccountNumbermessage("계좌번호와 은행을 입력하세요")
-                setIsbankname(false);
+        if( e.target.name === 'accountNumber'){
+            if( enroll_company.accountNumber.length < 1 || !isbankname){
+                    setaccountNumbermessage("계좌번호와 은행을 입력하세요");
+                    setIsacounternumbermessage(false);
+            }else{
+                    setaccountNumbermessage("올바른 입력입니다");
+                    setIsacounternumbermessage(true);
+            }
+        }else if(e.target.name === 'bankName'){
+            if( enroll_company.accountNumber.length < 1 || !isbankname){
+                setaccountNumbermessage("계좌번호와 은행을 입력하세요");
                 setIsacounternumbermessage(false);
             }else{
-                setaccountNumbermessage("올바른 입력입니다")
-                setIsbankname(true);
+                setaccountNumbermessage("올바른 입력입니다");
                 setIsacounternumbermessage(true);
             }
         }
@@ -428,14 +444,12 @@ function Register_company(){
                 .post(baseUrl + "/register/company", enroll_company)
                 .then((response) =>{
                     console.log(response.data);
-                    console.log("성공~!");
+                    console.log("회원가입 성공");
                     if(response.data.message === 'Success'){
                         navigate('/login');
                     }else{
                         alert("오류났습니다.");
                     }
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-
                 })
                 .catch((error) => {
                console.log(error);
@@ -455,10 +469,9 @@ function Register_company(){
                 enterpriseId: enroll_company.enterpriseId,
             })
             .then((response) => {
-                console.log(response.data);
                 //데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
                 if(response.data.returnvalue === '0'){
-                    console.log("susscess");
+                    console.log("아이디 중복성 검사 완료");
                     setenterpriseIdmessage("올바른 형식입니다. 중복성 검사가 완료되었습니다.")
                     setIsenterpriseId(true);
                 }else{
@@ -500,7 +513,7 @@ function Register_company(){
                         <option value="none"> 은행 </option>
                         <option value="우리은행">우리은행</option>
                         <option value="KB국민은행">KB국민은행</option>
-                        <option value="신한은행">신한은행"</option>
+                        <option value="신한은행">신한은행</option>
                         <option value="하나은행">하나은행</option>
                         <option value="NH농협은행">NH농협은행</option>
                         <option value="Sh수협은행">Sh수협은행</option>

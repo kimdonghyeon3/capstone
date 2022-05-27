@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DaumPostcode from "react-daum-postcode";
 import './post.css';
 
 const Post = (props) => {
-    // const address = props.address;
-    // const setAddress = props.setAddress;
 
     const complete = (data) =>{
         let fullAddress = data.address;

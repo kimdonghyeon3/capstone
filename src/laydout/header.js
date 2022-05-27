@@ -4,10 +4,6 @@ import {Link, useNavigate} from 'react-router-dom';
 import {Userlogin} from "../userinfo";
 export function Header(){
     const userlogin = useContext(Userlogin);
-    // console.log(userlogin.uid);
-    // console.log(userlogin.id);
-    // console.log(userlogin.role);
-    // console.log(userlogin.login);
 
     const [login_role,setLogin_role] =useState("");
 
@@ -16,17 +12,14 @@ export function Header(){
         if(userlogin.login){
 
             if(userlogin.role === "E")
-                setLogin_role("/company");
+                setLogin_role("/company/profile");
             else{
-                setLogin_role("/user");
+                setLogin_role("/user/profile");
             }
         }else{
-            console.log("여기?");
+            console.log("로그인 전");
         }
     });
-
-    console.log("login_role 변환")
-    console.log(login_role);
 
     return(
         <header className="header">
