@@ -1,6 +1,6 @@
 import './header.css'
 import React, {useContext, useEffect, useState} from "react";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Userlogin} from "../userinfo";
 
 
@@ -40,14 +40,14 @@ export function Header(){
 
     const [login_role,setLogin_role] =useState("");
 
-    const [logInOut, setlogInOut] = useState({
-        btn : <Login_btn/>
+    const [logInOut, setLogInOut] = useState({
+        btn : <Login_btn/>,
     });
 
     useEffect(() => {
 
         if(userlogin.login){
-            setlogInOut({
+            setLogInOut({
                 ...logInOut,
                 btn : <Logout_btn/>,
             });
@@ -59,12 +59,12 @@ export function Header(){
 
         }else{
             console.log("로그인 전");
-            setlogInOut({
+            setLogInOut({
                 ...logInOut,
                 btn : <Login_btn/>,
             });
         }
-    },);
+    },[userlogin]);
 
     return(
         <header className="header">
@@ -80,7 +80,6 @@ export function Header(){
                         </li>
                         <li className="header_item_right">
                             {logInOut.btn}
-                            {/*<Link className="header_link" to="/login">로그인</Link>*/}
                         </li>
                     </ul>
                 </nav>

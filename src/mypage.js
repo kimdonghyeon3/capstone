@@ -322,12 +322,31 @@ function Company_product(){
     )
 }
 
+function Company_withdraw(){
+
+    return(
+        <div>
+            <h2 className="user_profile_h2"> 회원 탈퇴</h2>
+            <hr/>
+            <h3 className="user_withdraw_guide"> 회원탈퇴 안내</h3>
+            <div className="user_withdraw_text"> 1. 회원 재가입은 탈퇴 후 바로 간응합니다. 단, 탈퇴한 아이디는 본인과 타인 모두 재사용할 수 없습니다.</div>
+            <div className="user_withdraw_text"> 2. 탈퇴 후 회원정보와 개인형 서비스가 아래와 같이 삭제되며 삭제된 데이터는 복구되지 않습니다.</div>
+            <div className="user_withdraw_text strong"> - 회원 정보</div>
+            <div className="user_withdraw_text strong"> - 구독 상품 정보</div>
+            <div className="user_withdraw_text"> 탈퇴 후 문의주신 내용은 삭제되지 않고 유지됩니다. 문의 내용 삭제를 원하는 경우 반듯이 삭제 요청 후 탈퇴를 신청해주세요.</div>
+            <hr/>
+            <div className="user_withdraw_btn_div"><button className="user_withdraw_btn"> V 회원탈퇴</button></div>
+        </div>
+    )
+}
+
 const company_content=[
     {title:'profile', description:<Company_profile/>},
     {title:'edit', description:<Company_edit/>},
     {title:'manage', description:<Company_manage/>},
     {title:'deliver', description:<Company_deliver/>},
     {title:'product', description:<Company_product/>},
+    {title:'withdraw', description:<Company_withdraw/>},
 ]
 
 function Company(){
@@ -345,6 +364,7 @@ function Company(){
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/manage"> 상품 관리</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/deliver"> 배송 조회</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/product"> 상품 등록</Link></li>
+                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/withdraw"> 회원 탈퇴</Link></li>
                     </ul>
                 </div>
 
