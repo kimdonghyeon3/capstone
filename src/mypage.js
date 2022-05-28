@@ -21,7 +21,7 @@ function Company_profile(){
         address:'',
         bankName:'',
         emailAddress:'',
-        enterpriseId:'',
+        enterpriseID:'',
         enterpriseNumber:'',
         enterpriseName:'',
         password:'',
@@ -44,7 +44,7 @@ function Company_profile(){
                     address:response.data.address,
                     bankName:response.data.bankName,
                     emailAddress:response.data.emailAddress,
-                    enterpriseId:response.data.enterpriseId,
+                    enterpriseID:response.data.enterpriseID,
                     enterpriseName:response.data.enterpriseName,
                     enterpriseNumber:response.data.enterpriseNumber,
                     password:response.data.password,
@@ -62,7 +62,7 @@ function Company_profile(){
             <hr/>
             <dl>
                 <dt className="user_profile_dt"><label>아이디</label></dt>
-                <dd className="user_profile_dd"><span>{companyprofile.enterpriseId}</span></dd>
+                <dd className="user_profile_dd"><span>{companyprofile.enterpriseID}</span></dd>
                 <dt className="user_profile_dt"><label>비밀번호</label></dt>
                 <dd className="user_profile_dd"><span>{companyprofile.password}</span></dd>
                 <dt className="user_profile_dt"><label>기업명</label></dt>
@@ -454,13 +454,16 @@ function User_edit(){
 
     const logininfo = useContext(Userlogin);
 
+    const [isuserId, setIsuserId] = useState(false);
+    const [userId_btn, setUserId_btn] = useState("중복 검사");
+
     const [userinfo, setUserinfo] = useState({
         enid:logininfo.uid,
         enterpriseId:logininfo.id,
         role:logininfo.role,
     });
     const[edit_user, setEdit_user] = useState({
-        usid:logininfo.uid,
+        id:logininfo.uid,
         phoneNumber:'',
         birth:'',
         userName:'',
@@ -506,10 +509,37 @@ function User_edit(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(edit_user);
+        if(isuserId){
+            await axios
+                .post(baseUrl + "/mypage/user/edit", edit_user)
+                .then((response) =>{
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }else{
+            alert("아이디 중복성 검사를 확인하세요");
+        }
+
+    }
+
+    //아이디 중복성 검사
+    const userid_check = async (e) => {
+        e.preventDefault();
+        console.log(edit_user.userId);
         await axios
-            .post(baseUrl + "/mypage/user/edit", edit_user)
+            .post(baseUrl + "/register/check", {
+                inputId:edit_user.userId,
+            })
             .then((response) =>{
-                console.log(response.data);
+
+                if(response.data.returnvalue === '0'){
+                    setUserId_btn("중복 검사 완료")
+                    setIsuserId(true);
+                }else{
+                    alert("중복된 아이디 입니다. 다른 아이디를 입력하세요")
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -522,10 +552,6 @@ function User_edit(){
             <hr />
             <form onSubmit={handleSubmit}>
                 <dl>
-                    <dt className="user_profile_dt"><label>사용자명</label></dt>
-                    <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.userName}  type="text" required={true} name="userName" onChange={handleInput} value={edit_user.userName||''}/>
-                    </dd>
                     <dt className="user_profile_dt"><label>이메일</label></dt>
                     <dd className="user_edit_dd">
                         <input className="user_enroll_text" placeholder={edit_user.email} type="text" required={true} name="email" onChange={handleInput} value={edit_user.email||''}/>
@@ -533,14 +559,11 @@ function User_edit(){
                     <dt className="user_profile_dt"><label>아이디</label></dt>
                     <dd className="user_edit_dd">
                         <input className="user_enroll_text" placeholder={edit_user.userId}  type="text" required={true} name="userId" onChange={handleInput} value={edit_user.userId||''}/>
+                        <button type="button" onClick={userid_check}>{userId_btn}</button>
                     </dd>
                     <dt className="user_profile_dt"><label>비밀번호</label></dt>
                     <dd className="user_edit_dd">
                         <input className="user_enroll_text" placeholder={edit_user.password}  type="text" required={true} name="password" onChange={handleInput} value={edit_user.password||''}/>
-                    </dd>
-                    <dt className="user_profile_dt"><label>생년월일</label></dt>
-                    <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.birth}  type="text" required={true} name="birth" onChange={handleInput} value={edit_user.birth||''}/>
                     </dd>
                     <dt className="user_profile_dt"><label>전화번호</label></dt>
                     <dd className="user_edit_dd">
