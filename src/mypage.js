@@ -510,11 +510,6 @@ function User_edit(){
             .post(baseUrl + "/mypage/user/edit", edit_user)
             .then((response) =>{
                 console.log(response.data);
-                // if(response.data.message === 'Success'){
-                //
-                // }else{
-                //     alert("오류났습니다.");
-                // }
             })
             .catch((error) => {
                 console.log(error);
@@ -541,7 +536,7 @@ function User_edit(){
                     </dd>
                     <dt className="user_profile_dt"><label>비밀번호</label></dt>
                     <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.password}  type="text" required={true} name="phoneNumber" onChange={handleInput} value={edit_user.phoneNumber||''}/>
+                        <input className="user_enroll_text" placeholder={edit_user.password}  type="text" required={true} name="password" onChange={handleInput} value={edit_user.password||''}/>
                     </dd>
                     <dt className="user_profile_dt"><label>생년월일</label></dt>
                     <dd className="user_edit_dd">
@@ -549,7 +544,7 @@ function User_edit(){
                     </dd>
                     <dt className="user_profile_dt"><label>전화번호</label></dt>
                     <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.phoneNumber}  type="text" required={true} name="password" onChange={handleInput} value={edit_user.password||''}/>
+                        <input className="user_enroll_text" placeholder={edit_user.phoneNumber}  type="text" required={true} name="phoneNumber" onChange={handleInput} value={edit_user.phoneNumber||''}/>
                     </dd>
                     <button type="submit" className="user_edit_btn"> 변경 </button>
                 </dl>
