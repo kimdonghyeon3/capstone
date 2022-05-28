@@ -324,6 +324,25 @@ function Company_product(){
 
 function Company_withdraw(){
 
+    const baseUrl = "http://localhost:8080";
+
+    const userinfo = useContext(Userlogin);
+
+    const handleWithdraw = async () => {
+        await axios
+            .post(baseUrl + "/mypage/company/withdraw", {id:userinfo.uid,})
+            .then((response) => {
+                console.log(response.data);
+                if(response.data.message === 'Success'){
+                    console.log("Success");
+                    alert("탈퇴 완료 // 로그아웃 해야됨");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     return(
         <div>
             <h2 className="user_profile_h2"> 회원 탈퇴</h2>
@@ -335,7 +354,7 @@ function Company_withdraw(){
             <div className="user_withdraw_text strong"> - 구독 상품 정보</div>
             <div className="user_withdraw_text"> 탈퇴 후 문의주신 내용은 삭제되지 않고 유지됩니다. 문의 내용 삭제를 원하는 경우 반듯이 삭제 요청 후 탈퇴를 신청해주세요.</div>
             <hr/>
-            <div className="user_withdraw_btn_div"><button className="user_withdraw_btn"> V 회원탈퇴</button></div>
+            <div className="user_withdraw_btn_div"><button className="user_withdraw_btn" onClick={handleWithdraw}> V 회원탈퇴</button></div>
         </div>
     )
 }
@@ -663,6 +682,24 @@ function User_bascket(){
 }
 
 function User_withdraw(){
+    const baseUrl = "http://localhost:8080";
+
+    const userinfo = useContext(Userlogin);
+
+    const handleWithdraw = async () => {
+        await axios
+            .post(baseUrl + "/mypage/user/withdraw", {id:userinfo.uid,})
+            .then((response) => {
+                console.log(response.data);
+                if(response.data.message === 'Success'){
+                    console.log("Success");
+                    alert("탈퇴 완료 // 로그아웃 해야됨");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     return(
         <div>
