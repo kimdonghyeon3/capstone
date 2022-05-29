@@ -79,15 +79,24 @@ function ProductCreate(){
 
         e.preventDefault();
 
+        const data = {
+            "P_ENID":userinfo.uid,
+            "P_ProductName":productInfo.P_ProductName,
+            "P_Price":productInfo.P_Price,
+            "P_Category":productInfo.P_Category,
+            "P_Detail":productInfo.P_Detail,
+        }
+
         const formData = new FormData();
         formData.append("multipartFile",fileimage);
-        formData.append("productReq",new Blob([JSON.stringify(productInfo)], { type: "application/json" }));
+        formData.append("productReq",new Blob([JSON.stringify(data)], { type: "application/json" }));
         formData.append("detailFile",templateimage);
 
         for (let key of formData.keys()) {
             console.log(key, ":", formData.get(key));
         }
-        console.log(productInfo);
+
+        console.log(data);
         await axios
             .post(baseUrl + "/mypage/company/product",formData, {
                 headers: {
