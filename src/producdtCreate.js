@@ -10,6 +10,8 @@ import axios from "axios";
 
 function ProductCreate(){
 
+    const baseUrl = "http://localhost:8080";
+
     const userinfo = useContext(Userlogin);
 
     const navigate = useNavigate();
@@ -27,26 +29,50 @@ function ProductCreate(){
     const [fileimage, setFileimage] = useState();
 
     const saveFileImage = (e)=>{
-        setFileimage(URL.createObjectURL(e.target.files[0]));
+        // setFileimage(e.target.files);
+        // setFileimage(URL.createObjectURL(e.target.files[0]));
+        setFileimage(e.target.files[0]);
+        console.log(e.target.files[0]);
     }
 
-    const deleteFileImage = (event) => {
+    const deleteFileImage = (e) => {
         URL.revokeObjectURL(fileimage);
         setFileimage("");
+        console.log(fileimage);
     }
 
     //템플릿 이미지
-    const [template, setTemplate] = useState([]);
+    const [templateimage, setTemplateimage] = useState();
 
-    const saveTemplate = (e) => {
-        const nowSelectImgList = e.target.files;
-        const nowImageURLList = [...template];
+    const saveTemplateImage = (e)=>{
+        // setTemplateimage(e.target.files);
+        setTemplateimage(e.target.files[0]);
+        // setTemplateimage(URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0]);
+    }
 
-        for(let i = 0 ; i < nowSelectImgList.length ; i++){
-            const nowImageURL = URL.createObjectURL(nowSelectImgList[i])
-            nowImageURLList.push(nowImageURL);
-        }
-        setTemplate(nowImageURLList);
+    const deleteTemplateImage = (e) => {
+        URL.revokeObjectURL(templateimage);
+        setTemplateimage("");
+        console.log(templateimage);
+    }
+
+    //나머지 입력 처리
+    const [productInfo, setProductInfo] = useState({
+        P_ENID:userinfo.uid,
+        P_ProductName:'',
+        P_Category:'',
+        P_Price:'',
+        P_Detail:'',
+    });
+
+    const handleInput = (e) => {
+
+        setProductInfo({
+            ...productInfo,
+            [e.target.name]:e.target.value,
+        })
+
     }
 
     const createProduct = async (e) => {
@@ -54,12 +80,18 @@ function ProductCreate(){
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("mainImg",fileimage);
+        formData.append("multipartFile",fileimage);
+        formData.append("productReq",new Blob([JSON.stringify(productInfo)], { type: "application/json" }));
+        formData.append("detailFile",templateimage);
 
+        for (let key of formData.keys()) {
+            console.log(key, ":", formData.get(key));
+        }
+        console.log(productInfo);
         await axios
-            .post("",formData, {
+            .post(baseUrl + "/mypage/company/product",formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
                 }
             })
             .then((response) => {
@@ -67,9 +99,7 @@ function ProductCreate(){
                 console.log(response.data);
             })
             .catch((e) => { console.log(e); })
-
     }
-
 
     return(
         <div>
@@ -77,43 +107,48 @@ function ProductCreate(){
             <button type="button" onClick={back}>뒤로가기</button>
             <h2 className="company_profile_h2"> 상품 등록 페이지</h2>
             <hr/>
-            <form onSubmit={createProduct}>
+
                 <p> 대표 사진 업로드 </p>
                 <div className="preview_img">
                     {fileimage && (<img alt="preview" src={fileimage}/>)}
                 </div>
-                <button onClick={() => deleteFileImage()}> 삭제 </button>
+                <button onClick={deleteFileImage}> 삭제 </button>
                 <input type="file" accept="image/*" onChange={saveFileImage}/>
-            <div><label>상평명</label>
-                <input type="text"/>
+
+            <div><label>상품명</label>
+                <input type="text" name="P_ProductName" onChange={handleInput}/>
             </div>
             <div> <label>카테고리설정</label>
-                <select>
-                    <option></option>
-                    <option>lifestyle</option>
-                    <option>sw</option>
+                <select name="P_Category" onChange={handleInput}>
+                    <option value="none">카테고리</option>
+                    <option value="생활">생활</option>
+                    <option value="멤버쉽">멤버쉽</option>
+                    <option value="건강">건강</option>
+                    <option value="도서">도서</option>
+                    <option value="음악">음악</option>
+                    <option value="영상">영상</option>
+                    <option value="빵">빵</option>
+                    <option value="유제품">유제품</option>
+                    <option value="죽">죽</option>
                 </select>
             </div>
-            <div> <label>월/가격 및 옵션</label>
-                <select>
-                    <option></option>
-                    <option>월</option>
-                    <option>년</option>
-                </select>
-                <input type="number" placeholder={"가격"}/>
-            </div>
-            <div><label>문의 번호</label>
-                <input type="text"/>
+            <div> <label>가격</label>
+                <input type="text" name="P_Price" placeholder={"가격"} onChange={handleInput}/>
             </div>
             <div> <label>상품 요약 설명 </label>
-                <textarea></textarea>
+                <textarea name="P_Detail" onChange={handleInput}></textarea>
             </div>
-            <div><label>템플릿 등록</label>
-                <label></label>
-                <input type="file" multiple="multiple" accept=".jpg,.jpeg,.png"/>
-            </div>
-                <button type="submit">제품 만들기</button>
-            </form>
+
+                <div><label>템플릿 등록</label>
+                    <div className="preview_img">
+                        {templateimage && (<img alt="preview1" src={templateimage}/>)}
+                    </div>
+                    <button onClick={deleteTemplateImage}> 삭제 </button>
+                    <input type="file" accept="image/*" onChange={saveTemplateImage}/>
+                </div>
+                <button type="submit" onClick={createProduct}>제품 만들기</button>
+
+
             <Footer/>
         </div>
     )
