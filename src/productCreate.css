@@ -1,0 +1,11 @@
+.preview_img{
+    width:30%;
+    height:10rem;
+    border: 1px solid;
+}
+
+.preview_img img{
+    display:inherit;
+    width:100%;
+    height:100%;
+}

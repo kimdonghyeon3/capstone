@@ -5,6 +5,7 @@ import {Routes, Route, Link, useParams, useNavigate} from 'react-router-dom';
 import './mypage.css';
 import {Userlogin} from "./userinfo";
 import axios from "axios";
+import ProductCreate from "./producdtCreate";
 
 //기업페이지
 function Company_profile(){
@@ -201,6 +202,13 @@ function Company_edit(){
 }
 
 function Company_manage(){
+
+    const navigate = useNavigate();
+
+    const movecreate = () => {
+        navigate("/product/create");
+    }
+
     return(
         <div>
             <h2 className="company_profile_h2"> 등록 상품 관리</h2>
@@ -221,7 +229,9 @@ function Company_manage(){
                     <div className="product_link_div"><button className="product_th_btn"> 수정하기 </button></div>
                 </div>
             </div>
-            <div className="company_product_enroll_div"><button className="company_product_enroll_btn">상품 등록하러 가기</button></div>
+            <div className="company_product_enroll_div">
+                <button className="company_product_enroll_btn" onClick={movecreate}>상품 등록하러 가기</button>
+            </div>
         </div>
     )
 }
@@ -289,44 +299,13 @@ function Company_deliver(){
     )
 }
 
-function Company_product(){
-
-    const [fileimage, setFileimage] = useState();
-
-    const saveFileImage = (event)=>{
-        setFileimage(URL.createObjectURL(event.target.files[0]));
-    }
-
-    const deleteFileImage = (event) => {
-        URL.revokeObjectURL(fileimage);
-        setFileimage("");
-    }
-    return(
-        <div>
-            <h2 className="company_profile_h2"> 상품 등록 페이지</h2>
-            <hr/>
-            <form>
-                <p> 대표 사진 업로드 </p>
-                <div>{fileimage && (<img alt="preview" src={fileimage}/>)}
-                <button onClick={() => deleteFileImage()}> 삭제 </button>
-                </div>
-                <input type="file" accept="image/*" onChange={saveFileImage}></input>
-            <p> 상평명 </p>
-            <p> 카테고리설정 </p>
-            <p> 월/가격 및 옵션 </p>
-            <p> 상담번호 </p>
-            <p> 사업장 주소 </p>
-            <p> 상품 상세 설명 </p>
-            </form>
-        </div>
-    )
-}
-
 function Company_withdraw(){
 
     const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
+
+    const navigate = useNavigate();
 
     const handleWithdraw = async () => {
         await axios
@@ -335,7 +314,16 @@ function Company_withdraw(){
                 console.log(response.data);
                 if(response.data.message === 'Success'){
                     console.log("Success");
-                    alert("탈퇴 완료 // 로그아웃 해야됨");
+                    alert("탈퇴 완료 // 로그아웃 합니다");
+                    navigate("/category/main");
+                    console.log("?");
+                    userinfo.edituser({
+                        uid : '',
+                        id : '',
+                        role : '',
+                        login : false,
+                    });
+                    console.log("??");
                 }
             })
             .catch((error) => {
@@ -364,7 +352,7 @@ const company_content=[
     {title:'edit', description:<Company_edit/>},
     {title:'manage', description:<Company_manage/>},
     {title:'deliver', description:<Company_deliver/>},
-    {title:'product', description:<Company_product/>},
+    {title:'product', description:<ProductCreate/>},
     {title:'withdraw', description:<Company_withdraw/>},
 ]
 
@@ -382,7 +370,7 @@ function Company(){
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/edit"> 기업 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/manage"> 상품 관리</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/deliver"> 배송 조회</Link></li>
-                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/product"> 상품 등록</Link></li>
+                        {/*<li className="user_navbar_li"><Link className="user_navbar_link" to="/product/create"> 상품 등록</Link></li>*/}
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/withdraw"> 회원 탈퇴</Link></li>
                     </ul>
                 </div>
@@ -686,6 +674,8 @@ function User_withdraw(){
 
     const userinfo = useContext(Userlogin);
 
+    const navigate = useNavigate();
+
     const handleWithdraw = async () => {
         await axios
             .post(baseUrl + "/mypage/user/withdraw", {id:userinfo.uid,})
@@ -693,7 +683,17 @@ function User_withdraw(){
                 console.log(response.data);
                 if(response.data.message === 'Success'){
                     console.log("Success");
-                    alert("탈퇴 완료 // 로그아웃 해야됨");
+                    alert("탈퇴 완료 // 로그아웃 합니다");
+                    navigate("/category/main");
+                    console.log("?");
+                    userinfo.edituser({
+                        uid : '',
+                        id : '',
+                        role : '',
+                        login : false,
+                    });
+                    console.log("??");
+
                 }
             })
             .catch((error) => {

@@ -195,8 +195,6 @@ function Register_user(){
             alert("올바른 입력을 해주세요");
         }
 
-
-
     }
 
     //아이디 중복성 검사

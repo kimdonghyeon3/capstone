@@ -13,6 +13,7 @@ import Login from './login';
 import Category from "./category";
 import Register from './register';
 import Userinfo, {UserPovider} from "./userinfo";
+import ProductCreate from "./producdtCreate";
 
 function Home(){
 
@@ -34,11 +35,12 @@ function App(){
         <div>
             <UserPovider>
                 <Routes>
-                    <Route path="/" element={<Home />}></Route>
-                    <Route path="/mypage/*" element={<Mypage/>}></Route>
-                    <Route path="/login" element={<Login/>}></Route>
-                    <Route path="/category/*" element={<Category/>}></Route>
-                    <Route path="/register/:register_id" element={<Register/>}></Route>
+                    <Route path="/" element={<Home />}/>
+                    <Route path="/mypage/*" element={<Mypage/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/category/*" element={<Category/>}/>
+                    <Route path="/register/:register_id" element={<Register/>}/>
+                    <Route path="/product/create" element={<ProductCreate/>}/>
                 </Routes>
             </UserPovider>
         </div>
