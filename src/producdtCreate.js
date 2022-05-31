@@ -75,28 +75,16 @@ function ProductCreate(){
 
     }
 
+    // 상품 만들기 누르기
     const createProduct = async (e) => {
 
         e.preventDefault();
 
-        const data = {
-            "P_ENID":userinfo.uid,
-            "P_ProductName":productInfo.P_ProductName,
-            "P_Price":productInfo.P_Price,
-            "P_Category":productInfo.P_Category,
-            "P_Detail":productInfo.P_Detail,
-        }
-
         const formData = new FormData();
         formData.append("multipartFile",fileimage);
-        formData.append("productReq",new Blob([JSON.stringify(data)], { type: "application/json" }));
         formData.append("detailFile",templateimage);
 
-        for (let key of formData.keys()) {
-            console.log(key, ":", formData.get(key));
-        }
-
-        console.log(data);
+        //이미지 보내기
         await axios
             .post(baseUrl + "/mypage/company/product",formData, {
                 headers: {
@@ -104,7 +92,17 @@ function ProductCreate(){
                 }
             })
             .then((response) => {
-                alert("보내기 성공");
+                alert("img 보내기 성공");
+                console.log(response.data);
+            })
+            .catch((e) => { console.log(e); })
+
+        console.log(productInfo);
+        //json 보내기
+        await axios
+            .post(baseUrl + "/mypage/company/product/json",productInfo)
+            .then((response) => {
+                alert("json 보내기 성공");
                 console.log(response.data);
             })
             .catch((e) => { console.log(e); })
