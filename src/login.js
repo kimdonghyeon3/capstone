@@ -43,6 +43,10 @@ function Login({children}){
                         role : response.data.role,
                         login : true,
                     })
+                    sessionStorage.setItem("uid",response.data.enid);
+                    sessionStorage.setItem("id",response.data.enterpriseId);
+                    sessionStorage.setItem("role",response.data.role);
+                    sessionStorage.setItem("login","true");
 
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");

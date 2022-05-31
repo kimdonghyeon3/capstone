@@ -25,6 +25,8 @@ export function Logout_btn(){
             role : '',
             login : false,
         })
+
+        sessionStorage.clear();
     }
 
     return(
@@ -58,7 +60,6 @@ export function Header(){
             }
 
         }else{
-            console.log("로그인 전");
             setLogInOut({
                 ...logInOut,
                 btn : <Login_btn/>,

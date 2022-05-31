@@ -12,24 +12,23 @@ function Category_content_main(){
                        <div className="product_container">
                            <div className="product">
                                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                               <div class="product_txt">&nbsp; 상품설명</div>
+                               <div className="product_txt">&nbsp; 상품설명</div>
                            </div>
                        </div>
 
                        <div className="product_container">
                            <div className="product">
                                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                               <div class="product_txt">&nbsp; 상품설명</div>
+                               <div className="product_txt">&nbsp; 상품설명</div>
                            </div>
                        </div>
 
                        <div className="product_container">
                            <div className="product">
                                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                               <div class="product_txt">&nbsp; 상품설명</div>
+                               <div className="product_txt">&nbsp; 상품설명</div>
                            </div>
                        </div>
-
 
                    </div>
                </div>)
@@ -276,9 +275,6 @@ function Category({children}){
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content/bread'>빵</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content/milk'>유제품</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content/juk'>죽</Link></li>
-
-
-
                                 </ul>
                             </li>
                             </ul>
@@ -301,8 +297,6 @@ function Category({children}){
                     </nav>
 
                 </div>
-
-
 
                 <div className="category_layout">
 
