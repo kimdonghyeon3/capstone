@@ -4,14 +4,19 @@ import {NavLink} from 'react-router-dom';
 
 export function Content(){
     return(
-        <main className="content">
+        <main className="content" style={{backgroundColor:'white'}}>
             <div>
-                <h2> 메인asdsd </h2>
-                <div className="door">
+
+                 <div>
                     <NavLink to="/category/main">
-                        <img src={require("../img/door.jpg") } />
+
+                    <div className="arrangement">
+                    <video autoPlay loop muted >
+                    <source src={require("../img/video_123.mp4")} type="video/mp4"/>
+                    </video>
+                    </div>
                     </NavLink>
-                </div>
+                 </div>
             </div>
         </main>
     )

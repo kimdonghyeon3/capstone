@@ -1,7 +1,7 @@
 
-.header{
+/* .header{
     box-shadow : 0 3px 0 0 #EFEFEF;
-}
+} */
 
 .header_navbar{
     display : inline-block;
@@ -30,8 +30,8 @@
 
 .header_item_left{
     float : left;
-    margin-left : 10%;
-    margin-top : 6px;
+    margin-left : 4%;
+    margin-top : 7px;
 }
 
 .header_item_right{
