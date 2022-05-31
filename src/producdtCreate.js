@@ -59,11 +59,11 @@ function ProductCreate(){
 
     //나머지 입력 처리
     const [productInfo, setProductInfo] = useState({
-        P_ENID:userinfo.uid,
-        P_ProductName:'',
-        P_Category:'',
-        P_Price:'',
-        P_Detail:'',
+        p_enid:userinfo.uid,
+        p_ProductName:'',
+        p_Category:'',
+        p_Price:'',
+        p_Detail:'',
     });
 
     const handleInput = (e) => {
@@ -123,10 +123,10 @@ function ProductCreate(){
                 <input type="file" accept="image/*" onChange={saveFileImage}/>
 
             <div><label>상품명</label>
-                <input type="text" name="P_ProductName" onChange={handleInput}/>
+                <input type="text" name="p_ProductName" onChange={handleInput}/>
             </div>
             <div> <label>카테고리설정</label>
-                <select name="P_Category" onChange={handleInput}>
+                <select name="p_Category" onChange={handleInput}>
                     <option value="none">카테고리</option>
                     <option value="생활">생활</option>
                     <option value="멤버쉽">멤버쉽</option>
@@ -140,10 +140,10 @@ function ProductCreate(){
                 </select>
             </div>
             <div> <label>가격</label>
-                <input type="text" name="P_Price" placeholder={"가격"} onChange={handleInput}/>
+                <input type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/>
             </div>
             <div> <label>상품 요약 설명 </label>
-                <textarea name="P_Detail" onChange={handleInput}></textarea>
+                <textarea name="p_Detail" onChange={handleInput}></textarea>
             </div>
 
                 <div><label>템플릿 등록</label>
