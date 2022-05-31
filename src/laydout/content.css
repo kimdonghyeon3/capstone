@@ -1,8 +1,11 @@
 .content{
-    background-color : #2AC1BC;
+    /* height: 100vh; */
+    color:black;
+    padding: 5%;
 }
-.door{
-    display : flex;
-    justify-content : center;
-    align-items:center;
+
+.arrangement{
+    margin-top: -5%;
+    padding-left: 5.5%;
+
 }
