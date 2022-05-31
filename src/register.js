@@ -9,7 +9,7 @@ import Post from "./modals/post";
 function Register_main(){
     return(
         <div className="register_main_container">
-                            <div className="register_box"><strong>회원가입</strong></div>
+                            <div className="register_box"><strong>회원가입a</strong></div>
                 <hr className="sun"size="3" width="105%" color="black"/>
 
                   
