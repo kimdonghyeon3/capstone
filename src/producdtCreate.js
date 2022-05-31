@@ -59,7 +59,7 @@ function ProductCreate(){
 
     //나머지 입력 처리
     const [productInfo, setProductInfo] = useState({
-        p_enid:userinfo.uid,
+        p_ENID:userinfo.uid,
         p_ProductName:'',
         p_Category:'',
         p_Price:'',
@@ -82,6 +82,7 @@ function ProductCreate(){
 
         const formData = new FormData();
         formData.append("multipartFile",fileimage);
+        formData.append("productReq",new Blob([JSON.stringify(productInfo)], {type:'application/json'}));
         formData.append("detailFile",templateimage);
 
         //이미지 보내기
@@ -92,17 +93,7 @@ function ProductCreate(){
                 }
             })
             .then((response) => {
-                alert("img 보내기 성공");
-                console.log(response.data);
-            })
-            .catch((e) => { console.log(e); })
-
-        console.log(productInfo);
-        //json 보내기
-        await axios
-            .post(baseUrl + "/mypage/company/product/json",productInfo)
-            .then((response) => {
-                alert("json 보내기 성공");
+                alert("보내기 성공");
                 console.log(response.data);
             })
             .catch((e) => { console.log(e); })
