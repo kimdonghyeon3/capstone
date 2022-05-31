@@ -6,7 +6,7 @@ export function Content(){
     return(
         <main className="content">
             <div>
-                <h2> 메인 </h2>
+                <h2> 메인asdsd </h2>
                 <div className="door">
                     <NavLink to="/category/main">
                         <img src={require("../img/door.jpg") } />
