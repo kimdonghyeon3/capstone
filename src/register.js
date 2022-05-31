@@ -9,23 +9,23 @@ import Post from "./modals/post";
 function Register_main(){
     return(
         <div className="register_main_container">
-                            <div className="register_box"><strong>회원가입a</strong></div>
+                            <div className="register_box"><strong>회원가입</strong></div>
                 <hr className="sun"size="3" width="105%" color="black"/>
 
                   
                 <div className="company_img">
 
-                     <img className="company_image"src={require("./img/join_company.png")}/>
+                     <img className="company_image"src={require("./img/join_person.png")}/>
                      <div className="bigtxt">개인회원</div>
                      <div className="smalltxt">설명</div>
-                     <div className="register_main_item_div register_main_left"> <Link to="/register/user" className="register_main_item">가입하기</Link></div>
+                     <div className="register_main_item_div register_main_left"> <Link to="/register/user"  className="register_main_item">가입하기</Link></div>
                      </div>
 
                 <div className="sidetosidemargin">&nbsp;</div>
 
 
                 <div className="person_img">
-                     <img className="person_image"src={require("./img/join_person.png")}/>
+                     <img className="person_image"src={require("./img/join_company.png")}/>
                      <div className="bigtxt">기업회원</div>
                      <div className="smalltxt">설명</div>
                      <div className="register_main_item_div register_main_right"> <Link to="/register/company" className="register_main_item">가입하기</Link></div>
