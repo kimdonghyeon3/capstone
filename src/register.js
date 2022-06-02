@@ -247,7 +247,6 @@ function Register_user(){
             <form onSubmit={handleSubmit} className="user_enroll_form">
 
 
-
                     <div className="register_box"><strong>회원가입</strong></div>
                     <hr className="sun"size="3" width="105%" color="black"/>
                 <div className="modecontainer">
@@ -257,14 +256,14 @@ function Register_user(){
                 </div>
 
 
-                
-                <div>    
+                <div className="tt">
                 <p className="form_locate_username">username : </p> <div className="sd"> <input className="user_enroll_text" placeholder="유저이름"  type="text" required={true} name="userName" onChange={handleInput}/>
-                   {<div>{nameMessage}</div>}</div></div> 
+                   {<div className="ad">{nameMessage}</div>}</div></div>
                     
-                <div><p>birth
+                <div className="tt"><p>birth</p><div className="sd">
                     <input className="user_enroll_text" placeholder="생년월일"  type="text" required={true} name="birth" onChange={handleInput}/>
-                    {<span>{birthMessage}</span>}</p></div>
+                    {<div className="ad">{birthMessage}</div>}</div></div>
+
                 <div><p>phone
                     <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_user.phoneNumber}/>
                     <span>{phoneMessage}</span>}</p></div>
