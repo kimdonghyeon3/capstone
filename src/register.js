@@ -245,9 +245,23 @@ function Register_user(){
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
-                <div><p>username
-                    <input className="user_enroll_text" placeholder="유저이름"  type="text" required={true} name="userName" onChange={handleInput}/>
-                    {<span>{nameMessage}</span>}</p></div>
+
+
+
+                    <div className="register_box"><strong>회원가입</strong></div>
+                    <hr className="sun"size="3" width="105%" color="black"/>
+                <div className="modecontainer">
+                <span className="userregister">개인</span>
+
+                <span className="companyregister">기업</span>
+                </div>
+
+
+                
+                <div>    
+                <p className="form_locate_username">username : </p> <div className="sd"> <input className="user_enroll_text" placeholder="유저이름"  type="text" required={true} name="userName" onChange={handleInput}/>
+                   {<div>{nameMessage}</div>}</div></div> 
+                    
                 <div><p>birth
                     <input className="user_enroll_text" placeholder="생년월일"  type="text" required={true} name="birth" onChange={handleInput}/>
                     {<span>{birthMessage}</span>}</p></div>
@@ -269,7 +283,7 @@ function Register_user(){
                 </p></div>
                 <div><button type="submit">회원가입</button></div>
             </form>
-
+        
         </div>
     )
 }

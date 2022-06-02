@@ -78,30 +78,62 @@
 .smalltxt{
     font-size: 20px;
 }
+.modecontainer{
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
 
+.userregister{
+    color: #4193E3;
+    border-bottom: 2px solid #1d7abd;
+    font-size: 1.125rem;
+    padding-bottom: 0.6%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.companyregister{
+    color: black;
+    border-bottom: 2px solid rgb(234, 234, 234);
+    font-size: 1.125rem;
+    padding-bottom: 0.6%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
 
 
 .user_enroll_text{
     display:block;
-    width : 100%;
+    width : 30%;
     padding:0.0375rem 0.75rem;
     font-size:1rem;
     font-weight: 400;
     line-height: 1.5;
-    color:#212529;
+    color:#212529;  
     border:1px solid #ced4da;
     border-radius:0.25rem;
+    margin-left: 10%;
+    
 }
 
 .user_enroll_form{
     margin-top : 7%;
     margin-bottom : 7%;
-    text-align: center;
+    /* text-align: center; */
     justify-content: center;
+    
 }
 
 .user_enroll_form div{
     display:flex;
     justify-content: center;
+
 }
 
+.form_locate_username{
+    margin-left: 5%;
+
+}
+.sd{
+    display: flex;
+}
