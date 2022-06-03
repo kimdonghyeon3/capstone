@@ -249,38 +249,41 @@ function Register_user(){
 
                     <div className="register_box"><strong>회원가입</strong></div>
                     <hr className="sun"size="3" width="105%" color="black"/>
-                <div className="modecontainer">
-                <span className="userregister">개인</span>
 
-                <span className="companyregister">기업</span>
-                </div>
+                    <div className="modecontainer">
+                      <span className="userregister">개인</span>
+                      <span className="companyregister">기업</span>
+                    </div>
 
+                <div className="register_info"><strong>회원 정보</strong></div>
+                <div className="tt">
+                <p>이름 : </p> <div className="sd"> <input className="user_enroll_text" placeholder="유저이름"  type="text" required={true} name="userName" onChange={handleInput}/>
+                   </div></div>{<div className="ad1">{nameMessage}</div>}
+                    
+                <div className="tt"><p>생년월일 :</p><div className="sd"> <input className="user_enroll_text" placeholder="생년월일"  type="text" required={true} name="birth" onChange={handleInput}/>
+                    </div></div> {<div className="ad2">{birthMessage}</div>}
 
                 <div className="tt">
-                <p className="form_locate_username">username : </p> <div className="sd"> <input className="user_enroll_text" placeholder="유저이름"  type="text" required={true} name="userName" onChange={handleInput}/>
-                   {<div className="ad">{nameMessage}</div>}</div></div>
-                    
-                <div className="tt"><p>birth</p><div className="sd">
-                    <input className="user_enroll_text" placeholder="생년월일"  type="text" required={true} name="birth" onChange={handleInput}/>
-                    {<div className="ad">{birthMessage}</div>}</div></div>
+                    <p>휴대폰번호 :</p> <div className="sd">  <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_user.phoneNumber}/>
+                   </div></div> <div className="ad3">{phoneMessage}</div>
+                
+                <div className="register_info"><strong>로그인 정보</strong></div>
+                
+                <div className="tt"><p>아이디 :</p>
+                <div className="sd">  <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="userId" onChange={handleInput}/>                   
+                </div></div>{<div className="ad4">{userIdMessage}</div>} <div><button className="availability" onClick={userid_check}>중복 확인</button></div>
 
-                <div><p>phone
-                    <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_user.phoneNumber}/>
-                    <span>{phoneMessage}</span>}</p></div>
-                <div><p>userid
-                    <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="userId" onChange={handleInput}/>
-                    {<span>{userIdMessage}</span>}
-                    <button onClick={userid_check}>중복성 검사</button>
-                </p></div>
-                <div><p>password
-                    <input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
-                    {<span>{passwordMessage}</span>}
-                </p></div>
-                <div><p>email
-                    <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
-                    {<span>{emailMessage}</span>}
-                </p></div>
-                <div><button type="submit">회원가입</button></div>
+                <div className="tt"><p>비밀번호 :</p>
+                <div className="sd">  <input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
+                    
+                </div></div>{<div className="ad5">{passwordMessage}</div>}
+
+                <div className="tt"><p>이메일 :</p>
+                <div className="sd">   <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
+                   
+                </div></div>
+
+                <div className="submit_locate"><button type="submit">회원가입</button></div>
             </form>
         
         </div>
