@@ -10,6 +10,8 @@ function Category_content_main(){
 
     const baseUrl = "http://localhost:8080";
 
+    const [productList, setProductList] = useState({});
+
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getProductInfo();
     },[]);
@@ -19,11 +21,38 @@ function Category_content_main(){
             .get(baseUrl + "/category/main")
             .then((response) => {
                 console.log(response.data);
+                console.log(response.data.length);
+                console.log(response.data[0]);
+
+                for(let i = 0 ; i < response.data.length ; i ++){
+                    setProductList({
+                        ...productList,
+                        ["p" + String(i)]:response.data[i],
+                    })
+                }
+
             })
             .catch((error)=>{
                 console.log(error);
             })
     }
+
+    // useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+    //     productInfode();
+    // },[productList]);
+    //
+    // const productInfode = () => {
+    //
+    //     const product = '';
+    //
+    //     for(let i = 0 ; i < productList.size ; i++){
+    //         // product = {"<img src=" + {require({productList.p1.imageFilePath} + "/" + {productList.p1.imageFileName}}/>"}
+    //     }
+    //
+    //     return(
+    //         {product}
+    //             )
+    // }
 
     return(<div>
                    <div className="product_container_container">

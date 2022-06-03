@@ -62,21 +62,50 @@ function ProductCreate(){
         p_ENID:userinfo.uid,
         p_ProductName:'',
         p_Category:'',
+        p_DetailCategory:'',
         p_Price:'',
         p_Detail:'',
+        p_SaleYN:'',
     });
 
     const handleInput = (e) => {
 
-        setProductInfo({
-            ...productInfo,
-            [e.target.name]:e.target.value,
-        })
+        if(e.target.name === 'p_Category'){
+
+            if(e.target.value === '생활' || e.target.value === '생활' || e.target.value === '생활'){
+                setProductInfo({
+                    ...productInfo,
+                    ['p_Category']:"라이프스타일",
+                    ['p_DetailCategory']:e.target.value,
+                })
+            }else if(e.target.value === '도서' || e.target.value === '음악' || e.target.value === '영상'){
+                setProductInfo({
+                    ...productInfo,
+                    ['p_Category']:"컨텐츠",
+                    ['p_DetailCategory']:e.target.value,
+                })
+            }else if(e.target.value === '빵' || e.target.value === '유제품' || e.target.value === '죽'){
+                setProductInfo({
+                    ...productInfo,
+                    ['p_Category']:"음식",
+                    ['p_DetailCategory']:e.target.value,
+                })
+            }
+
+        }else{
+            setProductInfo({
+                ...productInfo,
+                [e.target.name]:e.target.value,
+            })
+        }
+
 
     }
 
     // 상품 만들기 누르기
     const createProduct = async (e) => {
+
+        console.log(productInfo);
 
         e.preventDefault();
 
@@ -116,23 +145,35 @@ function ProductCreate(){
             <div><label>상품명</label>
                 <input type="text" name="p_ProductName" onChange={handleInput}/>
             </div>
+
+            <div><label>할인유무</label>
+                <div><input type="radio" name="p_SaleYN" value="Y" onChange={handleInput}/>Y</div>
+                <div><input type="radio" name="p_SaleYN" value="N" onChange={handleInput}/>N</div>
+            </div>
+
+            <div><label>할인가격</label>
+                <input type="text" name="p_Sale" onChange={handleInput}/>
+            </div>
+
             <div> <label>카테고리설정</label>
                 <select name="p_Category" onChange={handleInput}>
                     <option value="none">카테고리</option>
-                    <option value="생활">생활</option>
-                    <option value="멤버쉽">멤버쉽</option>
-                    <option value="건강">건강</option>
-                    <option value="도서">도서</option>
-                    <option value="음악">음악</option>
-                    <option value="영상">영상</option>
-                    <option value="빵">빵</option>
-                    <option value="유제품">유제품</option>
-                    <option value="죽">죽</option>
+                    <option value="생활">라이프스타일/생활</option>
+                    <option value="멤버쉽">라이프스타일/멤버쉽</option>
+                    <option value="건강">라이프스타일/건강</option>
+                    <option value="도서">컨텐츠/도서</option>
+                    <option value="음악">컨텐츠/음악</option>
+                    <option value="영상">컨텐츠/영상</option>
+                    <option value="빵">음식/빵</option>
+                    <option value="유제품">음식/유제품</option>
+                    <option value="죽">음식/죽</option>
                 </select>
             </div>
+
             <div> <label>가격</label>
                 <input type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/>
             </div>
+
             <div> <label>상품 요약 설명 </label>
                 <textarea name="p_Detail" onChange={handleInput}></textarea>
             </div>
