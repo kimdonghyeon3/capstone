@@ -574,7 +574,7 @@ function Register_company(){
                     </select></div>
                 </div><div className="ad1">{accountNumberMessage}</div>
 
-
+                <div className="register_info"><strong>로그인 정보</strong></div>
                 <div className="tt">
                 <p>enterpriseId</p> <div className="sd"> <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
                     </div></div>{<div className="ad1">{enterpriseIdMessage}</div>}<button className="availability1" onClick={enterpriseId_check}>중복성 검사</button>
