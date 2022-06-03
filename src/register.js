@@ -526,24 +526,41 @@ function Register_company(){
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
-                <div><p>enterpriseName
-                    <input className="user_enroll_text1" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
-                    {<span>{nameMessage}</span>}</p></div>
-                <div><p>enterpriseNumber
-                    <input className="user_enroll_text1" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
-                    {<span>{numMessage}</span>}</p></div>
-                <div><p>phone
-                    <input className="user_enroll_text1" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
-                    <span>{phoneMessage}</span>}</p></div>
-                <div className="address_search" >address
-                    <input className="user_enroll_text1" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                    <span>{addressMessage}</span>}
-                    <button onClick={handleComplete}>우편번호 찾기</button>
-                    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
-                </div>
-                <div><p>accountNumber
-                    <input className="user_enroll_text1" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
-                    <span>{accountNumberMessage}</span>}
+
+            <div className="register_box"><strong>회원가입</strong></div>
+                    <hr className="sun"size="3" width="105%" color="black"/>
+
+                    <div className="modecontainer">
+                      <span className="userregister1">개인</span>
+                      <span className="companyregister1">기업</span>
+                    </div>
+
+                    <div className="register_info"><strong>회원 정보</strong></div>
+
+
+                <div className="tt">
+                    <p>enterpriseName</p> <div className="sd"><input className="user_enroll_text" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
+                    </div></div>{<div className="ad1">{nameMessage}</div>}
+
+                <div className="tt">
+                    <p>enterpriseNumber</p> <div className="sd"><input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
+                    </div></div>{<div className="ad1">{numMessage}</div>}
+
+                <div className="tt">
+                    <p>phone</p> <div className="sd"><input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
+                    </div></div>{<div className="ad1">{phoneMessage}</div>}
+
+                <div className="tt" > <p>address</p>
+                    <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                    </div><div className="ad1">{addressMessage}
+                    <button className="post_container" onClick={handleComplete}>우편번호 찾기</button>
+                    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}</div>
+                
+                
+                <div className="tt"><p>accountNumber</p>
+                    <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
+                    
+                    <div className="bank_container">
                     <select name="bankName" onChange={handleInput}>
                         <option value="none"> 은행 </option>
                         <option value="우리은행">우리은행</option>
@@ -554,20 +571,22 @@ function Register_company(){
                         <option value="Sh수협은행">Sh수협은행</option>
                         <option value="SC제일은행">SC제일은행</option>
                         <option value="한국씨티은행">한국씨티은행</option>
-                    </select>
-                </p></div>
+                    </select></div>
+                </div><div className="ad1">{accountNumberMessage}</div>
+
+                
                 <div><p>enterpriseId
                     <input className="user_enroll_text1" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
-                    {<span>{enterpriseIdMessage}</span>}
+                    {<div>{enterpriseIdMessage}</div>}
                     <button onClick={enterpriseId_check}>중복성 검사</button>
                 </p></div>
                 <div><p>password
                     <input className="user_enroll_text1" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
-                    {<span>{passwordMessage}</span>}
+                    {<div>{passwordMessage}</div>}
                 </p></div>
                 <div><p>email
                     <input className="user_enroll_text1" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
-                    {<span>{emailMessage}</span>}
+                    {<div>{emailMessage}</div>}
                 </p></div>
                 <div><button type="submit">회원가입</button></div>
             </form>
