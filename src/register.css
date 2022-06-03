@@ -81,6 +81,7 @@
 .modecontainer{
     margin-top: 1%;
     margin-bottom: 2%;
+    text-decoration: none;
 }
 
 .userregister{
@@ -210,11 +211,11 @@ p{
     position: absolute;
     top: 85.7%;
     left: 71.5%;
-    /* background-color: white; */
-    /* border-left : 0.01rem solid black;
-    border-right: 0.01rem solid black;
-    border-top: 0.01rem solid black;
-    border-bottom: 0.01rem solid black; */
+}
+.availability1{
+    position: absolute;
+    top: 91%;
+    left: 71.4%;
 }
 .bank_container{
     position: absolute;

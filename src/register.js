@@ -251,8 +251,8 @@ function Register_user(){
                     <hr className="sun"size="3" width="105%" color="black"/>
 
                     <div className="modecontainer">
-                      <span className="userregister">개인</span>
-                      <span className="companyregister">기업</span>
+                    <Link to="/register/user" style={{ textDecoration: 'none' }}><span className="userregister">개인</span></Link>
+                      <Link to="/register/company" style={{ textDecoration: 'none' }}><span className="companyregister">기업</span></Link>
                     </div>
 
                 <div className="register_info"><strong>회원 정보</strong></div>
@@ -531,8 +531,8 @@ function Register_company(){
                     <hr className="sun"size="3" width="105%" color="black"/>
 
                     <div className="modecontainer">
-                      <span className="userregister1">개인</span>
-                      <span className="companyregister1">기업</span>
+                      <Link to="/register/user" style={{ textDecoration: 'none' }}><span className="userregister1">개인</span></Link>
+                      <Link to="/register/user" style={{ textDecoration: 'none' }}><span className="companyregister1">기업</span></Link>
                     </div>
 
                     <div className="register_info"><strong>회원 정보</strong></div>
@@ -557,8 +557,8 @@ function Register_company(){
                     {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}</div>
                 
                 
-                <div className="tt"><p>accountNumber</p>
-                    <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
+                <div className="tt">
+                    <p>accountNumber</p> <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
                     
                     <div className="bank_container">
                     <select name="bankName" onChange={handleInput}>
@@ -574,20 +574,20 @@ function Register_company(){
                     </select></div>
                 </div><div className="ad1">{accountNumberMessage}</div>
 
+
+                <div className="tt">
+                <p>enterpriseId</p> <div className="sd"> <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
+                    </div></div>{<div className="ad1">{enterpriseIdMessage}</div>}<button className="availability1" onClick={enterpriseId_check}>중복성 검사</button>
+                    
                 
-                <div><p>enterpriseId
-                    <input className="user_enroll_text1" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
-                    {<div>{enterpriseIdMessage}</div>}
-                    <button onClick={enterpriseId_check}>중복성 검사</button>
-                </p></div>
-                <div><p>password
-                    <input className="user_enroll_text1" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
-                    {<div>{passwordMessage}</div>}
-                </p></div>
-                <div><p>email
-                    <input className="user_enroll_text1" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
-                    {<div>{emailMessage}</div>}
-                </p></div>
+                <div className="tt">
+                <p>password</p> <div className="sd"><input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
+                </div></div>{<div className="ad1">{passwordMessage}</div>}
+
+                <div className="tt"><p>email</p>
+                <div className="sd"><input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
+                    </div></div>{<div className="ad1">{emailMessage}</div>}
+                
                 <div><button type="submit">회원가입</button></div>
             </form>
 
