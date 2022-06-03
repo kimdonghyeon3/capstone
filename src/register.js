@@ -527,22 +527,22 @@ function Register_company(){
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
                 <div><p>enterpriseName
-                    <input className="user_enroll_text" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
+                    <input className="user_enroll_text1" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
                     {<span>{nameMessage}</span>}</p></div>
                 <div><p>enterpriseNumber
-                    <input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
+                    <input className="user_enroll_text1" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
                     {<span>{numMessage}</span>}</p></div>
                 <div><p>phone
-                    <input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
+                    <input className="user_enroll_text1" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
                     <span>{phoneMessage}</span>}</p></div>
                 <div className="address_search" >address
-                    <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                    <input className="user_enroll_text1" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                     <span>{addressMessage}</span>}
                     <button onClick={handleComplete}>우편번호 찾기</button>
                     {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
                 </div>
                 <div><p>accountNumber
-                    <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
+                    <input className="user_enroll_text1" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
                     <span>{accountNumberMessage}</span>}
                     <select name="bankName" onChange={handleInput}>
                         <option value="none"> 은행 </option>
@@ -557,16 +557,16 @@ function Register_company(){
                     </select>
                 </p></div>
                 <div><p>enterpriseId
-                    <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
+                    <input className="user_enroll_text1" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
                     {<span>{enterpriseIdMessage}</span>}
                     <button onClick={enterpriseId_check}>중복성 검사</button>
                 </p></div>
                 <div><p>password
-                    <input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
+                    <input className="user_enroll_text1" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
                     {<span>{passwordMessage}</span>}
                 </p></div>
                 <div><p>email
-                    <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
+                    <input className="user_enroll_text1" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
                     {<span>{emailMessage}</span>}
                 </p></div>
                 <div><button type="submit">회원가입</button></div>
