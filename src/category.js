@@ -1,11 +1,29 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {Link, Routes, Route, useParams, useNavigate, useLocation} from "react-router-dom";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
+import axios from "axios";
 
 function Category_content_main(){
+
+    const baseUrl = "http://localhost:8080";
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        await axios
+            .get(baseUrl + "/category/main")
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
 
     return(<div>
                    <div className="product_container_container">

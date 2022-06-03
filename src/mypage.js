@@ -605,6 +605,23 @@ function User_edit(){
 
 function User_manage(){
 
+    const baseUrl = "http://localhost:8080";
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getUserSubscript();
+    },[]);
+
+    async function getUserSubscript(){            //spring 연동 값 받아오기
+        await axios
+            .post(baseUrl + "/mypage/user/manage")
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
     return(
         <div>
             <h2 className="user_profile_h2"> 구독 관리</h2>
