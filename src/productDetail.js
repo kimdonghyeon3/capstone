@@ -71,7 +71,7 @@ function ProductDetail(){
             .post(baseUrl + "/product/detail/subscript", {
                 p_PDID: pdid,
                 p_USID: loginInfo.uid,
-                p_Period: "월",
+                SubscriptCycle: "월",
             })
             .then((response) => {
                 console.log(response.data);
