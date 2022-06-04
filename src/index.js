@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
@@ -14,6 +14,7 @@ import Category from "./category";
 import Register from './register';
 import Userinfo, {Userlogin, UserPovider} from "./userinfo";
 import ProductCreate from "./producdtCreate";
+import ProductDetail from "./productDetail";
 
 function Home(){
 
@@ -35,18 +36,21 @@ function App(){
 
     const logininfo = sessionStorage.getItem("login");
 
-    if(logininfo === null){
-        console.log("로그인 후 로그아웃")
-    }else{
-        console.log("로그인 하고 값 유지");
-        userdata.edituser({
-            uid : sessionStorage.getItem("uid"),
-            id : sessionStorage.getItem("id"),
-            role : sessionStorage.getItem("role"),
-            login : true,
-        })
-        console.log(userdata);
-    }
+    useEffect( () => {
+        if(logininfo === null){
+            // console.log("로그인 후 로그아웃")
+        }else{
+            // console.log("로그인 하고 값 유지");
+            userdata.edituser({
+                uid : sessionStorage.getItem("uid"),
+                id : sessionStorage.getItem("id"),
+                role : sessionStorage.getItem("role"),
+                login : true,
+            })
+            // console.log(userdata);
+        }
+    },)
+
 
     return(
         <div>
@@ -58,6 +62,7 @@ function App(){
                     <Route path="/category/*" element={<Category/>}/>
                     <Route path="/register/:register_id" element={<Register/>}/>
                     <Route path="/product/create" element={<ProductCreate/>}/>
+                    <Route path="/product/detail/:product_pdid" element={<ProductDetail/>}></Route>
                 </Routes>
             {/*</UserPovider>*/}
         </div>
@@ -66,13 +71,15 @@ function App(){
 }
 
 ReactDOM.render(
-    <BrowserRouter>
-  <React.StrictMode>
-      <UserPovider>
-    <App />
-      </UserPovider>
-  </React.StrictMode>
-    </BrowserRouter>,
+    <UserPovider>
+        <BrowserRouter>
+          <React.StrictMode>
+              {/*<UserPovider>*/}
+                <App />
+              {/*</UserPovider>*/}
+          </React.StrictMode>
+        </BrowserRouter>
+    </UserPovider>,
   document.getElementById('root')
 );
 

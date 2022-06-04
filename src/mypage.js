@@ -603,7 +603,46 @@ function User_edit(){
     )
 }
 
+function ProductSubscriptHTML(props){
+
+    const baseUrl = "http://localhost:8080";
+
+    const handleClick = async () => {
+        console.log("구독해지");
+
+        await axios
+            .post(baseUrl + "/mypage/user/manage/withdraw", {
+                p_SSID: props.list.p_SSID,
+            })
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
+
+    return(
+        <div className="product_container">
+            <div className="product">
+                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
+                <div className="product_txt">&nbsp; {props.list.p_ProductName}
+                    <div>&nbsp;{props.list.p_Detail}</div>
+                    <div>&nbsp;{"월"}</div>
+                    <div>&nbsp;{props.list.p_Price}</div>
+                    <button onClick={handleClick}>구독 해지</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function User_manage(){
+
+    const logininfo = useContext(Userlogin);
+
+    const [subscriptList, setSubscriptList] = useState();
 
     const baseUrl = "http://localhost:8080";
 
@@ -613,9 +652,12 @@ function User_manage(){
 
     async function getUserSubscript(){            //spring 연동 값 받아오기
         await axios
-            .post(baseUrl + "/mypage/user/manage")
+            .post(baseUrl + "/mypage/user/manage", {
+                p_USID:logininfo.uid,
+            })
             .then((response) => {
                 console.log(response.data);
+                setSubscriptList(response.data)
             })
             .catch((error)=>{
                 console.log(error);
@@ -626,38 +668,11 @@ function User_manage(){
         <div>
             <h2 className="user_profile_h2"> 구독 관리</h2>
             <hr />
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 해지 </button></div>
-                </div>
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 해지 </button></div>
-                </div>
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 해지 </button></div>
-                </div>
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 해지 </button></div>
-                </div>
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 해지 </button></div>
-                </div>
-            </div>
+            {subscriptList ? subscriptList.map( list => {
+                return(
+                    <ProductSubscriptHTML list={list} key={list.p_PDID}></ProductSubscriptHTML>
+                )
+            }) : ""}
         </div>
     )
 }
@@ -832,7 +847,6 @@ function Mypage(){
     const [login_role,setLogin_role] =useState("");
 
     useEffect(() => {
-
         if(userlogin.login){
             if(userlogin.role === "E")
                 setLogin_role("/company");

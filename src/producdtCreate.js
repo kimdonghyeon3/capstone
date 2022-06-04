@@ -27,16 +27,20 @@ function ProductCreate(){
 
     //메인 이미지
     const [fileimage, setFileimage] = useState();
+    const [preViewMain, setPreViewMain] = useState();
+    const [preViewTemplate, setPreViewTemplate] = useState();
 
     const saveFileImage = (e)=>{
         // setFileimage(e.target.files);
         // setFileimage(URL.createObjectURL(e.target.files[0]));
+        setPreViewMain(URL.createObjectURL(e.target.files[0]));
         setFileimage(e.target.files[0]);
         console.log(e.target.files[0]);
     }
 
     const deleteFileImage = (e) => {
-        URL.revokeObjectURL(fileimage);
+        URL.revokeObjectURL(preViewMain);
+        setPreViewMain("");
         setFileimage("");
         console.log(fileimage);
     }
@@ -45,6 +49,7 @@ function ProductCreate(){
     const [templateimage, setTemplateimage] = useState();
 
     const saveTemplateImage = (e)=>{
+        setPreViewTemplate(URL.createObjectURL(e.target.files[0]));
         // setTemplateimage(e.target.files);
         setTemplateimage(e.target.files[0]);
         // setTemplateimage(URL.createObjectURL(e.target.files[0]));
@@ -52,7 +57,8 @@ function ProductCreate(){
     }
 
     const deleteTemplateImage = (e) => {
-        URL.revokeObjectURL(templateimage);
+        URL.revokeObjectURL(preViewTemplate);
+        setPreViewTemplate("");
         setTemplateimage("");
         console.log(templateimage);
     }
@@ -66,13 +72,14 @@ function ProductCreate(){
         p_Price:'',
         p_Detail:'',
         p_SaleYN:'',
+        p_Sale:'',
     });
 
     const handleInput = (e) => {
 
         if(e.target.name === 'p_Category'){
 
-            if(e.target.value === '생활' || e.target.value === '생활' || e.target.value === '생활'){
+            if(e.target.value === '생활' || e.target.value === '건강' || e.target.value === '멤버쉽'){
                 setProductInfo({
                     ...productInfo,
                     ['p_Category']:"라이프스타일",
@@ -122,8 +129,13 @@ function ProductCreate(){
                 }
             })
             .then((response) => {
-                alert("보내기 성공");
+                alert("상품이 성공적으로 등록되었습니다.");
                 console.log(response.data);
+                if(userinfo.role === 'E'){
+                    navigate("/mypage/company/profile");
+                }else{
+                    navigate("/mypage/user/profile");
+                }
             })
             .catch((e) => { console.log(e); })
     }
@@ -137,7 +149,7 @@ function ProductCreate(){
 
                 <p> 대표 사진 업로드 </p>
                 <div className="preview_img">
-                    {fileimage && (<img alt="preview" src={fileimage}/>)}
+                    {preViewMain && (<img alt="preview" src={preViewMain}/>)}
                 </div>
                 <button onClick={deleteFileImage}> 삭제 </button>
                 <input type="file" accept="image/*" onChange={saveFileImage}/>
@@ -180,7 +192,7 @@ function ProductCreate(){
 
                 <div><label>템플릿 등록</label>
                     <div className="preview_img">
-                        {templateimage && (<img alt="preview1" src={templateimage}/>)}
+                        {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
                     </div>
                     <button onClick={deleteTemplateImage}> 삭제 </button>
                     <input type="file" accept="image/*" onChange={saveTemplateImage}/>
