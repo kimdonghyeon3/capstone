@@ -10,7 +10,7 @@ function ProductHTML(props){
 
     const path = props.list.imageFilePath + props.list.imageFileName;
 
-    console.log(path + " /// " +  typeof path);
+    // console.log(path + " /// " +  typeof path);
 
     return(
         <div className="product_container">
@@ -72,10 +72,13 @@ function Category_content_lifestyle(){
     },[]);
 
     async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("life style 값받아오기")
         await axios
-            .get(baseUrl + "/category/select")
+            .post(baseUrl + "/category/select",{
+                category : "라이프스타일",
+            })
             .then((response) => {
-                setProductList(response.data)
+                console.log(response.data)
             })
             .catch((error)=>{
                 console.log(error);
