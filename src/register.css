@@ -201,7 +201,27 @@
     font-size: 12px;
     margin-bottom: 1%;
 }
-
+.ad6{
+    margin-top: -0.75%;
+    margin-right: 7.3%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
+.ad7{
+    margin-top: -0.75%;
+    margin-right: 8.65%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
+.ad8{
+    margin-top: -0.75%;
+    margin-right: 13.1%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
 p{
     margin-top: 0.4%;
     font-size: 19px;
@@ -214,7 +234,7 @@ p{
 }
 .availability1{
     position: absolute;
-    top: 99.7%;
+    top: 104.1%;
     left: 71.4%;
 }
 .bank_container{
@@ -224,5 +244,5 @@ p{
 .post_container{
     position: absolute;
     left: 71.4%;
-    top: 72%;
+    top: 76.5%;
 }

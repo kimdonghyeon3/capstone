@@ -312,8 +312,8 @@ function Register_company(){
     const [enterpriseIdMessage, setenterpriseIdmessage] = useState('유저아이디는 6글자 이상으로 작성해 주세요');
     const [passwordMessage, setPasswordmessage] = useState('비밀전호는 8글자 이상으로 작성해 주세요');
     const [emailMessage, setEmailmessage] = useState("이메일이 올바른 형식이 아닙니다.");
-    const [addressMessage, setaddressmessage] = useState("입력해라");
-    const [accountNumberMessage, setaccountNumbermessage] = useState("입력해라");
+    const [addressMessage, setaddressmessage] = useState("입력하세요");
+    const [accountNumberMessage, setaccountNumbermessage] = useState("계좌번호와 은행을 입력하세요");
     const [bankNameMessage, setBanknamemessage] = useState();
 
     const [isname, setIsname] = useState(false);
@@ -336,7 +336,7 @@ function Register_company(){
     //주소 유효성 검사
     useEffect(() => {
         if(enroll_company.address === ''){
-            setaddressmessage("입력하세요")
+            setaddressmessage("우편번호 찾기를 통해 주소를 입력해주세요")
             setIsaddress(false);
         }else{
             setaddressmessage("올바른 형식입니다.")
@@ -539,26 +539,26 @@ function Register_company(){
 
 
                 <div className="tt">
-                    <p>enterpriseName</p> <div className="sd"><input className="user_enroll_text" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
+                    <p>회사명 :</p> <div className="sd"><input className="user_enroll_text" placeholder="회사명"  type="text" required={true} name="enterpriseName" onChange={handleInput}/>
                     </div></div>{<div className="ad1">{nameMessage}</div>}
 
                 <div className="tt">
-                    <p>enterpriseNumber</p> <div className="sd"><input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
-                    </div></div>{<div className="ad1">{numMessage}</div>}
+                    <p>사업자번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
+                    </div></div>{<div className="ad6">{numMessage}</div>}
 
                 <div className="tt">
-                    <p>phone</p> <div className="sd"><input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
-                    </div></div>{<div className="ad1">{phoneMessage}</div>}
+                    <p>휴대폰번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
+                    </div></div>{<div className="ad3">{phoneMessage}</div>}
 
-                <div className="tt" > <p>address</p>
-                    <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                    </div><div className="ad1">{addressMessage}
+                <div className="tt" > 
+                    <p>주소 :</p> <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                    </div><div className="ad7">{addressMessage}
                     <button className="post_container" onClick={handleComplete}>우편번호 찾기</button>
                     {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}</div>
                 
                 
                 <div className="tt">
-                    <p>accountNumber</p> <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
+                    <p>계좌번호 :</p> <input className="user_enroll_text" placeholder="계좌번호"  type="text" required={true} name="accountNumber" onChange={handleInput} value={enroll_company.accountNumber}/>
                     
                     <div className="bank_container">
                     <select name="bankName" onChange={handleInput}>
@@ -572,21 +572,21 @@ function Register_company(){
                         <option value="SC제일은행">SC제일은행</option>
                         <option value="한국씨티은행">한국씨티은행</option>
                     </select></div>
-                </div><div className="ad1">{accountNumberMessage}</div>
+                </div><div className="ad8">{accountNumberMessage}</div>
 
                 <div className="register_info"><strong>로그인 정보</strong></div>
                 <div className="tt">
-                <p>enterpriseId</p> <div className="sd"> <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
-                    </div></div>{<div className="ad1">{enterpriseIdMessage}</div>}<button className="availability1" onClick={enterpriseId_check}>중복성 검사</button>
+                <p>아이디 :</p> <div className="sd"> <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
+                    </div></div>{<div className="ad4">{enterpriseIdMessage}</div>}<button className="availability1" onClick={enterpriseId_check}>중복성 검사</button>
                     
                 
                 <div className="tt">
-                <p>password</p> <div className="sd"><input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
-                </div></div>{<div className="ad1">{passwordMessage}</div>}
+                <p>비밀번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
+                </div></div>{<div className="ad5">{passwordMessage}</div>}
 
-                <div className="tt"><p>email</p>
-                <div className="sd"><input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
-                    </div></div>{<div className="ad1">{emailMessage}</div>}
+                <div className="tt">
+                <p>이메일 :</p> <div className="sd"><input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
+                    </div></div>{<div className="ad3">{emailMessage}</div>}
                 
                 <div><button type="submit">회원가입</button></div>
             </form>
