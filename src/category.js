@@ -1,16 +1,39 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {Link, Routes, Route, useParams, useNavigate, useLocation} from "react-router-dom";
-import React, {useContext, useEffect, useState} from "react";
+import {Link, Routes, Route, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
 import axios from "axios";
+
+function ProductHTML(props){
+
+    const path = props.list.imageFilePath + props.list.imageFileName;
+
+    // console.log(path + " /// " +  typeof path);
+
+    return(
+        <div className="product_container">
+            <div className="product">
+                <div className="product_img_div"><Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}><img
+                    src={require("./img/aa.jpg")}
+                    className="product_img"/>
+                </Link></div>
+                <div className="product_txt">&nbsp; {props.list.productName}
+                    <div>&nbsp;{props.list.detail}</div>
+                    <div>&nbsp;{"월"}</div>
+                    <div>&nbsp;{props.list.price}</div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 function Category_content_main(){
 
     const baseUrl = "http://localhost:8080";
 
-    const [productList, setProductList] = useState({});
+    const [productList, setProductList] = useState();
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getProductInfo();
@@ -21,78 +44,49 @@ function Category_content_main(){
             .get(baseUrl + "/category/main")
             .then((response) => {
                 console.log(response.data);
-                console.log(response.data.length);
-                console.log(response.data[0]);
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+    return(
+            <div>
+                   <div className="product_container_container">
+                       {productList ? productList.map( list => {
+                           return(
+                               <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                           )
+                       }) : ""}
+                   </div>
+               </div>)
+}
 
-                for(let i = 0 ; i < response.data.length ; i ++){
-                    setProductList({
-                        ...productList,
-                        ["p" + String(i)]:response.data[i],
-                    })
-                }
+function Category_content_lifestyle(){
+    const baseUrl = "http://localhost:8080";
 
+    const [productList, setProductList] = useState();
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("life style 값받아오기")
+        await axios
+            .post(baseUrl + "/category/select",{
+                category : "라이프스타일",
+            })
+            .then((response) => {
+                console.log(response.data)
             })
             .catch((error)=>{
                 console.log(error);
             })
     }
 
-    // useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
-    //     productInfode();
-    // },[productList]);
-    //
-    // const productInfode = () => {
-    //
-    //     const product = '';
-    //
-    //     for(let i = 0 ; i < productList.size ; i++){
-    //         // product = {"<img src=" + {require({productList.p1.imageFilePath} + "/" + {productList.p1.imageFileName}}/>"}
-    //     }
-    //
-    //     return(
-    //         {product}
-    //             )
-    // }
-
-    return(<div>
-                   <div className="product_container_container">
-                       <div className="product_container">
-                           <div className="product">
-                               <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                               <div className="product_txt">&nbsp; 상품설명</div>
-                           </div>
-                       </div>
-
-                       <div className="product_container">
-                           <div className="product">
-                               <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                               <div className="product_txt">&nbsp; 상품설명</div>
-                           </div>
-                       </div>
-
-                       <div className="product_container">
-                           <div className="product">
-                               <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                               <div className="product_txt">&nbsp; 상품설명</div>
-                           </div>
-                       </div>
-
-                   </div>
-               </div>)
-}
-
-function Category_content_lifestyle(){
-
     return(
         <div>
-
-            {/*라이프스타일 네비바*/}
-            {/* <div className="category_sub_navbar">
-                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/lifestyle/life">생활</Link></div>
-                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/lifestyle/life">멤버쉽</Link></div>
-                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/lifestyle/life">건강</Link></div>
-            </div> */}
-
             {/*상품 리스트*/}
             <div className="product_container">
                 <div className="product">
@@ -102,8 +96,6 @@ function Category_content_lifestyle(){
                     <div className="product_mon"> 월 : 15,000￦</div>
                     <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
-
-
             </div>
 
         </div>
@@ -113,13 +105,6 @@ function Category_content_lifestyle(){
 function Category_content_content(){
     return(
         <div>
-            {/*컨텐츠 네비바*/}
-            {/* <div className="category_sub_navbar">
-                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/book">도서</Link></div>
-                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/music">음악</Link></div>
-                <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/video">영상</Link></div>
-            </div> */}
-
             {/*상품 리스트*/}
             <div className="product_container">
                 <div className="product">
@@ -129,10 +114,7 @@ function Category_content_content(){
                     <div className="product_mon"> 월 : 15,000￦</div>
                     <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                 </div>
-
-
             </div>
-
         </div>
     )
 }
@@ -140,14 +122,6 @@ function Category_content_content(){
 function Category_content_food(){
     return(
          <div>
-
-             {/*음식 네비바*/}
-             {/* <div className="category_sub_navbar">
-                 <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/bread">빵</Link></div>
-                 <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/milk">유제품</Link></div>
-                 <div className="category_sub_link_div"><Link className="category_sub_link" to="/category/content/juk">죽</Link></div>
-             </div> */}
-
              {/*상품 리스트*/}
              <div className="product_container">
                  <div className="product">
@@ -157,7 +131,6 @@ function Category_content_food(){
                      <div className="product_mon"> 월 : 15,000￦</div>
                      <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
                  </div>
-
              </div>
 
          </div>
@@ -273,7 +246,7 @@ const contents = [
     {id:6, title:'sale_event', description:<Category_content_sale_event/>}
 ]
 
-function Category_content(props){
+function Category_content(){
 
     var params = useParams();
     var category_id = params.category_id;
@@ -314,14 +287,14 @@ function Category({children}){
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content'>컨텐츠</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/food'>음식</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle/life'>생활</Link></li>
-                                    <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle/life'>멤버쉽</Link></li>
-                                    <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle/life'>건강</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle/membership'>멤버쉽</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle/health'>건강</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content/book'>도서</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content/music'>음악</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content/video'>영상</Link></li>
-                                    <li className="category_sub_item"><Link className='category_link' to='/category/content/bread'>빵</Link></li>
-                                    <li className="category_sub_item"><Link className='category_link' to='/category/content/milk'>유제품</Link></li>
-                                    <li className="category_sub_item"><Link className='category_link' to='/category/content/juk'>죽</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/food/bread'>빵</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/food/milk'>유제품</Link></li>
+                                    <li className="category_sub_item"><Link className='category_link' to='/category/food/juk'>죽</Link></li>
                                 </ul>
                             </li>
                             </ul>
@@ -395,6 +368,9 @@ function Category({children}){
 
                 <Routes>
                     <Route path="/:category_id" element={<Category_content/>}></Route>
+                    <Route path="/lifestyle/:categoryDetail_id" element={<Category_content/>}></Route>
+                    <Route path="/content/:categoryDetail_id" element={<Category_content/>}></Route>
+                    <Route path="/food/:categoryDetail_id" element={<Category_content/>}></Route>
                 </Routes>
                     </div>
                 </div>
