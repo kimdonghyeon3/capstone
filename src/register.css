@@ -81,6 +81,7 @@
 .modecontainer{
     margin-top: 1%;
     margin-bottom: 2%;
+    text-decoration: none;
 }
 
 .userregister{
@@ -91,7 +92,14 @@
     padding-left: 10%;
     padding-right: 10%;
 }
-
+.userregister1{
+    color: black;
+    border-bottom: 2px solid rgb(234, 234, 234);
+    font-size: 1.125rem;
+    padding-bottom: 0.6%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
 .companyregister{
     color: black;
     border-bottom: 2px solid rgb(234, 234, 234);
@@ -100,47 +108,121 @@
     padding-left: 10%;
     padding-right: 10%;
 }
-
+.companyregister1{
+    color: #4193E3;
+    border-bottom: 2px solid #1d7abd;
+    font-size: 1.125rem;
+    padding-bottom: 0.6%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
 
 .user_enroll_text{
     display:block;
-    width : 70%;
-    padding:0.0375rem 0.75rem;
-    font-size:1rem;
+    font-size:20px;
     font-weight: 400;
     line-height: 1.5;
     color:#212529;  
-    border:1px solid #ced4da;
-    border-radius:0.25rem;
+    border-right:1px solid white;
+    border-left:1px solid white;
+    border-top: 1px solid white;
     margin-left: 10%;
+    outline:none;
+    position: absolute;
+    left: 28%;
+    margin-bottom: 10%;
+    width: 33%;
 }
 
 .user_enroll_form{
     margin-top : 7%;
     margin-bottom : 7%;
-    /* text-align: center; */
-    justify-content: center;
-    
 }
 
 .user_enroll_form div{
-    /*display:flex;*/
-    justify-content: center;
+
     text-align: center;
-
-}
-
-.form_locate_username{
-    margin-left: 5%;
 
 }
 .tt{
     display:flex;
+    margin-left: 29%;
 }
-/*.sd{*/
-/*    display:inline-block;*/
-/*}*/
 
-/*.ad{*/
-/*    display:inline-block;*/
-/*}*/
+.tt1{
+    display:flex;
+    margin-left: 29%;
+    margin-bottom: 3%;
+}
+.submit_locate{
+    margin-top: 0%;
+}
+.sd{
+    margin-left: 7%;
+}
+.register_info{
+    display:flex;
+    margin-left: 28%;
+    margin-bottom: 1.5%;
+    font-size: 31px;
+}
+.ad1{
+    margin-top: -0.75%;
+    margin-right: 10%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
+.ad2{
+    margin-top: -0.75%;
+    margin-right: 8.3%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
+.ad3{
+    margin-top: -0.75%;
+    margin-right: 11.8%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 3%;
+}
+.ad4{
+    margin-top: -0.75%;
+    margin-right: 8%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
+.ad5{
+    margin-top: -0.75%;
+    margin-right: 8.6%;
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 1%;
+}
+
+p{
+    margin-top: 0.4%;
+    font-size: 19px;
+}
+
+.availability{
+    position: absolute;
+    top: 85.7%;
+    left: 71.5%;
+}
+.availability1{
+    position: absolute;
+    top: 99.7%;
+    left: 71.4%;
+}
+.bank_container{
+    position: absolute;
+    left: 71.4%;
+}
+.post_container{
+    position: absolute;
+    left: 71.4%;
+    top: 72%;
+}
