@@ -248,8 +248,8 @@ function Company_manage(){
 
     async function getProductManageInfo(){            //spring 연동 값 받아오기
         await axios
-            .post(baseUrl + "/company/manage/edit", {
-                p_ENID:localStorage.getItem("uid")
+            .post(baseUrl + "/mypage/company/manage", {
+                enid:localStorage.getItem("uid")
             })
             .then((response) => {
                 console.log(response.data);
