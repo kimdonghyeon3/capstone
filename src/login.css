@@ -1,62 +1,102 @@
 .gap{
     display: inline-block
 }
-.user_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 10vh;
-
-}
-
-.company_btn{
-    text-align: center;
-    /*display:center;*/
-    min-height: 0vh;
-}
-.user_id{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.user_pw{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-.login_config{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.user_bt{
-    font-size:18px;
-}
-
-.company_bt{
-    font-size:18px;
-}
 .findid{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 14px;
+    position: relative;
+    margin-bottom: 3%;
+    left: 119.1%;
 }
 .findpw{
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .signup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
+}
+.findid_bt{
+    border-left : 0.01rem solid white;
+    border-right: 0.01rem solid white;
+    border-top: 0.01rem solid white;
+    border-bottom: 0.01rem solid white;
+    background-color: white;
+    color: rgb(90,98,115);
+}
+.findpw_bt{
+    border-left : 0.01rem solid white;
+    border-right: 0.01rem solid white;
+    border-top: 0.01rem solid white;
+    border-bottom: 0.01rem solid white;
+    background-color: white;
+    color: rgb(90,98,115);
+}
+.signup_bt{
+    border-left : 0.01rem solid white;
+    border-right: 0.01rem solid white;
+    border-top: 0.01rem solid white;
+    border-bottom: 0.01rem solid white;
+    background-color: white;
+    color: rgb(90,98,115);
 }
 
+
 .login_form{
-    display:flex;
-    flex-direction:column;
-    align-items : center;
-    margin:1% 1% 5% 1%;
+    width: 40%;
+    height: 300px;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.register_box{
+    width: 100%;
+    margin-bottom: 0.5%;
+    margin-top: -5%;
+    font-size: 40px;
+    /* text-align: center; */
+}
+.login_main_container{
+    text-align: center;
+    margin-top : 7%;
+    width: 100%;
+    flex-wrap: wrap;
+    
+}
+.asd{
+    width: 70%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+    background-color: black;
+    color: white;
+    position: relative;
+    left: 89.5%;
+    border-left : 0.01rem solid black;
+    border-right: 0.01rem solid black;
+    border-top: 0.01rem solid black;
+    border-bottom: 0.01rem solid black;
+    padding-top: 0.65rem;
+}
+
+.asd1{
+    width: 70%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+    position: relative;
+    left: 89.5%;
+    padding-left: 7px;
+}
+.radio{
+    padding-right: 7%;
+}
+.radio_container{
+    display: flex;
+    padding-left: 104%;
+    width: 250%;
+    margin-bottom: 3%;
+    /* align-items: center; */
 }

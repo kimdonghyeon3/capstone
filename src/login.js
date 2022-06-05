@@ -62,25 +62,28 @@ function Login({children}){
             <Userlogin.Provider value={{userinfo, setUserinfo}}>
 
             <Header/>
+            <div className="login_main_container">
+            <div className="register_box"><strong>로그인</strong></div>
+                    <hr className="sun"size="3" width="105%" color="black"/></div>
 
-            <div className="gap"/>
-            <h2><center><strong>문앞에</strong></center></h2>
-
-            <div className="gap"/>
-
+            <div className="form_container">
             <form onSubmit={handleSubmit} className="login_form">
-                <div><input type="radio" name="role" value="E" onChange={handleChange}/>기업 로그인</div>
-                <div><input type="radio" name="role" value="U" onChange={handleChange}/>일반 로그인</div>
-                <div><input type="text" name="userId" placeholder="아이디" onChange={handleChange}/></div>
-                <div><input type="password" name="password" placeholder="비밀번호" onChange={handleChange}/></div>
-                <div><button type="submit">로그인</button></div>
-            </form>
-
-            <div className="findid"><button className="findid_bt"> 아이디찾기</button>
+                <div className="radio_container">
+                <div className="radio"><input type="radio" name="role" value="E" onChange={handleChange}/>기업 로그인</div>
+                <div className="radio"><input type="radio" name="role" value="U" onChange={handleChange}/>일반 로그인</div></div>
+                <div><input className="asd1" type="text" name="userId" placeholder="아이디" onChange={handleChange}/></div>
+                <div><input className="asd1" type="password" name="password" placeholder="비밀번호" onChange={handleChange}/></div>
+                <div className="findid"><button className="findid_bt"> 아이디찾기</button>
                 <div className="findpw"><button className="findpw_bt"> 비밀번호찾기</button>
-                    <div className="signup"><Link to="/register/main"><button className="signup_bt"> 회원가입</button></Link></div>
+                <div className="signup"><Link to="/register/main"><button className="signup_bt"> 회원가입</button></Link></div>
                 </div>
+                </div>
+                <div><button className="asd" type="submit"><strong>로그인</strong></button></div>
+
+                
+            </form>
             </div>
+
 
             <div className="gap"/>
             <Footer/>
