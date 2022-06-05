@@ -15,6 +15,7 @@ import Register from './register';
 import Userinfo, {Userlogin, UserPovider} from "./userinfo";
 import ProductCreate from "./producdtCreate";
 import ProductDetail from "./productDetail";
+import ProductEdit from "./productEdit";
 
 function Home(){
 
@@ -34,7 +35,7 @@ function App(){
 
     const userdata = useContext(Userlogin);
 
-    const logininfo = sessionStorage.getItem("login");
+    const logininfo = localStorage.getItem("login");
 
     useEffect( () => {
         if(logininfo === null){
@@ -42,19 +43,19 @@ function App(){
         }else{
             // console.log("로그인 하고 값 유지");
             userdata.edituser({
-                uid : sessionStorage.getItem("uid"),
-                id : sessionStorage.getItem("id"),
-                role : sessionStorage.getItem("role"),
+                uid : localStorage.getItem("uid"),
+                id : localStorage.getItem("id"),
+                role : localStorage.getItem("role"),
                 login : true,
             })
             // console.log(userdata);
         }
-    },)
+    },[])
 
 
     return(
         <div>
-            {/*<UserPovider>*/}
+            <UserPovider>
                 <Routes>
                     <Route path="/" element={<Home />}/>
                     <Route path="/mypage/*" element={<Mypage/>}/>
@@ -63,8 +64,10 @@ function App(){
                     <Route path="/register/:register_id" element={<Register/>}/>
                     <Route path="/product/create" element={<ProductCreate/>}/>
                     <Route path="/product/detail/:product_pdid" element={<ProductDetail/>}></Route>
+                    <Route path="/product/edit/:edit_pdid" element={<ProductEdit/>}></Route>
+                    {/*<Route path="/product/detail/:product_pdid" element={<ProductDetail uid={sessionStorage.getItem("uid")}/>}></Route>*/}
                 </Routes>
-            {/*</UserPovider>*/}
+            </UserPovider>
         </div>
 
     )

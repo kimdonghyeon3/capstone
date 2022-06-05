@@ -1,10 +1,12 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {Link, Routes, Route, useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
 import axios from "axios";
+import {Userlogin} from "./userinfo";
+import ProductDetail from "./productDetail";
 
 function ProductHTML(props){
 
@@ -79,6 +81,7 @@ function Category_content_lifestyle(){
             })
             .then((response) => {
                 console.log(response.data)
+                setProductList(response.data)
             })
             .catch((error)=>{
                 console.log(error);
@@ -88,52 +91,90 @@ function Category_content_lifestyle(){
     return(
         <div>
             {/*상품 리스트*/}
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                </div>
+            <div className="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
             </div>
-
         </div>
     )
 }
 
 function Category_content_content(){
+    const baseUrl = "http://localhost:8080";
+
+    const [productList, setProductList] = useState();
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("content style 값받아오기")
+        await axios
+            .post(baseUrl + "/category/select",{
+                category : "컨텐츠",
+            })
+            .then((response) => {
+                console.log(response.data)
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
     return(
         <div>
             {/*상품 리스트*/}
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                </div>
+            <div className="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
             </div>
         </div>
     )
 }
 
 function Category_content_food(){
-    return(
-         <div>
-             {/*상품 리스트*/}
-             <div className="product_container">
-                 <div className="product">
-                     <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                     <h5 className="product_title"> 상품 제목</h5>
-                     <p className="product_des"> 상품 내용 요약</p>
-                     <div className="product_mon"> 월 : 15,000￦</div>
-                     <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                 </div>
-             </div>
+    const baseUrl = "http://localhost:8080";
 
-         </div>
+    const [productList, setProductList] = useState();
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("음식 style 값받아오기")
+        await axios
+            .post(baseUrl + "/category/select",{
+                category : "음식",
+            })
+            .then((response) => {
+                console.log(response.data)
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+    return(
+        <div>
+            {/*상품 리스트*/}
+            <div className="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
+            </div>
+        </div>
     )
 }
 
@@ -237,29 +278,94 @@ function Category_content_sale_event(){
     </div>)
 }
 
+const contents_detail = [
+    {title:'life', description:"생활"},
+    {title:'membership', description:"멤버쉽"},
+    {title:'health', description:"건강"},
+    {title:'book', description:"도서"},
+    {title:'music', description:"음악"},
+    {title:'video', description:"영상"},
+    {title:'bread', description:"빵"},
+    {title:'milk', description:"유제품"},
+    {title:'juk', description:"죽"},
+]
+
+
+function Category_content_detail(props){
+
+    let detail = "";
+
+    for(let i = 0 ; i < contents_detail.length ; i++){
+        if(contents_detail[i].title === props.detail){
+            detail = contents_detail[i].description
+            break;
+        }
+    }
+    const baseUrl = "http://localhost:8080";
+
+    const [productList, setProductList] = useState();
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[detail]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        await axios
+            .post(baseUrl + "/category/detail",{
+                detailcategory : detail,
+            })
+            .then((response) => {
+                console.log(response.data)
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+    return(
+        <div>
+            {/*상품 리스트*/}
+            <div className="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
+            </div>
+        </div>
+    )
+
+}
+
 const contents = [
-    {id:1, title:'main', description:<Category_content_main/>},
-    {id:2, title:'lifestyle', description:<Category_content_lifestyle/>},
-    {id:3, title:'content', description:<Category_content_content/>},
-    {id:4, title:'food', description:<Category_content_food/>},
-    {id:5, title:'best', description:<Category_content_best/>},
-    {id:6, title:'sale_event', description:<Category_content_sale_event/>}
+    {title:'main', description:<Category_content_main/>},
+    {title:'lifestyle', description:<Category_content_lifestyle/>},
+    {title:'content', description:<Category_content_content/>},
+    {title:'food', description:<Category_content_food/>},
+    {title:'best', description:<Category_content_best/>},
+    {title:'sale_event', description:<Category_content_sale_event/>}
 ]
 
 function Category_content(){
 
     var params = useParams();
     var category_id = params.category_id;
+    var categoryDetail_id = params.categoryDetail_id;
 
     var selected_category ={
         title : 'sorry',
         description : <Category_content_main/>
     }
 
-    for(let i = 0 ; i < contents.length ; i++){
-        if(contents[i].title === category_id){
-            selected_category = contents[i];
-            break;
+    if(categoryDetail_id !== undefined){
+        selected_category.description = <Category_content_detail detail={categoryDetail_id}/>;
+    }else{
+        for(let i = 0 ; i < contents.length ; i++){
+            if(contents[i].title === category_id){
+                selected_category = contents[i];
+                break;
+            }
         }
     }
 
@@ -271,6 +377,8 @@ function Category_content(){
 }
 
 function Category({children}){
+
+    const userinfo = useContext(Userlogin);
 
     return(
             <div>
@@ -359,7 +467,6 @@ function Category({children}){
 
                 </div>
 
-                {/* 내가 구독한 상품*/}
                 <div className="my_ss_product">
                 <div className="sub_logo">문앞에</div>
                     <hr className="sun"size="5" width="107%" color="black"/>

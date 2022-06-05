@@ -7,6 +7,35 @@ import {Userlogin} from "./userinfo";
 import axios from "axios";
 import ProductCreate from "./producdtCreate";
 
+function ProductManageHTML(props){
+
+    const path = props.list.imageFilePath + props.list.imageFileName;
+    const navigate = useNavigate();
+
+    // console.log(path + " /// " +  typeof path);
+    const productEdit = () => {
+        const url = "/product/edit/" + props.list.pdid;
+        console.log(url);
+        navigate(url);
+    }
+
+    return(
+        <div className="product_container">
+            <div className="product">
+                <div className="product_img_div"><Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}><img
+                    src={require("./img/aa.jpg")}
+                    className="product_img"/>
+                </Link></div>
+                <div className="product_txt">&nbsp; {props.list.productName}
+                    <div>&nbsp;{props.list.detail}</div>
+                    <div>&nbsp;{"월"}</div>
+                    <div>&nbsp;{props.list.price}</div>
+                    <div><button type="button" onClick={productEdit}> 수정하기 </button></div>
+                </div>
+            </div>
+        </div>
+    )
+}
 //기업페이지
 function Company_profile(){
     const baseUrl = "http://localhost:8080";
@@ -14,7 +43,7 @@ function Company_profile(){
     const logininfo = useContext(Userlogin);    //전역변수 관리 변수
 
     const [companyinfo, setCompanyinfo] = useState({
-        enid:logininfo.uid,
+        enid:localStorage.getItem("uid"),
     }); //프로필 정보가져오기 위한 uid
 
     const[companyprofile, setCompanyprofile] = useState({
@@ -89,10 +118,10 @@ function Company_edit(){
     const logininfo = useContext(Userlogin);
 
     const [companyinfo, setCompanyinfo] = useState({
-        enid:logininfo.uid,
+        enid:localStorage.getItem("uid"),
     });
     const[edit_company, setEdit_company] = useState({
-        id:logininfo.uid,
+        id:localStorage.getItem("uid"),
         e_name:'',
         e_address:'',
         e_password:'',
@@ -144,6 +173,7 @@ function Company_edit(){
                 .post(baseUrl + "/mypage/company/edit", edit_company)
                 .then((response) =>{
                     console.log(response.data);
+                    alert("회원 정보 수정을 완료했습니다.")
                 })
                 .catch((error) => {
                     console.log(error);
@@ -209,26 +239,40 @@ function Company_manage(){
         navigate("/product/create");
     }
 
+    const baseUrl = "http://localhost:8080";
+
+    const [productList, setProductList] = useState();
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductManageInfo();
+    },[]);
+
+    async function getProductManageInfo(){            //spring 연동 값 받아오기
+        await axios
+            .post(baseUrl + "/mypage/company/manage", {
+                enid:localStorage.getItem("uid")
+            })
+            .then((response) => {
+                console.log(response.data);
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
     return(
         <div>
             <h2 className="company_profile_h2"> 등록 상품 관리</h2>
             <hr/>
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 수정하기 </button></div>
-                </div>
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 수정하기 </button></div>
-                </div>
+            <div className="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductManageHTML list={list} key={list.pdid}></ProductManageHTML>
+                    )
+                }) : ""}
             </div>
+
             <div className="company_product_enroll_div">
                 <button className="company_product_enroll_btn" onClick={movecreate}>상품 등록하러 가기</button>
             </div>
@@ -316,7 +360,6 @@ function Company_withdraw(){
                     console.log("Success");
                     alert("탈퇴 완료 // 로그아웃 합니다");
                     navigate("/category/main");
-                    console.log("?");
                     userinfo.edituser({
                         uid : '',
                         id : '',
@@ -324,6 +367,8 @@ function Company_withdraw(){
                         login : false,
                     });
                     console.log("??");
+                    sessionStorage.clear();
+                    localStorage.clear();
                 }
             })
             .catch((error) => {
@@ -416,9 +461,9 @@ function User_profile(){
     const logininfo = useContext(Userlogin);
 
     const [userinfo, setUserinfo] = useState({
-        enid:logininfo.uid,
-        enterpriseId:logininfo.id,
-        role:logininfo.role,
+        enid:localStorage.getItem("uid"),
+        enterpriseId:localStorage.getItem("id"),
+        role:localStorage.getItem("role"),
     });
 
     const [userprofile, setUserprofile] = useState({});
@@ -481,16 +526,18 @@ function User_edit(){
 
     const logininfo = useContext(Userlogin);
 
-    const [isuserId, setIsuserId] = useState(false);
-    const [userId_btn, setUserId_btn] = useState("중복 검사");
+    const [isuserId, setIsuserId] = useState(true);
+    const [userId_btn, setUserId_btn] = useState("중복 검사 완료");
+
+    let userId_re = "";
 
     const [userinfo, setUserinfo] = useState({
-        enid:logininfo.uid,
-        enterpriseId:logininfo.id,
-        role:logininfo.role,
+        enid:localStorage.getItem("uid"),
+        enterpriseId:localStorage.getItem("id"),
+        role:localStorage.getItem("role"),
     });
     const[edit_user, setEdit_user] = useState({
-        id:logininfo.uid,
+        id:localStorage.getItem("uid"),
         phoneNumber:'',
         birth:'',
         userName:'',
@@ -518,6 +565,7 @@ function User_edit(){
                     password:response.data.password,
                     email:response.data.email,
                 })
+                userId_re = response.data.userId;
             })
             .catch((error)=>{
                 console.log(error);
@@ -526,6 +574,13 @@ function User_edit(){
 
     const handleInput = (e)=>{
         e.preventDefault();
+
+        if(e.target.name === 'userId'){
+            if(e.target.value !== userId_re){
+                setIsuserId(false)
+                setUserId_btn("중복성 검사")
+            }
+        }
 
         setEdit_user({
             ...edit_user,
@@ -541,6 +596,7 @@ function User_edit(){
                 .post(baseUrl + "/mypage/user/edit", edit_user)
                 .then((response) =>{
                     console.log(response.data);
+                    alert("수정이 완료되었습니다.")
                 })
                 .catch((error) => {
                     console.log(error);
@@ -653,7 +709,7 @@ function User_manage(){
     async function getUserSubscript(){            //spring 연동 값 받아오기
         await axios
             .post(baseUrl + "/mypage/user/manage", {
-                p_USID:logininfo.uid,
+                p_USID:localStorage.getItem("uid"),
             })
             .then((response) => {
                 console.log(response.data);
@@ -717,14 +773,14 @@ function User_withdraw(){
                     console.log("Success");
                     alert("탈퇴 완료 // 로그아웃 합니다");
                     navigate("/category/main");
-                    console.log("?");
                     userinfo.edituser({
                         uid : '',
                         id : '',
                         role : '',
                         login : false,
                     });
-                    console.log("??");
+                    sessionStorage.clear();
+                    localStorage.clear();
 
                 }
             })
@@ -847,8 +903,8 @@ function Mypage(){
     const [login_role,setLogin_role] =useState("");
 
     useEffect(() => {
-        if(userlogin.login){
-            if(userlogin.role === "E")
+        if(localStorage.getItem("role") !== null){
+            if(localStorage.getItem("role") === "E")
                 setLogin_role("/company");
             else{
                 setLogin_role("/user");

@@ -47,6 +47,11 @@ function Login({children}){
                     sessionStorage.setItem("id",response.data.enterpriseId);
                     sessionStorage.setItem("role",response.data.role);
                     sessionStorage.setItem("login","true");
+                    localStorage.setItem("uid",response.data.enid);
+                    localStorage.setItem("id",response.data.enterpriseId);
+                    localStorage.setItem("role",response.data.role);
+                    localStorage.setItem("login","true");
+
 
                 }else{
                     alert("아이디와 비밀번호가 잘못되었습니다.");
