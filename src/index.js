@@ -64,7 +64,7 @@ function App(){
                     <Route path="/register/:register_id" element={<Register/>}/>
                     <Route path="/product/create" element={<ProductCreate/>}/>
                     <Route path="/product/detail/:product_pdid" element={<ProductDetail/>}></Route>
-                    <Route path="/product/edit" element={<ProductEdit/>}></Route>
+                    <Route path="/product/edit/:edit_pdid" element={<ProductEdit/>}></Route>
                     {/*<Route path="/product/detail/:product_pdid" element={<ProductDetail uid={sessionStorage.getItem("uid")}/>}></Route>*/}
                 </Routes>
             </UserPovider>

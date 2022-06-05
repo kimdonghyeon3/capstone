@@ -3,12 +3,18 @@ import axios from "axios";
 import {Footer} from "./laydout/footer";
 import Header from "./laydout/header";
 import {Userlogin} from "./userinfo";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
-function ProductEdit(){
+function ProductEdit(props){
+
+    const params = useParams();
+    const pdid = params.edit_pdid;
+    console.log(pdid);
+    // const {productId} = useParams().product_pdid;
+    // console.log(productId);
 
     const baseUrl = "http://localhost:8080";
-    const navigate = useNavigate();
+    const navigateback = useNavigate();
     const userinfo = useContext(Userlogin);
 
     const [productInfo, setProductInfo] = useState();
@@ -16,9 +22,9 @@ function ProductEdit(){
     //뒤로가기 핸들러
     const back = () => {
         if(userinfo.role === 'E'){
-            navigate("/mypage/company/profile");
+            navigateback("/mypage/company/profile");
         }else{
-            navigate("/mypage/user/profile");
+            navigateback("/mypage/user/profile");
         }
     }
 
@@ -27,9 +33,10 @@ function ProductEdit(){
     },[]);
 
     async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log(pdid);
         await axios
-            .post(baseUrl + "/product/edit/get", {
-                p_USID:localStorage.getItem("uid"),
+            .post(baseUrl + "/product/update", {
+                pdid:pdid,
             })
             .then((response) => {
                 console.log(response.data);
@@ -141,9 +148,9 @@ function ProductEdit(){
                 alert("상품이 성공적으로 등록되었습니다.");
                 console.log(response.data);
                 if(userinfo.role === 'E'){
-                    navigate("/mypage/company/profile");
+                    navigateback("/mypage/company/profile");
                 }else{
-                    navigate("/mypage/user/profile");
+                    navigateback("/mypage/user/profile");
                 }
             })
             .catch((e) => { console.log(e); })

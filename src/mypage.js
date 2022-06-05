@@ -7,7 +7,6 @@ import {Userlogin} from "./userinfo";
 import axios from "axios";
 import ProductCreate from "./producdtCreate";
 
-
 function ProductManageHTML(props){
 
     const path = props.list.imageFilePath + props.list.imageFileName;
@@ -15,7 +14,9 @@ function ProductManageHTML(props){
 
     // console.log(path + " /// " +  typeof path);
     const productEdit = () => {
-        navigate("/product/edit");
+        const url = "/product/edit/" + props.list.pdid;
+        console.log(url);
+        navigate(url);
     }
 
     return(
