@@ -27,6 +27,7 @@ export function Logout_btn(){
         })
 
         sessionStorage.clear();
+        localStorage.clear();
     }
 
     return(
@@ -47,13 +48,13 @@ export function Header(){
     });
 
     useEffect(() => {
-
-        if(userlogin.login){
+        // userlogin.login
+        if(localStorage.getItem("uid") !== null){
             setLogInOut({
                 ...logInOut,
                 btn : <Logout_btn/>,
             });
-            if(userlogin.role === "E")
+            if(localStorage.getItem("role") === "E")
                 setLogin_role("/company/profile");
             else{
                 setLogin_role("/user/profile");

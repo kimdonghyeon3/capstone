@@ -1,11 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./laydout/header";
 import {Footer} from "./laydout/footer";
 import {useParams} from "react-router-dom";
 import './productDetail.css'
 import axios from "axios";
-import {Userlogin} from "./userinfo";
-
 
 //상품이 들어왔다? 그러면 해당 상품이 무엇인지 알아야하는 것
 function ProductDetail(){
@@ -13,8 +11,6 @@ function ProductDetail(){
     const baseUrl = "http://localhost:8080";
     const params = useParams();
     const pdid = params.product_pdid;
-
-    const loginInfo = useContext(Userlogin);
 
     const[productInfo, setProductInfo] = useState({
         p_Category: '',
@@ -30,8 +26,6 @@ function ProductDetail(){
         p_ProductName: '',
         p_Sale: '',
     });
-
-    console.log(pdid)
 
     useEffect(() => {
         getProductInfo();
@@ -67,19 +61,26 @@ function ProductDetail(){
 
     const subscript = async () => {
 
+        console.log(localStorage.getItem("uid"))
         await axios
-            .post(baseUrl + "/product/detail/subscript", {
+            .post(baseUrl + "/product/detail/subscribe", {
                 p_PDID: pdid,
-                p_USID: loginInfo.uid,
-                SubscriptCycle: "월",
+                p_USID: localStorage.getItem("uid"),
+                p_SubscribeCycle: "월",
             })
             .then((response) => {
                 console.log(response.data);
+                if(response.data === 'Success'){
+                    alert("구독에 성공하였습니다.")
+                }else if(response.data === 'Failed'){
+                    alert("이미 구독한 상품입니다.")
+                }else{
+                    alert("오류났습니다. 새로고침후 ㄲ")
+                }
             })
             .catch((error) => {
                 console.log(error);
             })
-
     }
 
     return(
