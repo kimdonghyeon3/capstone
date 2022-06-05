@@ -70,9 +70,9 @@ function ProductDetail(){
             })
             .then((response) => {
                 console.log(response.data);
-                if(response.data === 'Success'){
+                if(response.data.message === 'Success'){
                     alert("구독에 성공하였습니다.")
-                }else if(response.data === 'Failed'){
+                }else if(response.data.message === 'Failed'){
                     alert("이미 구독한 상품입니다.")
                 }else{
                     alert("오류났습니다. 새로고침후 ㄲ")
