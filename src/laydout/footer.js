@@ -15,19 +15,19 @@ export function Footer(){
                     <div className="id">김동현</div>
                     <div className="email">sh2115521@naver.com</div>
                     <div className="id">손일국</div>
-                    <div className="email">sh2115521@naver.com</div>
+                    <div className="email">thsdlfrnr@naver.com</div>
                 </div>
                 <div className="footer_backend">
                     <h2>BackEnd</h2>
                     <div className="id">양철진</div>
-                    <div className="email">sh2115521@naver.com</div>
+                    <div className="email">gra1259@naver.com</div>
                     <div className="id">신예환</div>
-                    <div className="email">sh2115521@naver.com</div>
+                    <div className="email">jghisjl007@naver.com</div>
                 </div>
                 <div className="footer_db">
                     <h2>DataBase</h2>
                     <div className="id">지완</div>
-                    <div className="email">sh2115521@naver.com</div>
+                    <div className="email">g1990107@naver.com</div>
                 </div>
             </div>
         </footer>
