@@ -229,53 +229,35 @@ function Category_content_best(){
 }
 
 function Category_content_sale_event(){
-    return(<div>
-        <div className="cat_content">
+    const baseUrl = "http://localhost:8080";
 
-            <h2 className="category_name lifestyle"> 라이프 스타일 </h2>
-            {/*상품 리스트*/}
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                </div>
+    const [productList, setProductList] = useState();
 
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
 
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        await axios
+            .get(baseUrl + "/category/sale")
+            .then((response) => {
+                console.log(response.data);
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+    return(
+        <div>
+            <div className="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
             </div>
-
-            <h2 className="category_name content"> 컨텐츠 </h2>
-            {/*상품 리스트*/}
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                </div>
-
-
-            </div>
-
-            <h2 className="category_name food"> 음식 </h2>
-            {/*상품 리스트*/}
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <p className="product_des"> 상품 내용 요약</p>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                </div>
-
-
-            </div>
-
-        </div>
-    </div>)
+        </div>)
 }
 
 const contents_detail = [

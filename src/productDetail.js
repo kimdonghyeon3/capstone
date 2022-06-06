@@ -37,7 +37,6 @@ function ProductDetail(){
                 p_PDID: pdid
             })
             .then((response) => {
-                console.log(response.data);
                 setProductInfo({
                     ...productInfo,
                     p_Category: response.data.p_Category,
@@ -60,8 +59,6 @@ function ProductDetail(){
     }
 
     const subscript = async () => {
-
-        console.log(localStorage.getItem("uid"))
         await axios
             .post(baseUrl + "/product/detail/subscribe", {
                 p_PDID: pdid,
@@ -75,6 +72,27 @@ function ProductDetail(){
                 }else if(response.data.message === 'Failed'){
                     alert("이미 구독한 상품입니다.")
                 }else{
+                    alert("오류났습니다. 새로고침후 ㄲ")
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    const basket = async () => {
+        await axios
+            .post(baseUrl + "/mypage/user/basket/insert", {
+                p_PDID: pdid,
+                p_USID: localStorage.getItem("uid"),
+            })
+            .then((response) => {
+                console.log(response.data);
+                if (response.data.message === 'Success') {
+                    alert("장바구니에 등록하였습니다..")
+                } else if (response.data.message === 'Failed') {
+                    alert("장바구니에 등록한 상품입니다.")
+                } else {
                     alert("오류났습니다. 새로고침후 ㄲ")
                 }
             })
@@ -107,6 +125,7 @@ function ProductDetail(){
                     <div className="productitem"> 상품요약설명 </div>
                     <div>{productInfo.p_Detail}</div>
                     <button onClick={subscript}> 구독하기 </button>
+                    <button onClick={basket}> 장바구니 </button>
                 </div>
             </div>
 

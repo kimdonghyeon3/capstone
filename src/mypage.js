@@ -522,8 +522,6 @@ function User_edit(){
 
     const baseUrl = "http://localhost:8080";
 
-    const logininfo = useContext(Userlogin);
-
     const [isuserId, setIsuserId] = useState(true);
     const [userId_btn, setUserId_btn] = useState("중복 확인");
 
@@ -553,7 +551,6 @@ function User_edit(){
         await axios
             .post(baseUrl + "/mypage/user/profile", userinfo)
             .then((response) => {
-                console.log(response.data);
                 setEdit_user({
                     ...edit_user,
                     userName:response.data.userName,
@@ -657,6 +654,7 @@ function User_edit(){
 function ProductSubscriptHTML(props){
 
     const baseUrl = "http://localhost:8080";
+    const navigate = useNavigate();
 
     const handleClick = async () => {
         console.log("구독해지");
@@ -666,7 +664,8 @@ function ProductSubscriptHTML(props){
                 p_SSID: props.list.p_SSID,
             })
             .then((response) => {
-                console.log(response.data);
+                alert(response.data.p_ProductName + "이 구독해지되었습니다.");
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error);
@@ -689,8 +688,6 @@ function ProductSubscriptHTML(props){
 
 function User_manage(){
 
-    const logininfo = useContext(Userlogin);
-
     const [subscriptList, setSubscriptList] = useState();
 
     const baseUrl = "http://localhost:8080";
@@ -705,7 +702,6 @@ function User_manage(){
                 p_USID:localStorage.getItem("uid"),
             })
             .then((response) => {
-                console.log(response.data);
                 setSubscriptList(response.data)
             })
             .catch((error)=>{
@@ -715,38 +711,90 @@ function User_manage(){
 
     return(
         <div>
+
             <div className="modecontainer">
             <Link to="/mypage/user/manage" style={{ textDecoration: 'none' }}><span className="nowscribe">현재 구독중인 상품</span></Link>
             <Link to="/mypage/user/manage" style={{ textDecoration: 'none' }}><span className="pastscribe">과거에 구독했던 상품</span></Link>
             </div>
+
+            <div className="product_container_container">
+
             {subscriptList ? subscriptList.map( list => {
                 return(
                     <ProductSubscriptHTML list={list} key={list.p_PDID}></ProductSubscriptHTML>
                 )
             }) : ""}
+            </div>
+        </div>
+    )
+}
+
+function ProductBasketHTML(props){
+
+    const baseUrl = "http://localhost:8080";
+
+    const handleClick = async () => {
+        console.log("장바구니 해지");
+
+        await axios
+            .post(baseUrl + "/mypage/", {
+                p_BSID: props.list.p_BSID,
+            })
+            .then((response) => {
+                alert(response.data.p_ProductName + "이 장바구니에서 삭제되었습니다.");
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
+
+    return(
+        <div className="product_container">
+            <div className="product">
+                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
+                <div className="product_txt">&nbsp; {props.list.p_ProductName}
+                    <div>&nbsp;{props.list.p_Price}</div>
+                    <button onClick={handleClick}>장바구니 해지</button>
+                </div>
+            </div>
         </div>
     )
 }
 
 function User_bascket(){
+    const [subscriptList, setSubscriptList] = useState();
+
+    const baseUrl = "http://localhost:8080";
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getUserSubscript();
+    },[]);
+
+    async function getUserSubscript(){            //spring 연동 값 받아오기
+        await axios
+            .post(baseUrl + "/mypage/user/basket", {
+                p_USID:localStorage.getItem("uid"),
+            })
+            .then((response) => {
+                setSubscriptList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
 
     return(
         <div>
-            <h2 className="user_profile_h2"> 장바구니</h2>
-            <hr/>
-            <div className="product_container">
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 하러가기 </button></div>
-                </div>
-                <div className="product">
-                    <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                    <h5 className="product_title"> 상품 제목</h5>
-                    <div className="product_mon"> 월 : 15,000￦</div>
-                    <div className="product_link_div"><button className="product_th_btn"> 구독 하러가기 </button></div>
-                </div>
+            <h2 className="user_profile_h2"> 장바구니 관리</h2>
+            <hr />
+            <div className="product_container_container">
+                {subscriptList ? subscriptList.map( list => {
+                    return(
+                        <ProductBasketHTML list={list} key={list.p_PDID}></ProductBasketHTML>
+                    )
+                }) : ""}
             </div>
         </div>
     )
@@ -776,7 +824,6 @@ function User_withdraw(){
                     });
                     sessionStorage.clear();
                     localStorage.clear();
-
                 }
             })
             .catch((error) => {
