@@ -500,8 +500,6 @@ function User_profile(){
 
     return(
         <div>
-            <h2 className="user_profile_h2"> 기본정보</h2>
-            <hr/>
             <dl>
                 <dt className="user_profile_dt"><label>사용자명</label></dt>
                 <dd className="user_profile_dd"><span>{userprofile.userName}</span></dd>
@@ -527,7 +525,7 @@ function User_edit(){
     const logininfo = useContext(Userlogin);
 
     const [isuserId, setIsuserId] = useState(true);
-    const [userId_btn, setUserId_btn] = useState("중복 검사 완료");
+    const [userId_btn, setUserId_btn] = useState("중복 확인");
 
     let userId_re = "";
 
@@ -631,28 +629,25 @@ function User_edit(){
 
     return(
         <div>
-            <h2 className="user_profile_h2"> 프로필 수정</h2>
-            <hr />
             <form onSubmit={handleSubmit}>
                 <dl>
                     <dt className="user_profile_dt"><label>이메일</label></dt>
-                    <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.email} type="text" required={true} name="email" onChange={handleInput} value={edit_user.email||''}/>
+                    <dd><input className="user_profile_dd" placeholder={edit_user.email} type="text" required={true} name="email" onChange={handleInput} value={edit_user.email||''}/>
                     </dd>
                     <dt className="user_profile_dt"><label>아이디</label></dt>
-                    <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.userId}  type="text" required={true} name="userId" onChange={handleInput} value={edit_user.userId||''}/>
-                        <button type="button" onClick={userid_check}>{userId_btn}</button>
+                    <dd>
+                        <input className="user_profile_dd" placeholder={edit_user.userId}  type="text" required={true} name="userId" onChange={handleInput} value={edit_user.userId||''}/>
+                        <button className="profile_btn" type="button" onClick={userid_check}>{userId_btn}</button>
                     </dd>
                     <dt className="user_profile_dt"><label>비밀번호</label></dt>
-                    <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.password}  type="text" required={true} name="password" onChange={handleInput} value={edit_user.password||''}/>
+                    <dd>
+                        <input className="user_profile_dd" placeholder={edit_user.password}  type="text" required={true} name="password" onChange={handleInput} value={edit_user.password||''}/>
                     </dd>
                     <dt className="user_profile_dt"><label>전화번호</label></dt>
-                    <dd className="user_edit_dd">
-                        <input className="user_enroll_text" placeholder={edit_user.phoneNumber}  type="text" required={true} name="phoneNumber" onChange={handleInput} value={edit_user.phoneNumber||''}/>
+                    <dd>
+                        <input className="user_profile_dd" placeholder={edit_user.phoneNumber}  type="text" required={true} name="phoneNumber" onChange={handleInput} value={edit_user.phoneNumber||''}/>
                     </dd>
-                    <button type="submit" className="user_edit_btn"> 변경 </button>
+                    <button type="submit" className="user_edit_btn"> 개인정보 업데이트 </button>
                 </dl>
             </form>
         </div>
@@ -680,15 +675,13 @@ function ProductSubscriptHTML(props){
     }
 
     return(
-        <div className="product_container">
-            <div className="product">
-                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img"/></Link></div>
-                <div className="product_txt">&nbsp; {props.list.p_ProductName}
-                    <div>&nbsp;{props.list.p_Detail}</div>
-                    <div>&nbsp;{"월"}</div>
-                    <div>&nbsp;{props.list.p_Price}</div>
-                    <button onClick={handleClick}>구독 해지</button>
-                </div>
+        <div className="manage_container">
+                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img1"/></Link></div>
+                <div className="manage"> 상품명: {props.list.p_ProductName}
+                    <div className="">상품설명: {props.list.p_Detail}</div>
+                    {/* <div>{"월"}</div> */}
+                    <div>가격 : {props.list.p_Price}</div>
+                    <button className="cancel_btn"onClick={handleClick}>구독 해지</button>
             </div>
         </div>
     )
@@ -722,8 +715,10 @@ function User_manage(){
 
     return(
         <div>
-            <h2 className="user_profile_h2"> 구독 관리</h2>
-            <hr />
+            <div className="modecontainer">
+            <Link to="/mypage/user/manage" style={{ textDecoration: 'none' }}><span className="nowscribe">현재 구독중인 상품</span></Link>
+            <Link to="/mypage/user/manage" style={{ textDecoration: 'none' }}><span className="pastscribe">과거에 구독했던 상품</span></Link>
+            </div>
             {subscriptList ? subscriptList.map( list => {
                 return(
                     <ProductSubscriptHTML list={list} key={list.p_PDID}></ProductSubscriptHTML>
@@ -841,13 +836,12 @@ function User(){
 
     return(
         <div>
-            <div><h2 className="User_title"> 유저 마이페이지</h2></div>
-
             <div className="user_container">
 
                 <div className="user_navbar">
                     <ul className="user_navbar_list">
-                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/profile"> 내 프로필</Link></li>
+                        <h2 className="user_title">마이 페이지</h2>
+                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/profile"> 프로필</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/edit"> 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/manage"> 구독 관리</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/bascket"> 장바구니</Link></li>
