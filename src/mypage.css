@@ -80,9 +80,15 @@
     font-size: 1.6rem;
     margin-bottom : 1%;
     width: 50%;
-    
 }
-
+.bank_locate{
+    position: relative;
+    font-size: 1.6rem;
+    margin-bottom : 1%;
+    width: 50%;
+    margin-left: 40%;
+    padding-bottom: -2%;
+}
 .user_profile_dd{
     font-size : 1.2rem;
     border:1px solid rgb(191,191,191);
@@ -96,7 +102,21 @@
 }
 
 /* 유저 edit*/
-
+.user_profile_dt123{
+    display: flex;
+    font-size: 1.6rem;
+    margin-bottom : 1%;
+    /* width: 50%; */
+}
+.user_edit_dd123{
+    display: flex;
+}
+.bank_select{
+    margin-left: 67%;
+    width: 100%;
+    font-size: 24px;
+    margin-top: -1%;
+}
 .user_edit_dd input{
     border: 0.1rem solid #d3d3d3;
     padding : 0 1.6rem;
@@ -201,10 +221,19 @@
     color : black;
     border-radius : 0.4rem;
 }
-.company_product_enroll_btn:hover{
-    border-color : #1DC078;
+.company_product_enroll_btn1{
+    font-weight: bold;
+    margin-left: 7.5vw;
+    font-size:1.5rem;
+    border-color : black;
     background-color : #fff;
-    color : #1DC078;
+    color : black;
+    border-radius : 0.4rem;
+}
+.company_product_enroll_btn:hover{
+    /* border-color : #1DC078;
+    background-color : #fff;
+    color : #1DC078; */
 }
 .manage_container{
     display: flex;
@@ -220,3 +249,4 @@
     margin-left: 8.5vw;
     margin-top: 1vw;
 }
+

@@ -369,10 +369,14 @@ function Category({children}){
                 {/*카테고리 navbar*/}
                 <div className="category_navbar">
                     <nav className="category_container">
+
                         <ul className="category_list1">
+
                             <li className="category_item dropdown"><Link className='category_link' to="/category/main">카테고리 전체보기</Link>
                                 <ul className="category_sub_list">
+                                    
                                     <li> &nbsp;</li>
+                                    
                                     <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle'>라이프스타일</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content'>컨텐츠</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/food'>음식</Link></li>
@@ -401,6 +405,9 @@ function Category({children}){
 
                             <ul className="category_list5">
                                     <li className="category_item"><Link className='category_link'to="/category/sale_event">매거진</Link></li>
+                            </ul>
+                            <ul className="category_list6">
+                            <li><input className="search_bar" type="text" class="search__input" placeholder="Search"/></li>
                             </ul>
 
                         {/*<div className="search"><Link className="link" to="/"><BsSearch/>검색</Link></div>*/}
