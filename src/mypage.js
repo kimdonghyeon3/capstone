@@ -40,7 +40,7 @@ function ProductManageHTML(props){
 function Company_profile(){
     const baseUrl = "http://localhost:8080";
 
-    const logininfo = useContext(Userlogin);    //전역변수 관리 변수
+    const logininfo = useContext(Userlogin);   //전역변수 관리 변수
 
     const [companyinfo, setCompanyinfo] = useState({
         enid:localStorage.getItem("uid"),
