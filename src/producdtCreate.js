@@ -204,17 +204,6 @@ function ProductCreate(){
                 <span className="sale_display"><input className="user_profile_dd" type="text" name="p_Sale" onChange={handleInput}/></span>
                 </div></div>
 
-
-
-
-
-
-
-
-
-
-
-
                 <button className="btn_margin"type="submit" onClick={createProduct}>제품 만들기</button>
 
                 </div>
