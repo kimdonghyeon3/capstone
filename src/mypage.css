@@ -1,64 +1,122 @@
+.modecontainer{
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    text-decoration: none;
+}
 
+.nowscribe{
+    color: black;
+    border-bottom: 2px solid black;
+    font-size: 1.125rem;
+    padding-bottom: 0.6%;
+    padding-left: 17%;
+    padding-right: 17%;
+}
+.pastscribe{
+    color: rgb(82, 82, 82);
+    border-bottom: 2px solid rgb(234, 234, 234);
+    font-size: 1.125rem;
+    padding-bottom: 0.6%;
+    padding-left: 17%;
+    padding-right: 17%;
+}
 .user_container{
     display:flex;
 }
 
 /*유저 navbar*/
 .user_navbar{
-    float:left;
-    width : 10%;
-    margin-left: 8%;
-    margin-right : 5%;
+    width : 20vw;
+    background-color: white;
+    position: relative;
+    height: 750px;
 }
 
 .user_navbar_list{
-    width:100%;
+    /* width:100%; */
+    /* font-size: 100px; */
 }
 
 .user_navbar_li{
-    padding : 5% 5% 5% 5%;
-    font-weight: 600;
-    background:#fafafa;
-    border-bottom:1px solid #e4e4e4;
-    border-left:1px solid #e4e4e4;
-    border-right:1px solid #e4e4e4;
-    border-top:1px solid #e4e4e4;
+    /* padding : 15% 5% 5% 5%; */
+    padding-bottom: 15%;
+    font-weight: 500;
+    background-color: white;
     list-style : none;
-    text-align: center;
 }
-
+.user_title{
+    position: relative;
+    left: -0.5%;
+    padding-top: 15%;
+    margin-bottom: 14%;
+}
 .user_navbar_link{
     text-decoration:none;
-    color:black;
-    font-size: 1.2rem;
+    color:rgb(90,98,115);
+    font-size: 18px;
+    position: relative;
 }
 
 /* 유저 content*/
 .user_content{
-    float:right;
-    width:65%;
+
+    width:75%;
     border:1px solid #e4e4e4;
     padding : 2%;
-    box-shadow: 3px 3px 5px #000808;
-    margin-bottom : 5%;
 }
 
 /* 유저 profile*/
 .user_profile_h2{
     font-weight: bold;
 }
+.profile_container{
+    width:100%;
+    display: flex;
+
+
+}
 .user_profile_dt{
     font-size: 1.6rem;
     margin-bottom : 1%;
+    width: 50%;
 }
-
+.bank_locate{
+    position: relative;
+    font-size: 1.6rem;
+    margin-bottom : 1%;
+    width: 50%;
+    margin-left: 40%;
+    padding-bottom: -2%;
+}
 .user_profile_dd{
     font-size : 1.2rem;
+    border:1px solid rgb(191,191,191);
     margin-bottom : 3%;
+    width: 25vw;
+    height: 40px;
+    border-radius: 10px;
+    color: rgb(227,227,227);
+    padding-top: 0.4rem;
+    padding-left: 0.4rem;
 }
 
 /* 유저 edit*/
-
+.user_profile_dt123{
+    display: flex;
+    font-size: 1.6rem;
+    margin-bottom : 1%;
+    /* width: 50%; */
+}
+.user_edit_dd123{
+    display: flex;
+}
+.bank_select{
+    margin-left: 67%;
+    width: 100%;
+    font-size: 24px;
+    margin-top: -1%;
+}
 .user_edit_dd input{
     border: 0.1rem solid #d3d3d3;
     padding : 0 1.6rem;
@@ -69,23 +127,45 @@
 
 .user_edit_btn{
     padding: 0.5rem 1rem;
-    margin-left: 2%;
     border-color : #6e6e73;
     background-color : #fff;
     color : #6e6e73;
     border-radius : 0.4rem;
     font-size : 1rem;
     font-weight: bold;
+    margin-left: 6.3vw;
 }
 
 /* 유저 manage*/
-.product_th_btn{
+.cancel_btn{
     font-size : 1rem;
     font-weight: bold;
     border-color : #6e6e73;
     background-color : #fff;
     color : #6e6e73;
     border-radius : 0.4rem;
+    margin-top: 20%;
+}
+.product_th_btn{
+        font-size : 1rem;
+        font-weight: bold;
+        border-color : #6e6e73;
+        background-color : #fff;
+        color : #6e6e73;
+        border-radius : 0.4rem;
+}
+.profile_btn{
+    font-size : 1rem;
+    font-weight: bold;
+    border-color : #6e6e73;
+    background-color : #fff;
+    color : #6e6e73;
+    border-radius : 0.4rem;
+    height: 40px;
+    margin-left: 5px;
+    position: absolute;
+    margin-top: 2.6px;
+
 }
 .product_th_btn:hover{
     color : red;
@@ -141,8 +221,32 @@
     color : black;
     border-radius : 0.4rem;
 }
-.company_product_enroll_btn:hover{
-    border-color : #1DC078;
+.company_product_enroll_btn1{
+    font-weight: bold;
+    margin-left: 7.5vw;
+    font-size:1.5rem;
+    border-color : black;
     background-color : #fff;
-    color : #1DC078;
+    color : black;
+    border-radius : 0.4rem;
 }
+.company_product_enroll_btn:hover{
+    /* border-color : #1DC078;
+    background-color : #fff;
+    color : #1DC078; */
+}
+.manage_container{
+    display: flex;
+    margin-bottom: 3vw;
+    margin-top: 8.5vh;
+}
+.product_img1{
+    width:73%;
+    height: 39vh;
+    margin-left: 5.8vh;
+}
+.manage{
+    margin-left: 8.5vw;
+    margin-top: 1vw;
+}
+
