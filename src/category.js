@@ -1,12 +1,10 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
 import {Link, Routes, Route, useParams} from "react-router-dom";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
 import axios from "axios";
-import {Userlogin} from "./userinfo";
-import ProductDetail from "./productDetail";
 
 function ProductHTML(props){
 
@@ -45,7 +43,6 @@ function Category_content_main(){
         await axios
             .get(baseUrl + "/category/main")
             .then((response) => {
-                console.log(response.data);
                 setProductList(response.data)
             })
             .catch((error)=>{
@@ -80,7 +77,6 @@ function Category_content_lifestyle(){
                 category : "라이프스타일",
             })
             .then((response) => {
-                console.log(response.data)
                 setProductList(response.data)
             })
             .catch((error)=>{
@@ -118,7 +114,6 @@ function Category_content_content(){
                 category : "컨텐츠",
             })
             .then((response) => {
-                console.log(response.data)
                 setProductList(response.data)
             })
             .catch((error)=>{
@@ -156,7 +151,6 @@ function Category_content_food(){
                 category : "음식",
             })
             .then((response) => {
-                console.log(response.data)
                 setProductList(response.data)
             })
             .catch((error)=>{
@@ -241,7 +235,6 @@ function Category_content_sale_event(){
         await axios
             .get(baseUrl + "/category/sale")
             .then((response) => {
-                console.log(response.data);
                 setProductList(response.data)
             })
             .catch((error)=>{
@@ -271,7 +264,6 @@ const contents_detail = [
     {title:'milk', description:"유제품"},
     {title:'juk', description:"죽"},
 ]
-
 
 function Category_content_detail(props){
 
@@ -358,9 +350,7 @@ function Category_content(){
     );
 }
 
-function Category({children}){
-
-    const userinfo = useContext(Userlogin);
+function Category(){
 
     return(
             <div>

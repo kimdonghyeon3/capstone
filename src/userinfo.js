@@ -11,7 +11,6 @@ export const UserPovider = ({children}) => {
     const [login, setLogin] = useState(false);
 
     const edituser = (data) => {
-        console.log("edituser 실행됨");
         setUid(data.uid);
         setId(data.id);
         setRole(data.role);

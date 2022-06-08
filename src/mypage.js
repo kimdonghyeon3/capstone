@@ -9,7 +9,7 @@ import ProductCreate from "./producdtCreate";
 
 function ProductManageHTML(props){
 
-    const path = props.list.imageFilePath + props.list.imageFileName;
+    // const path = props.list.imageFilePath + props.list.imageFileName;
     const navigate = useNavigate();
 
     // console.log(path + " /// " +  typeof path);
@@ -39,8 +39,6 @@ function ProductManageHTML(props){
 //기업페이지
 function Company_profile(){
     const baseUrl = "http://localhost:8080";
-
-    const logininfo = useContext(Userlogin);    //전역변수 관리 변수
 
     const [companyinfo, setCompanyinfo] = useState({
         enid:localStorage.getItem("uid"),
@@ -114,8 +112,6 @@ function Company_profile(){
 
 function Company_edit(){
     const baseUrl = "http://localhost:8080";
-
-    const logininfo = useContext(Userlogin);
 
     const [companyinfo, setCompanyinfo] = useState({
         enid:localStorage.getItem("uid"),
@@ -458,8 +454,6 @@ function User_profile(){
 
     const baseUrl = "http://localhost:8080";
 
-    const logininfo = useContext(Userlogin);
-
     const [userinfo, setUserinfo] = useState({
         enid:localStorage.getItem("uid"),
         enterpriseId:localStorage.getItem("id"),
@@ -469,7 +463,6 @@ function User_profile(){
     const [userprofile, setUserprofile] = useState({});
 
     useEffect(()=>{
-        console.log("마이페이지 유저 정보 받아오기");
         getuserinfo();
     },[]);
 
@@ -478,8 +471,6 @@ function User_profile(){
         await axios
             .post(baseUrl + "/mypage/user/profile", userinfo)
             .then((response) => {
-                console.log(response.data);
-
                 setUserprofile({
                     ...userprofile,
                     id : response.data.id,
@@ -545,7 +536,6 @@ function User_edit(){
     });
 
     useEffect(()=>{
-        console.log("마이페이지 유저 정보 받아오기");
         getcompanyinfo();
     },[]);
 
@@ -592,7 +582,6 @@ function User_edit(){
             await axios
                 .post(baseUrl + "/mypage/user/edit", edit_user)
                 .then((response) =>{
-                    console.log(response.data);
                     alert("수정이 완료되었습니다.")
                 })
                 .catch((error) => {
@@ -659,7 +648,6 @@ function User_edit(){
 function ProductSubscriptHTML(props){
 
     const baseUrl = "http://localhost:8080";
-    const navigate = useNavigate();
 
     const handleClick = async () => {
         console.log("구독해지");
@@ -739,7 +727,7 @@ function ProductBasketHTML(props){
         console.log("장바구니 해지");
 
         await axios
-            .post(baseUrl + "/mypage/", {
+            .post(baseUrl + "/mypage/user/basket/withdraw", {
                 p_BSID: props.list.p_BSID,
             })
             .then((response) => {
