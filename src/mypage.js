@@ -402,7 +402,6 @@ const company_content=[
 
 function Company(){
 
-</div>
     return(
 
         <div>
