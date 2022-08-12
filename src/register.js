@@ -51,6 +51,8 @@ function Register_user(){
         role:'U',
     });
 
+    const[code, setCode] = useState();
+
     const [nameMessage, setNamemessage] = useState('이름은 2 글자 이상으로 작성해 주세요');
     const [birthMessage, setBirthmessage] = useState('날짜를 20200101 형식으로 입력 해 주세요.');
     const [phoneMessage, setPhonemessage] = useState("유효하지 않은 휴대폰 번호입니다.");
@@ -64,6 +66,7 @@ function Register_user(){
     const [isuserId, setIsuserId] = useState(false);
     const [ispassword, setIspassword] = useState(false);
     const [isemail, setIsemail] = useState(false);
+    const [isemailCert, setIsemailCert] = useState(false);
 
     //휴대폰 하이픈 작동
     // useEffect(() => {
@@ -191,6 +194,10 @@ function Register_user(){
             }
         }
 
+        if(e.target.name === 'code'){
+            setCode(e.target.value);
+        }
+
         setEnroll_user({
             ...enroll_user,
             [e.target.name]:e.target.value,
@@ -201,8 +208,11 @@ function Register_user(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(enroll_user);
+        if(!isemailCert){
+            alert("이메일 인증을 하세요");
+        }
 
-        if(isname && isbirth && isphone && isuserId && ispassword && isemail){
+        if(isname && isbirth && isphone && isuserId && ispassword && isemail &&isemailCert){
             await axios
                 .post(baseUrl + "/register/user", enroll_user)
                 .then((response) =>{
@@ -242,10 +252,57 @@ function Register_user(){
             })
     }
 
+    //이메일 인증 발송
+    const email_cert = async (e) => {
+        e.preventDefault();
+        console.log(enroll_user.userId);
+        alert("이메일 발송 눌림");
+        await axios
+            .post(baseUrl + "/email/cert", {
+                inputId:enroll_user.userId,
+            })
+            .then((response) =>{
+
+                // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
+                if(response.data.returnvalue === '0'){
+                    alert("이메일을 발송하였습니다.")
+                }else{
+                    alert("올바른 이메일이 아닙니다.")
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //이메일 인증 코드 확인
+    const email_check = async (e) => {
+        e.preventDefault();
+        console.log(enroll_user.userId);
+        alert("코드 확인 눌림");
+        await axios
+            .post(baseUrl + "/email/check", {
+                inputId:enroll_user.userId,
+                code:code,
+            })
+            .then((response) =>{
+
+                // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
+                if(response.data.returnvalue === '0'){
+                    alert("이메일 인증이 되었습니다.")
+                    setIsemailCert(true);
+                }else{
+                    alert("올바른 이메일이 아닙니다.")
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
-
 
                     <div className="register_box"><strong>회원가입</strong></div>
                     <hr className="sun"size="3" width="105%" color="black"/>
@@ -280,8 +337,14 @@ function Register_user(){
 
                 <div className="tt"><p>이메일 :</p>
                 <div className="sd">   <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
-                   
-                </div></div>
+
+                </div><button className="emailValidate" onClick={email_cert}>코드 발송</button></div>
+
+                <div className="tt"><p>이메일 인증번호 :</p>
+                    <div className="sd">   <input className="user_enroll_text" placeholder="이메일 인증번호"  type="text" required={true} name="code" onChange={handleInput}/>
+
+                    </div><button className="emailValidate" onClick={email_check}>확인</button></div>
+
 
                 <div className="submit_locate"><button type="submit">회원가입</button></div>
             </form>
