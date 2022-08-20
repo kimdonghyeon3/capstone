@@ -13,10 +13,11 @@ const IdSearch = ({show, onHide}) => {
         name:"",
         email:"",
         role:"U",
+        exitYN:"",
+        id:""
     });
 
     const handleChange = (e) => {
-
 
         if(e.target.name === "flexRadioDefault"){
             setFindId({
@@ -42,8 +43,8 @@ const IdSearch = ({show, onHide}) => {
         await axios
             .post(baseUrl + "/findid", findid)
             .then((response) =>{
-                if(response.data != null){
-                    alert(response.data);
+                if(response.data.output != "error"){
+                    alert(response.data.output);
                 }else{
                     alert("등록되지 않은 이름/아이디입니다.");
                 }

@@ -11,9 +11,10 @@ const PwSearch = ({show, onHide}) => {
 
     const [findid,setFindId] = useState({
         name:"",
-        birth:"",
         email:"",
         role:"U",
+        exitYN:"",
+        id:""
     });
 
     const handleChange = (e) => {
@@ -33,14 +34,13 @@ const PwSearch = ({show, onHide}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(findid.name);
-        console.log(findid.birth);
         console.log(findid.email);
         console.log(findid.role);
         await axios
             .post(baseUrl + "/findpw", findid)
             .then((response) =>{
-                if(response.data != null){
-                    alert(response.data);
+                if(response.data.output === "Y"){
+                    alert("임시비밀번호가 메일로 발송되었습니다.");
                 }else{
                     alert("등록되지 않은 이름/생일/이메일입니다.");
                 }
@@ -71,10 +71,10 @@ const PwSearch = ({show, onHide}) => {
                             <Form.Control name="name" onChange={handleChange} placeholder="이름을 입력해 주세요" />
                         </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>생년월일</Form.Label>
-                            <Form.Control name="birth" onChange={handleChange} placeholder="19981119 형태로 입력해주세요" />
-                        </Form.Group>
+                        {/*<Form.Group className="mb-3">*/}
+                        {/*    <Form.Label>생년월일</Form.Label>*/}
+                        {/*    <Form.Control name="birth" onChange={handleChange} placeholder="19981119 형태로 입력해주세요" />*/}
+                        {/*</Form.Group>*/}
 
                         <Form.Group className="mb-3">
                             <Form.Label>이메일</Form.Label>
