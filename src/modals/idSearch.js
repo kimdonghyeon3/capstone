@@ -12,20 +12,33 @@ const IdSearch = ({show, onHide}) => {
     const [findid,setFindId] = useState({
         name:"",
         email:"",
+        role:"U",
     });
 
     const handleChange = (e) => {
-        setFindId({
-            ...findid,
-            [e.target.name]: e.target.value,
-        });
-        console.log(findid.name);
-        console.log(findid.email);
+
+
+        if(e.target.name === "flexRadioDefault"){
+            setFindId({
+                ...findid,
+                role: e.target.value,
+            });
+        }else{
+            setFindId({
+                ...findid,
+                [e.target.name]: e.target.value,
+            });
+        }
+
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("눌리냐");
+
+        console.log(findid.name);
+        console.log(findid.email);
+        console.log(findid.role);
+
         await axios
             .post(baseUrl + "/findid", findid)
             .then((response) =>{
@@ -66,6 +79,19 @@ const IdSearch = ({show, onHide}) => {
                         <Form.Control type="email" name="email" onChange={handleChange} placeholder="이메일을 입력해 주세요" />
                         <Form.Text className="text-muted"></Form.Text>
                     </Form.Group>
+
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="U" onClick={handleChange}/>
+                            <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                일반회원
+                            </label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="E" onClick={handleChange}/>
+                            <label className="form-check-label" htmlFor="flexRadioDefault2">
+                                기업회원
+                            </label>
+                    </div>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
