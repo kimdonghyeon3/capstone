@@ -33,6 +33,7 @@ const PwSearch = ({show, onHide}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(findid.id);
         console.log(findid.name);
         console.log(findid.email);
         console.log(findid.role);
@@ -66,6 +67,12 @@ const PwSearch = ({show, onHide}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>아이디</Form.Label>
+                            <Form.Control name="id" onChange={handleChange} placeholder="아이디를 입력해 주세요" />
+                        </Form.Group>
+
                         <Form.Group className="mb-3">
                             <Form.Label>이름</Form.Label>
                             <Form.Control name="name" onChange={handleChange} placeholder="이름을 입력해 주세요" />
