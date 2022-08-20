@@ -5,6 +5,8 @@ import {Link, useNavigate} from 'react-router-dom';
 import './login.css';
 import axios from "axios";
 import {Userlogin} from "./userinfo";
+import IdSearch from "./modals/idSearch";
+import PwSearch from "./modals/pwSearch";
 
 function Login({children}){
 
@@ -21,6 +23,9 @@ function Login({children}){
     const userdata = useContext(Userlogin);
 
     const {userinfo, setUserinfo} = userdata;
+    const [Idpopup, setIdpopup] = useState(false);  //아이디 찾기 팝업
+    const [Pwpopup, setPwpopup] = useState(false);  //비밀번호 찾기 팝업
+
     const handleChange = (e) => {
         setState({
             ...state,
@@ -62,9 +67,13 @@ function Login({children}){
             })
     }
 
+
     return(
         <div>
             <Userlogin.Provider value={{userinfo, setUserinfo}}>
+
+                <IdSearch show={Idpopup} onHide={()=>setIdpopup(false)}/>
+                <PwSearch show={Pwpopup} onHide={()=>setPwpopup(false)}/>
 
             <Header/>
             <div className="login_main_container">
@@ -78,14 +87,14 @@ function Login({children}){
                 <div className="radio"><input type="radio" name="role" value="U" onChange={handleChange}/>일반 로그인</div></div>
                 <div><input className="asd1" type="text" name="userId" placeholder="아이디" onChange={handleChange}/></div>
                 <div><input className="asd1" type="password" name="password" placeholder="비밀번호" onChange={handleChange}/></div>
-                <div className="findid"><button className="findid_bt"> 아이디찾기</button>
-                <div className="findpw"><button className="findpw_bt"> 비밀번호찾기</button>
+
+                <div className="findid"><button type="button" className="findid_bt" onClick={()=>setIdpopup(true)}> 아이디찾기</button>
+                <div className="findpw"><button type="button" className="findpw_bt" onClick={()=>setPwpopup(true)}> 비밀번호찾기</button>
+
                 <div className="signup"><Link to="/register/main"><button className="signup_bt"> 회원가입</button></Link></div>
                 </div>
                 </div>
                 <div><button className="asd" type="submit"><strong>로그인</strong></button></div>
-
-                
             </form>
             </div>
 
@@ -97,5 +106,5 @@ function Login({children}){
 
     );
 }
-
+//
 export default Login;
