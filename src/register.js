@@ -137,8 +137,6 @@ function Register_user(){
                     setBirthmessage('올바른 형식 입니다.');
                     setIsbirth(true);
                 }
-
-
             }
         }
 
@@ -355,6 +353,12 @@ function Register_company(){
         role:'E',
     });
 
+    const[company_check, setConpany_check] = useState({
+        enterpriseNumber:'',
+        enterpriseRepresentName : '',
+        enterpriseBirth : '',
+    })
+
     const [nameMessage, setNamemessage] = useState('이름은 1 글자 이상으로 작성해 주세요');
     const [numMessage, setNummessage] = useState('사업자번호 형식으로 입력 해 주세요. (10자리)');
     const [phoneMessage, setPhonemessage] = useState("유효하지 않은 휴대폰 번호입니다.");
@@ -392,6 +396,42 @@ function Register_company(){
             setIsaddress(true);
         }
     },[enroll_company.address]);
+
+    //사업자 진위 여부 폼 입력 시 변경되는 사항
+    const companyHandleInput = (e) => {
+        if(e.target.name === 'enterpriseNumber'){
+            handleInput(e);
+        }
+
+        setConpany_check({
+            ...company_check,
+            [e.target.name]:e.target.value,
+        });
+
+    }
+
+    //사업자 진위 여부 정보 보내기
+    const company_check_submit = async (e) => {
+        e.preventDefault();
+
+        console.log("사업자 확인을 위해 필요한 정보");
+        console.log(company_check);
+
+        await axios
+            .post(baseUrl + "/register/company/auth", company_check)
+            .then((response) =>{
+                console.log(response.data);
+                if(response.data.message === 'Success'){
+                    console.log("진위 여부 확인 보내기 성공");
+                }else{
+                    alert("올바르지 않은 사업자 정보 입니다.");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
 
     //폼 입력시 변경되는 사항
     const handleInput = (e)=>{
@@ -572,6 +612,36 @@ function Register_company(){
         setPopup(!popup);
     }
 
+    //이메일 인증 발송
+    const email_cert = async (e) => {
+        e.preventDefault();
+        console.log(enroll_company.email);
+        alert("이메일 발송 눌림");
+        await axios
+            .post(baseUrl + "/email/cert", {
+                email:enroll_company.email,
+            })
+            .then((response) =>{
+
+                // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
+                if(response.data.response !== null){
+                    alert("이메일을 발송하였습니다." + response.data.response);
+                }else{
+                    alert("올바른 이메일이 아닙니다.");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    //이메일 인증 코드 확인
+    const email_check = async (e) => {
+        e.preventDefault();
+
+        alert("코드 확인 눌림");
+    }
+
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
@@ -592,9 +662,16 @@ function Register_company(){
                     </div></div>{<div className="ad1">{nameMessage}</div>}
 
                 <div className="tt">
-                    <p>사업자번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={handleInput}/>
+                    <p>사업자번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="사업자번호"  type="text" required={true} name="enterpriseNumber" onChange={companyHandleInput}/>
                     </div></div>{<div className="ad6">{numMessage}</div>}
-
+                <div className="tt">
+                    <p>대표자명 :</p> <div className="sd"><input className="user_enroll_text" placeholder="대표자명"  type="text" required={true} name="enterpriseRepresentName" onChange={companyHandleInput}/>
+                </div></div>
+                <div className="tt">
+                    <p>개업일자 :</p> <div className="sd"><input className="user_enroll_text" placeholder="개업일자(20150405 - 8자리로 입력해 주세요)"  type="text" required={true} name="enterpriseBirth" onChange={companyHandleInput}/>
+                </div><button className="emailValidate" onClick={company_check_submit}>사업자 진위 여부 확인</button></div>
+                <hr/>
+                <br/>
                 <div className="tt">
                     <p>휴대폰번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
                     </div></div>{<div className="ad3">{phoneMessage}</div>}
@@ -633,9 +710,24 @@ function Register_company(){
                 <p>비밀번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
                 </div></div>{<div className="ad5">{passwordMessage}</div>}
 
-                <div className="tt">
-                <p>이메일 :</p> <div className="sd"><input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
-                    </div></div>{<div className="ad3">{emailMessage}</div>}
+                {/*<div className="tt">*/}
+                {/*<p>이메일 :</p> <div className="sd"><input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>*/}
+                {/*    </div></div>{<div className="ad3">{emailMessage}</div>}*/}
+
+
+                <div className="tt"><p>이메일 :</p>
+                    <div className="sd">   <input className="user_enroll_text" placeholder="이메일"  type="text" required={true} name="email" onChange={handleInput}/>
+
+                    </div><button className="emailValidate" onClick={email_cert}>코드 발송</button></div>
+                {<div className="ad3">{emailMessage}</div>}
+
+                <div className="tt"><p>이메일 인증번호 :</p>
+                    <div className="sd">   <input className="user_enroll_text" placeholder="이메일 인증번호"  type="text" required={true} name="code" onChange={handleInput}/>
+
+                    </div><button className="emailValidate" onClick={email_check}>확인</button></div>
+
+
+                {/**/}
                 
                 <div><button type="submit">회원가입</button></div>
             </form>
