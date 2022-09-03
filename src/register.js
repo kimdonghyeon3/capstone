@@ -429,7 +429,9 @@ function Register_company(){
                     alert("진위 여부 확인 보내기 성공");
                     setNummessage('사업자 번호 진위 여부 확인이 완료되었습니다.');
                     setIsnumAuth(true);
-                }else{
+                }else if(response.data.message === 'Duplicate'){
+                    alert("중복된 사업자 번호입니다. 아이디를 찾아주세요");
+                } else{
                     alert("올바르지 않은 사업자 정보 입니다.");
                 }
             })
