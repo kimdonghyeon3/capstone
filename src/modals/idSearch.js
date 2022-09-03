@@ -44,7 +44,7 @@ const IdSearch = ({show, onHide}) => {
             .post(baseUrl + "/findid", findid)
             .then((response) =>{
                 if(response.data.output != "error"){
-                    alert(response.data.output);
+                    alert("등록된 아이디 : " + response.data.output);
                 }else{
                     alert("등록되지 않은 이름/아이디입니다.");
                 }
