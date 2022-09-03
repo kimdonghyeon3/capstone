@@ -368,6 +368,7 @@ function Register_company(){
     const [addressMessage, setaddressmessage] = useState("입력하세요");
     const [accountNumberMessage, setaccountNumbermessage] = useState("계좌번호와 은행을 입력하세요");
     const [bankNameMessage, setBanknamemessage] = useState();
+    const [emailCode, setEmailCode] = useState();
 
     const [isname, setIsname] = useState(false);
     const [isnum, setIsnum] = useState(false);
@@ -378,6 +379,9 @@ function Register_company(){
     const [isaddress, setIsaddress] = useState(false);
     const [isaccountNumber, setIsacounternumbermessage] = useState(false);
     const [isbankname, setIsbankname] = useState(false);
+
+    const [isnumAuth, setIsnumAuth] = useState(false);  //사업자 진위여부 확인이 되었는지 안되어있는지 확인하는 변수
+    const [isEmailCode, setIsEmailCode] = useState(false);  //이메일 코드 확인이 되었는지 안되어있는지 확인하는 변수
 
     const [popup, setPopup] = useState(false);  //팝업
 
@@ -422,7 +426,9 @@ function Register_company(){
             .then((response) =>{
                 console.log(response.data);
                 if(response.data.message === 'Success'){
-                    console.log("진위 여부 확인 보내기 성공");
+                    alert("진위 여부 확인 보내기 성공");
+                    setNummessage('사업자 번호 진위 여부 확인이 완료되었습니다.');
+                    setIsnumAuth(true);
                 }else{
                     alert("올바르지 않은 사업자 정보 입니다.");
                 }
@@ -563,6 +569,17 @@ function Register_company(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(enroll_company);
+
+        if(!isnumAuth){
+            alert("사업자 진위 여부 확인은 완료하세요");
+            return;
+        }
+
+        if(!isEmailCode){
+            alert("이메일 인증코드 확인을 해주세요");
+            return;
+        }
+
         if(isname && isnum && isphone && isenterpriseId && ispassword && isemail && isaddress && isaccountNumber && isbankname){
             await axios
                 .post(baseUrl + "/register/company", enroll_company)
@@ -626,6 +643,7 @@ function Register_company(){
                 // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
                 if(response.data.response !== null){
                     alert("이메일을 발송하였습니다." + response.data.response);
+                    setEmailCode(response.data.response);
                 }else{
                     alert("올바른 이메일이 아닙니다.");
                 }
@@ -639,7 +657,24 @@ function Register_company(){
     const email_check = async (e) => {
         e.preventDefault();
 
-        alert("코드 확인 눌림");
+        console.log(emailCode);
+
+        await axios
+            .post(baseUrl + "/email/check", {
+                code:emailCode,
+            })
+            .then((response) =>{
+                // 데이터 잘 받아왔으면 할거 어떤 값 뭐라 받는거보고 결정
+                if(response.data.message === 'Success'){
+                    alert("이메일 코드 성공적으로 입력함");
+                    setIsEmailCode(true);
+                }else{
+                    alert("올바르지 않은 이메일 코드입니다. 다시 이메일을 확인해 주세요");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     return(
