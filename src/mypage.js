@@ -279,68 +279,191 @@ function Company_manage(){
     )
 }
 
-function Deliver_table(props){
-    const table = [];
-
-    for(let i=0; i<props.deliver_list.length; i++){
-        let t = props.deliver_list[i];
-        table.push(<li key={t.title}>
-            <div>{t.title}</div>
-            <div>{t.body}</div>
-        </li>)
-    }
-
-    return(
-        <div>
-            {table}
-        </div>
-    )
-}
-
 function Company_deliver(){
 
-    const [mode, setMode] = useState('NORMAL');
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getDeliverList();
+    },[]);
 
-    let deliver_li = null;
+    const [t_code, sett_code] = useState("");
+    const [t_invoice, sett_invoice] = useState("");
 
-    const [deliver_list,setDeliver_list] = useState([
-        {title:"운송장번호", body:"123456"}
-    ])
+    //myKey에는 내가 적용한 key 넣으면됨
+    var myKey = "";
 
-    console.log("실행됨");
-    if(mode === 'NORMAL'){
-        console.log("nomal 실행됨");
-        deliver_li = <Deliver_table deliver_list={deliver_list}></Deliver_table>
-    }else if(mode === 'CREATE'){
-        console.log("create 실행됨");
-        deliver_li = <Deliver_table deliver_list={deliver_list}></Deliver_table>
+    async function getDeliverList(){            //spring 연동 값 받아오기
+        await axios
+            .get("http://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey, {
+                p_USID:localStorage.getItem("uid"),
+            })
+            .then((response) => {
+                console.log(response);
+                // 방법 1. JSON.parse 이용하기
+                var parseData = JSON.parse(JSON.stringify(response.data));
+                console.log(parseData.Company); // 그중 Json Array에 접근하기 위해 Array명 Company 입력
+
+                // 방법 2. Json으로 가져온 데이터에 Array로 바로 접근하기
+                var CompanyArray = response.data.Company; // Json Array에 접근하기 위해 Array명 Company 입력
+                console.log(CompanyArray);
+
+                var myData="";
+
+                for(let i = 0 ; i < CompanyArray.length ; i++){
+                    myData += ('<option value='+CompanyArray[i].Code+'>' +'Code:'+CompanyArray[i].Code+',Name:'+CompanyArray[i].Name + '</option>');
+                }
+                console.log(myData);
+                document.getElementById("tekbeCompnayList").innerHTML = myData;
+                // $("#tekbeCompnayList").html(myData);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
     }
+
+    const trackingDelivery = async () => {
+
+        console.log(t_code);
+        console.log(t_invoice);
+
+        await axios
+            .get("http://info.sweettracker.co.kr/api/v1/trackingInfo?t_key=" + myKey + "&t_code=" + t_code + "&t_invoice=" + t_invoice)
+            .then((response) => {
+
+                var myInvoiceData = "";
+                var data = response.data
+
+                if(data.code === "104"){
+                    alert("유효하지 않은 운송장 번호 입니다.");
+                    return;
+                }
+
+                myInvoiceData += ('<tr>');
+                myInvoiceData += ('<th>'+"보내는사람"+'</td>');
+                myInvoiceData += ('<th>'+data.senderName+'</td>');
+                myInvoiceData += ('</tr>');
+                myInvoiceData += ('<tr>');
+                myInvoiceData += ('<th>'+"제품정보"+'</td>');
+                myInvoiceData += ('<th>'+data.itemName+'</td>');
+                myInvoiceData += ('</tr>');
+                myInvoiceData += ('<tr>');
+                myInvoiceData += ('<th>'+"송장번호"+'</td>');
+                myInvoiceData += ('<th>'+data.invoiceNo+'</td>');
+                myInvoiceData += ('</tr>');
+                myInvoiceData += ('<tr>');
+                myInvoiceData += ('<th>'+"배송지"+'</td>');
+                myInvoiceData += ('<th>'+data.receiverAddr+'</td>');
+                myInvoiceData += ('</tr>');
+
+                document.getElementById("myPtag").innerHTML = myInvoiceData;
+
+                var trackingDetails = data.trackingDetails;
+
+                var myTracking="";
+                var header ="";
+                header += ('<tr>');
+                header += ('<th>'+"시간"+'</th>');
+                header += ('<th>'+"장소"+'</th>');
+                header += ('<th>'+"유형"+'</th>');
+                header += ('<th>'+"전화번호"+'</th>');
+                header += ('</tr>');
+
+                for(let i = 0 ; i < trackingDetails.length ; i++){
+                    myTracking += ('<tr>');
+                    myTracking += ('<td>'+trackingDetails[i].timeString+'</td>');
+                    myTracking += ('<td>'+trackingDetails[i].where+'</td>');
+                    myTracking += ('<td>'+trackingDetails[i].kind+'</td>');
+                    myTracking += ('<td>'+trackingDetails[i].telno+'</td>');
+                    myTracking += ('</tr>');
+                }
+                document.getElementById("myPtag2").innerHTML = header + myTracking;
+
+
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
+
+    const handleSelect = (e) => {
+        sett_code(e.target.value);
+    };
+
+    const handleInput = (e) => {
+        sett_invoice(e.target.value);
+    };
+
 
     return(
         <div>
             <h2 className="company_profile_h2"> 배송 조회</h2>
             <hr/>
-            <form onSubmit={event=>{
-                event.preventDefault();
-                const deliver_num = event.target.deliver_number.value;
-                const new_deliver_num = {title : "운송장번호", body:deliver_num};
-                const new_deliver_list = [...deliver_list];
-                new_deliver_list.push(new_deliver_num);
-                setDeliver_list(new_deliver_list);
-                setMode("CREATE");
-            }}>
-                <dl>
-                    <dt className="user_profile_dt"><label>운송장 등록</label></dt>
-                    <dd className="user_edit_dd"><input type="text"  name="deliver_number" placeholder="deliver_number"></input>
-                        <button type="submit" className="user_edit_btn"> 등록 </button></dd>
-                </dl>
-            </form>
-            <hr/>
-                {deliver_li}
-            <hr/>
+
+            <span id="tekbeCompnayName">택배회사명: </span>
+            <select id="tekbeCompnayList" onChange={handleSelect} name="tekbeCompnayList"></select><br/><br/>
+
+            <span id="invoiceNumber">운송장번호: </span>
+            <input type="text" id="invoiceNumberText" onChange={handleInput} name="invoiceNumberText"/><br/><br/>
+                <button id="myButton1" onClick={trackingDelivery}>택배 조회하기 </button>
+
+            <br/>
+            <br/>
+            <div>
+                <table id="myPtag"></table>
+            </div>
+            <br/>
+            <div>
+                <table id="myPtag2"></table>
+            </div>
         </div>
     )
 }
+
+// function Company_deliver(){
+//
+//     const [mode, setMode] = useState('NORMAL');
+//
+//     let deliver_li = null;
+//
+//     const [deliver_list,setDeliver_list] = useState([
+//         {title:"운송장번호", body:"123456"}
+//     ])
+//
+//     console.log("실행됨");
+//     if(mode === 'NORMAL'){
+//         console.log("nomal 실행됨");
+//         deliver_li = <Deliver_table deliver_list={deliver_list}></Deliver_table>
+//     }else if(mode === 'CREATE'){
+//         console.log("create 실행됨");
+//         deliver_li = <Deliver_table deliver_list={deliver_list}></Deliver_table>
+//     }
+//
+//     return(
+//         <div>
+//             <h2 className="company_profile_h2"> 배송 조회</h2>
+//             <hr/>
+//             <form onSubmit={event=>{
+//                 event.preventDefault();
+//                 const deliver_num = event.target.deliver_number.value;
+//                 const new_deliver_num = {title : "운송장번호", body:deliver_num};
+//                 const new_deliver_list = [...deliver_list];
+//                 new_deliver_list.push(new_deliver_num);
+//                 setDeliver_list(new_deliver_list);
+//                 setMode("CREATE");
+//             }}>
+//                 <dl>
+//                     <dt className="user_profile_dt"><label>운송장 등록</label></dt>
+//                     <dd className="user_edit_dd"><input type="text"  name="deliver_number" placeholder="deliver_number"></input>
+//                         <button type="submit" className="user_edit_btn"> 등록 </button></dd>
+//                 </dl>
+//             </form>
+//             <hr/>
+//                 {deliver_li}
+//             <hr/>
+//         </div>
+//     )
+// }
 
 function Company_withdraw(){
 
