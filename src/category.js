@@ -1,6 +1,6 @@
 import {Header} from './laydout/header';
 import {Footer} from './laydout/footer';
-import {Link, Routes, Route, useParams} from "react-router-dom";
+import {Link, Routes, Route, useParams, useLocation, useNavigate, useHistory} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel'
 import './category.css';
@@ -51,7 +51,7 @@ function Category_content_main(){
     }
     return(
             <div>
-                   <div className="product_container_container">
+                   <div className="product_container_container" id="product_container_container">
                        {productList ? productList.map( list => {
                            return(
                                <ProductHTML list={list} key={list.pdid}></ProductHTML>
@@ -87,7 +87,7 @@ function Category_content_lifestyle(){
     return(
         <div>
             {/*상품 리스트*/}
-            <div className="product_container_container">
+            <div className="product_container_container" id="product_container_container">
                 {productList ? productList.map( list => {
                     return(
                         <ProductHTML list={list} key={list.pdid}></ProductHTML>
@@ -124,7 +124,7 @@ function Category_content_content(){
     return(
         <div>
             {/*상품 리스트*/}
-            <div className="product_container_container">
+            <div className="product_container_container" id="product_container_container">
                 {productList ? productList.map( list => {
                     return(
                         <ProductHTML list={list} key={list.pdid}></ProductHTML>
@@ -161,7 +161,7 @@ function Category_content_food(){
     return(
         <div>
             {/*상품 리스트*/}
-            <div className="product_container_container">
+            <div className="product_container_container" id="product_container_container">
                 {productList ? productList.map( list => {
                     return(
                         <ProductHTML list={list} key={list.pdid}></ProductHTML>
@@ -243,7 +243,7 @@ function Category_content_sale_event(){
     }
     return(
         <div>
-            <div className="product_container_container">
+            <div className="product_container_container" id="product_container_container">
                 {productList ? productList.map( list => {
                     return(
                         <ProductHTML list={list} key={list.pdid}></ProductHTML>
@@ -251,6 +251,133 @@ function Category_content_sale_event(){
                 }) : ""}
             </div>
         </div>)
+}
+
+function Category_content_search(){
+    const baseUrl = "http://localhost:8080";
+
+    const [productList, setProductList] = useState();
+    const url = window.location.pathname.split('/').pop();
+
+    let value = "";
+
+    if(document.getElementById("searchText") == null){
+        value = "";
+    }else{
+        value = document.getElementById("searchText").value;
+    }
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[url]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("search 가져오기")
+        await axios
+            .post(baseUrl + "/category/search",{
+                target : value,
+            })
+            .then((response) => {
+                console.log("아무것도 안가져오면 어떻게 되니?")
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+    return(
+        <div>
+            <div className="product_container_container" id="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
+            </div>
+        </div>)
+}
+
+function HadleSearch(){
+    const baseUrl = "http://localhost:8080";
+
+    var productList;
+
+    let value = "";
+
+    if(document.getElementById("searchText") == null){
+        value = "";
+    }else{
+        value = document.getElementById("searchText").value;
+    }
+
+    getProductInfo();
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("search 가져오기")
+        await axios
+            .post(baseUrl + "/category/search",{
+                target : value,
+            })
+            .then((response) => {
+                console.log("아무것도 안가져오면 어떻게 되니?")
+                console.log(response.data);
+                productList = (response.data);
+                let map = productList.map(list => {
+                    var props = {
+                        list : list,
+                        key : list.pdid,
+                    }
+                    let productHTML = ProductHTML(props);
+
+                    var html = "<div className=\"product_container\">";
+                    html+= "<div className=\"product\">";
+                    html+= "<div className=\"product_img_div\">";
+                    html+= "<Link className=\"product_link\" target=\"_blank\" to={\"/product/detail/\"" + list.pdid + "}>";
+                    html+= "<img src={require(\`./img/aa.jpg\`).default} className=\"product_img\"/>";
+                    html+= "</Link>";
+                    html+= "</div>";
+                    html+= "<div className=\"product_txt\">" + list.productName;
+                    html+= "<div>" + list.detail + "</div>";
+                    html+= "<div> 월 </div>";
+                    html+= "<div>" + list.price + "</div>";
+                    html+= "</div></div></div>";
+
+                    console.log(html);
+
+                    // <div className="product_container">
+                    //     <div className="product">
+                    //         <div className="product_img_div">
+                    //         <Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}>
+                    //         <img src={require("./img/aa.jpg")} className="product_img"/>
+                    //         </Link>
+                    //         </div>
+                    //         <div className="product_txt">{props.list.productName}
+                    //             <div>&nbsp;{props.list.detail}</div>
+                    //             <div>&nbsp;{"월"}</div>
+                    //             <div>&nbsp;{props.list.price}</div>
+                    //         </div>
+                    //     </div>
+                    // </div>
+                    let element = document.getElementById("product_container_container");
+
+                    element.innerHTML = html;
+
+                    //element.innerHTML = html;
+                    });
+
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+    console.log(productList);
+
+    let element = document.getElementById("product_container_container");
+
+    // element.innerHTML = categoryContentSearch;
+
+
 }
 
 const contents_detail = [
@@ -263,6 +390,7 @@ const contents_detail = [
     {title:'bread', description:"빵"},
     {title:'milk', description:"유제품"},
     {title:'juk', description:"죽"},
+    {title:'search', description:""},
 ]
 
 function Category_content_detail(props){
@@ -275,6 +403,12 @@ function Category_content_detail(props){
             break;
         }
     }
+
+    if(props.detail === "search"){
+        console.log(document.getElementById("searchText").value)
+        detail.description = document.getElementById("searchText").value;
+    }
+
     const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
@@ -300,7 +434,7 @@ function Category_content_detail(props){
     return(
         <div>
             {/*상품 리스트*/}
-            <div className="product_container_container">
+            <div className="product_container_container" id="product_container_container">
                 {productList ? productList.map( list => {
                     return(
                         <ProductHTML list={list} key={list.pdid}></ProductHTML>
@@ -309,7 +443,6 @@ function Category_content_detail(props){
             </div>
         </div>
     )
-
 }
 
 const contents = [
@@ -318,7 +451,8 @@ const contents = [
     {title:'content', description:<Category_content_content/>},
     {title:'food', description:<Category_content_food/>},
     {title:'best', description:<Category_content_best/>},
-    {title:'sale_event', description:<Category_content_sale_event/>}
+    {title:'sale_event', description:<Category_content_sale_event/>},
+    {title:'search', description:<Category_content_search/>}
 ]
 
 function Category_content(){
@@ -326,6 +460,7 @@ function Category_content(){
     var params = useParams();
     var category_id = params.category_id;
     var categoryDetail_id = params.categoryDetail_id;
+    var search_item = params.search_item;
 
     var selected_category ={
         title : 'sorry',
@@ -333,7 +468,10 @@ function Category_content(){
     }
 
     if(categoryDetail_id !== undefined){
-        selected_category.description = <Category_content_detail detail={categoryDetail_id}/>;
+            selected_category.description = <Category_content_detail detail={categoryDetail_id}/>;
+    }else if(search_item !== undefined){
+        console.log("여긴 되는가요?");
+        selected_category.description = <Category_content_search/>;
     }else{
         for(let i = 0 ; i < contents.length ; i++){
             if(contents[i].title === category_id){
@@ -350,7 +488,18 @@ function Category_content(){
     );
 }
 
+
 function Category(){
+
+
+    const [searchInput, setSearchInput] = useState();
+    const baseUrl = "/category/search/"
+
+
+    const searchChange = (e) => {
+        console.log(e.target.value)
+        setSearchInput(e.target.value);
+    }
 
     return(
             <div>
@@ -397,7 +546,11 @@ function Category(){
                                     <li className="category_item"><Link className='category_link'to="/category/sale_event">매거진</Link></li>
                             </ul>
                             <ul className="category_list6">
-                            <li><input className="search_bar" type="text" class="search__input" placeholder="Search"/></li>
+                            <li>
+                                <input className="search_bar search__input" type="text" id="searchText" name="searchText" onChange={searchChange} placeholder="Search"/>
+                                {/*<button onClick={HadleSearch}>검색</button>*/}
+                                <Link to={baseUrl+searchInput}>검색</Link>
+                            </li>
                             </ul>
 
                         {/*<div className="search"><Link className="link" to="/"><BsSearch/>검색</Link></div>*/}
@@ -457,6 +610,7 @@ function Category(){
                     <Route path="/lifestyle/:categoryDetail_id" element={<Category_content/>}></Route>
                     <Route path="/content/:categoryDetail_id" element={<Category_content/>}></Route>
                     <Route path="/food/:categoryDetail_id" element={<Category_content/>}></Route>
+                    <Route path="/search/:search_item" element={<Category_content/>}></Route>
                 </Routes>
                     </div>
                 </div>

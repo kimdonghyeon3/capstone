@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useParams, useLocation, useNavigate} from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {BsDoorOpenFill} from 'react-icons/bs';
@@ -30,6 +30,8 @@ function Home(){
         </div>
     )
 }
+
+let currentPath = "";
 
 function App(){
 

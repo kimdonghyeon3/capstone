@@ -1,6 +1,6 @@
 import './header.css'
 import React, {useContext, useEffect, useState} from "react";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {Userlogin} from "../userinfo";
 
 
@@ -104,8 +104,7 @@ export function Header(){
            window.removeEventListener('scroll', handleFollow)
          }
        })
-     
-   
+
    
     return(
         <header className="header">
