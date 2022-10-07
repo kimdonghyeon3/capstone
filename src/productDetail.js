@@ -59,25 +59,108 @@ function ProductDetail(){
     }
 
     const subscript = async () => {
-        await axios
-            .post(baseUrl + "/product/detail/subscribe", {
-                p_PDID: pdid,
-                p_USID: localStorage.getItem("uid"),
-                p_SubscribeCycle: "월",
-            })
-            .then((response) => {
-                console.log(response.data);
-                if(response.data.message === 'Success'){
-                    alert("구독에 성공하였습니다.")
-                }else if(response.data.message === 'Failed'){
-                    alert("이미 구독한 상품입니다.")
-                }else{
-                    alert("오류났습니다. 새로고침후 ㄲ")
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+
+        const baseUrl = "http://localhost:8080";
+
+        // await axios
+        //     .post(baseUrl + "/product/detail/subscribe", {
+        //         p_PDID: pdid,
+        //         p_USID: localStorage.getItem("uid"),
+        //         p_SubscribeCycle: "월",
+        //     })
+        //     .then((response) => {
+        //         console.log(response.data);
+        //         if(response.data.message === 'Success'){
+        //             alert("구독에 성공하였습니다.")
+        //         }else if(response.data.message === 'Failed'){
+        //             alert("이미 구독한 상품입니다.")
+        //         }else{
+        //             alert("오류났습니다. 새로고침후 ㄲ")
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     })
+
+        const onClickPayment = () => {
+            const {IMP} = window
+            IMP.init('imp26398049')
+
+            const data={
+                pg: 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid: `mid${new Date().getTime()}`,
+                amount: 100,
+                name: "상품2",
+                buyer_name: "m_name",
+                buyer_tel: "m_phoneNumber",                     // 구매자 전화번호
+                buyer_email: "m_email",               // 구매자 이메일
+            };
+
+            IMP.request_pay(data, callback);
+        }
+
+        const callback = async (response) => {
+
+            console.log(response.success);
+            console.log(response.imp_uid);
+            console.log(response.merchant_uid);
+            console.log(response.paid_amount);
+
+            const {
+                success,
+                imp_uid,
+                merchant_uid,
+                error_msg,
+            } = response;
+
+            //
+            if (success) {
+                console.log("imp_uid" + imp_uid);
+                console.log("merchant_uid" + merchant_uid);
+
+                await axios({
+                    method: 'post',
+                    url: `http://localhost:8080/verifyIamport/` + `${imp_uid}`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        imp_uid: imp_uid,
+                        merchant_uid: merchant_uid
+                    }
+                })
+                    .then((res) => {
+                        if (response.paid_amount === res.data.response.amount) {
+                            alert('결제가 완료되었습니다.')
+                            axios({
+                                method: 'post',
+                                url: baseUrl + `/subscribe/1/payment`,
+                                data: {
+                                    p_price: 100,
+                                    imp_uid: response.imp_uid
+                                }
+                            }).then(() => {
+                                console.log("잘됨");
+
+                            }).catch((error) => {
+                                console.log("1");
+                                console.log(error);
+                            })
+                        } else {
+                            console.log("2");
+                            alert(`결제 실패`);
+                        }
+                    })
+
+                console.log("마지막은 되니?")
+            } else {
+                console.log("3");
+                alert("알수 없는 오류");
+            }
+        }
+
+        onClickPayment();
     }
 
     const basket = async () => {
@@ -126,6 +209,7 @@ function ProductDetail(){
                     <div>{productInfo.p_Detail}</div>
                     <button onClick={subscript}> 구독하기 </button>
                     <button onClick={basket}> 장바구니 </button>
+
                 </div>
             </div>
 
@@ -138,5 +222,6 @@ function ProductDetail(){
     )
 
 }
+
 
 export default ProductDetail
