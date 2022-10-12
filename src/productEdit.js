@@ -13,7 +13,7 @@ function ProductEdit(props){
     // const {productId} = useParams().product_pdid;
     // console.log(productId);
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
     const navigateback = useNavigate();
     const userinfo = useContext(Userlogin);
 

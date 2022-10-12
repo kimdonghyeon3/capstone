@@ -8,7 +8,7 @@ import axios from "axios";
 //상품이 들어왔다? 그러면 해당 상품이 무엇인지 알아야하는 것
 function ProductDetail(){
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
     const params = useParams();
     const pdid = params.product_pdid;
 
@@ -60,7 +60,7 @@ function ProductDetail(){
 
     const subscript = async () => {
 
-        const baseUrl = "http://localhost:8080";
+        const baseUrl = "https://frontdoorprivacy.shop";
 
         // await axios
         //     .post(baseUrl + "/product/detail/subscribe", {
@@ -83,8 +83,8 @@ function ProductDetail(){
         //     })
 
         const onClickPayment = () => {
-            const {IMP} = window
-            IMP.init('imp26398049')
+            const {IMP} = window;
+            IMP.init("imp26398049")
 
             const data={
                 pg: 'html5_inicis',
@@ -100,7 +100,7 @@ function ProductDetail(){
             IMP.request_pay(data, callback);
         }
 
-        const callback = async (response) => {
+        const callback = (response) => {
 
             console.log(response.success);
             console.log(response.imp_uid);
@@ -119,38 +119,54 @@ function ProductDetail(){
                 console.log("imp_uid" + imp_uid);
                 console.log("merchant_uid" + merchant_uid);
 
-                await axios({
-                    method: 'post',
-                    url: `http://localhost:8080/verifyIamport/` + `${imp_uid}`,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: {
-                        imp_uid: imp_uid,
-                        merchant_uid: merchant_uid
-                    }
-                })
-                    .then((res) => {
-                        if (response.paid_amount === res.data.response.amount) {
-                            alert('결제가 완료되었습니다.')
-                            axios({
-                                method: 'post',
-                                url: baseUrl + `/subscribe/1/payment`,
-                                data: {
-                                    p_price: 100,
-                                    imp_uid: response.imp_uid
-                                }
-                            }).then(() => {
-                                console.log("잘됨");
+                axios
+                    .post(baseUrl + "/verifyIamport/" + `${imp_uid}`, {
+                     // imp_uid: imp_uid,
+                     // merchant_uid: merchant_uid
+                    })
+                    .then(() => {
+                        alert("vertifyIamport 완료");
 
-                            }).catch((error) => {
-                                console.log("1");
-                                console.log(error);
-                            })
-                        } else {
-                            console.log("2");
-                            alert(`결제 실패`);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+
+                    axios({
+                        method: 'post',
+                        url: `https://frontdoorprivacy.shop/verifyIamport/`  + `${imp_uid}`,
+                        headers: {
+                            'Content-Type' : 'application/json'
+                        },
+                        data: {
+                            imp_uid: imp_uid,
+                            merchant_uid: merchant_uid
                         }
+                    })
+                    .then(() => {   //res
+
+                        // console.log(res.data.response.amount);
+                        //
+                        // if (response.paid_amount === res.data.response.amount) {
+                        //     alert('결제가 완료되었습니다.')
+                        //     axios({
+                        //         method: 'post',
+                        //         url: baseUrl + `/subscribe/1/payment`,
+                        //         data: {
+                        //             p_price: 100,
+                        //             imp_uid: response.imp_uid
+                        //         }
+                        //     }).then(() => {
+                        //         console.log("잘됨");
+                        //
+                        //     }).catch((error) => {
+                        //         console.log("1");
+                        //         console.log(error);
+                        //     })
+                        // } else {
+                        //     console.log("2");
+                        //     alert(`결제 실패`);
+                        // }
                     })
 
                 console.log("마지막은 되니?")

@@ -38,7 +38,7 @@ function ProductManageHTML(props){
 }
 //기업페이지
 function Company_profile(){
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const logininfo = useContext(Userlogin);    //전역변수 관리 변수
 
@@ -111,7 +111,7 @@ function Company_profile(){
 }
 
 function Company_edit(){
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const logininfo = useContext(Userlogin);
 
@@ -238,7 +238,7 @@ function Company_manage(){
         navigate("/product/create");
     }
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const [productList, setProductList] = useState();
 
@@ -422,7 +422,7 @@ function Company_deliver(){
 
 function Company_withdraw(){
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const userinfo = useContext(Userlogin);
 
@@ -532,7 +532,7 @@ function Company_content(){
 //유저페이지
 function User_profile(){
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const logininfo = useContext(Userlogin);
 
@@ -596,7 +596,7 @@ function User_profile(){
 
 function User_edit(){
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const [isuserId, setIsuserId] = useState(true);
     const [userId_btn, setUserId_btn] = useState("중복 확인");
@@ -729,7 +729,7 @@ function User_edit(){
 
 function ProductSubscriptHTML(props){
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
     const navigate = useNavigate();
 
     const handleClick = async () => {
@@ -766,7 +766,7 @@ function User_manage(){
 
     const [subscriptList, setSubscriptList] = useState();
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getUserSubscript();
@@ -807,7 +807,7 @@ function User_manage(){
 
 function ProductBasketHTML(props){
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const handleClick = async () => {
         console.log("장바구니 해지");
@@ -841,7 +841,7 @@ function ProductBasketHTML(props){
 function User_bascket(){
     const [subscriptList, setSubscriptList] = useState();
 
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getUserSubscript();
@@ -876,7 +876,7 @@ function User_bascket(){
 }
 
 function User_withdraw(){
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "https://frontdoorprivacy.shop";
 
     const userinfo = useContext(Userlogin);
 
