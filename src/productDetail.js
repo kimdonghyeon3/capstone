@@ -7,6 +7,7 @@ import axios from "axios";
 
 //상품이 들어왔다? 그러면 해당 상품이 무엇인지 알아야하는 것
 function ProductDetail(){
+    //
 
     const baseUrl = "https://frontdoorprivacy.shop";
     const params = useParams();
