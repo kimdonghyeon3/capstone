@@ -31,7 +31,7 @@ function ProductHTML(props){
 
 function Category_content_main(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -62,7 +62,7 @@ function Category_content_main(){
 }
 
 function Category_content_lifestyle(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -99,7 +99,7 @@ function Category_content_lifestyle(){
 }
 
 function Category_content_content(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -136,7 +136,7 @@ function Category_content_content(){
 }
 
 function Category_content_food(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -223,7 +223,7 @@ function Category_content_best(){
 }
 
 function Category_content_sale_event(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -254,7 +254,7 @@ function Category_content_sale_event(){
 }
 
 function Category_content_search(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
     const url = window.location.pathname.split('/').pop();
@@ -299,7 +299,7 @@ function Category_content_search(){
 }
 
 function HadleSearch(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     var productList;
 
@@ -409,7 +409,7 @@ function Category_content_detail(props){
         detail.description = document.getElementById("searchText").value;
     }
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 

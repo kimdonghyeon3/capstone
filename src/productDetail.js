@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Header from "./laydout/header";
 import {Footer} from "./laydout/footer";
 import {useParams} from "react-router-dom";
 import './productDetail.css'
 import axios from "axios";
+import {Userlogin} from "./userinfo";
 
 //상품이 들어왔다? 그러면 해당 상품이 무엇인지 알아야하는 것
 function ProductDetail(){
-    //
+    //http://localhost:8080
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const params = useParams();
     const pdid = params.product_pdid;
+    const logininfo = useContext(Userlogin);
 
     const[productInfo, setProductInfo] = useState({
         p_Category: '',
@@ -61,7 +63,7 @@ function ProductDetail(){
 
     const subscript = async () => {
 
-        const baseUrl = "https://frontdoorprivacy.shop";
+        const baseUrl = "http://localhost:8080";
 
         // await axios
         //     .post(baseUrl + "/product/detail/subscribe", {
@@ -83,6 +85,9 @@ function ProductDetail(){
         //         console.log(error);
         //     })
 
+        //보내줘야 하는 것
+
+
         const onClickPayment = () => {
             const {IMP} = window;
             IMP.init("imp26398049")
@@ -91,8 +96,8 @@ function ProductDetail(){
                 pg: 'html5_inicis',
                 pay_method: 'card',
                 merchant_uid: `mid${new Date().getTime()}`,
-                amount: 100,
-                name: "상품2",
+                amount: productInfo.p_Price,
+                name: productInfo.p_ProductName,
                 buyer_name: "m_name",
                 buyer_tel: "m_phoneNumber",                     // 구매자 전화번호
                 buyer_email: "m_email",               // 구매자 이메일
@@ -120,54 +125,67 @@ function ProductDetail(){
                 console.log("imp_uid" + imp_uid);
                 console.log("merchant_uid" + merchant_uid);
 
-                axios
-                    .post(baseUrl + "/verifyIamport/" + `${imp_uid}`, {
-                     // imp_uid: imp_uid,
-                     // merchant_uid: merchant_uid
-                    })
-                    .then(() => {
-                        alert("vertifyIamport 완료");
+                axios({
+                    method: 'post',
+                    url: `http://localhost:8080/verifyIamport/`  + `${imp_uid}`,
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    data: {
+                        imp_uid: imp_uid,
+                        merchant_uid: merchant_uid
+                    }
+                })
+                .then((res) => {   //res
 
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
+                    console.log(res.data.amount);
+                    console.log(response.paid_amount);
 
-                    axios({
-                        method: 'post',
-                        url: `https://frontdoorprivacy.shop/verifyIamport/`  + `${imp_uid}`,
-                        headers: {
-                            'Content-Type' : 'application/json'
-                        },
-                        data: {
-                            imp_uid: imp_uid,
-                            merchant_uid: merchant_uid
+                    if (response.paid_amount === parseInt(res.data.amount)) {
+                        alert('결제가 완료되었습니다.')
+
+                        console.log(response.imp_uid);
+                        console.log(productInfo.p_Price);
+                        console.log(logininfo.uid);
+                        console.log("local" + localStorage.getItem("uid"));
+                        console.log(productInfo.p_PDID);
+                        console.log("월");
+
+                        const paymentReqDTO = {
+                            imp_uid: response.imp_uid,
+                            p_price: productInfo.p_Price,
+                            p_USID: localStorage.getItem("uid"),
+                            p_PDID: productInfo.p_PDID,
+                            p_SubscribeCycle: "월",
                         }
-                    })
-                    .then(() => {   //res
 
-                        // console.log(res.data.response.amount);
-                        //
-                        // if (response.paid_amount === res.data.response.amount) {
-                        //     alert('결제가 완료되었습니다.')
-                        //     axios({
-                        //         method: 'post',
-                        //         url: baseUrl + `/subscribe/1/payment`,
-                        //         data: {
-                        //             p_price: 100,
-                        //             imp_uid: response.imp_uid
-                        //         }
-                        //     }).then(() => {
-                        //         console.log("잘됨");
-                        //
-                        //     }).catch((error) => {
-                        //         console.log("1");
-                        //         console.log(error);
-                        //     })
-                        // } else {
-                        //     console.log("2");
-                        //     alert(`결제 실패`);
-                        // }
+                        axios
+                            .post(baseUrl + "/subscribe/payment", paymentReqDTO)
+                            .then((response) => {
+                                console.log(response.data);
+                                console.log("되어야지");
+                            })
+                            .catch((error)=>{
+                                console.log(error);
+                            })
+
+                        // axios({
+                        //     method: 'post',
+                        //     url: baseUrl + `/subscribe/payment`,
+                        //     data: {paymentReqDTO}
+                        // }).then((data) => {
+                        //     console.log(data);
+                        //     console.log("잘됨");
+                        // }).catch((error) => {
+                        //     console.log("1");
+                        //     console.log(error);
+                        // })
+
+
+                    } else {
+                        console.log("2");
+                        alert(`결제 실패`);
+                    }
                     })
 
                 console.log("마지막은 되니?")

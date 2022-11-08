@@ -37,7 +37,7 @@ function Register_main(){
 }
 function Register_user(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const navigate = useNavigate();
 
@@ -338,7 +338,7 @@ function Register_user(){
 }
 function Register_company(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const[enroll_company, setEnroll_company] = useState({
         enterpriseName:'',

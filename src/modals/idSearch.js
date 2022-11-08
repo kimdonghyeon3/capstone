@@ -7,7 +7,7 @@ import axios from "axios";
 
 const IdSearch = ({show, onHide}) => {
 
-    const baseUrl = "https://frontdoorprivacy.shop"
+    const baseUrl = "http://localhost:8080"
 
     const [findid,setFindId] = useState({
         name:"",
