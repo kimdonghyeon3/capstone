@@ -1,10 +1,22 @@
 import React, {useContext, useEffect, useState} from "react";
 import Header from "./laydout/header";
 import {Footer} from "./laydout/footer";
-import {useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import './productDetail.css'
 import axios from "axios";
 import {Userlogin} from "./userinfo";
+
+function ProductOptionHtml(props){
+
+    var list = props.list;
+
+    var price = props.list.p_Price - props.list.p_Sale;
+
+    return(
+        <option value={list.p_Optionname} name="p_Optionname">{list.p_Optionname + " 가격 :  " + price}</option>
+    )
+
+}
 
 //상품이 들어왔다? 그러면 해당 상품이 무엇인지 알아야하는 것
 function ProductDetail(){
@@ -28,10 +40,21 @@ function ProductDetail(){
         p_Price: '',
         p_ProductName: '',
         p_Sale: '',
+        p_Options:[],
     });
 
     const[option, SetOption] = useState();
     const[quantity, setQuantity] = useState();
+
+    const quantityHandle = (e) => {
+
+        if(e.target.value <= 0){
+            e.target.value = 0;
+            return;
+        }
+
+        setQuantity(e.target.value);
+    }
 
     useEffect(() => {
         getProductInfo();
@@ -47,17 +70,17 @@ function ProductDetail(){
                     ...productInfo,
                     p_Category: response.data.p_Category,
                     p_Detail: response.data.p_Detail,
-                    p_DetailFileName: response.data.p_DetailFileName,
                     p_ENID: response.data.p_ENID,
                     p_EnterpriseName: response.data.p_EnterpriseName,
-                    p_ImageFileName: response.data.p_ImageFileName,
-                    p_ImageFilePath: response.data.p_ImageFilePath,
                     p_PDID: response.data.p_PDID,
                     p_PhoneNumber: response.data.p_PhoneNumber,
                     p_Price: response.data.p_Price,
                     p_ProductName: response.data.p_ProductName,
                     p_Sale: response.data.p_Sale,
+                    p_Options: response.data.p_Options,
                 })
+
+                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -247,11 +270,15 @@ function ProductDetail(){
                     <div>{productInfo.p_Detail}</div>
 
                     <select>
-                        <option>옵션1</option>
+                        {productInfo.p_Options ? productInfo.p_Options.map( list => {
+                            return(
+                                <ProductOptionHtml list={list} key={list.p_Optionname}></ProductOptionHtml>
+                            )
+                        }) : ""}
                     </select>
 
                     <div>구독 주기</div>
-                    <input type="number"/>
+                    <input type="number" onChange={quantityHandle}/>
 
                     <button onClick={subscript}> 구독하기 </button>
                     <button onClick={basket}> 장바구니 </button>
