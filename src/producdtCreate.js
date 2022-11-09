@@ -133,7 +133,7 @@ function ProductCreate(){
                 salePrice = "0";
             }
 
-            var tmp = { p_Optionname : optionName, p_Price : price, p_SaleYN : yn, p_Sale : salePrice};
+            var tmp = { p_PDID :"1", p_Optionname : optionName, p_Price : price, p_SaleYN : yn, p_Sale : salePrice};
 
             options.push(tmp);
         }
