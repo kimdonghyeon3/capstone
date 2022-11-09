@@ -63,11 +63,17 @@ function ProductCreate(){
         p_ProductName:'',
         p_Category:'',
         p_DetailCategory:'',
-        p_Price:'',
         p_Detail:'',
         p_SaleYN:'',
-        p_Sale:'',
+        option:[],
     });
+
+    const [optionInfo, setOptionInfo] = useState({
+        optionName : "",
+        p_Price : "",
+        p_SaleYN:"",
+        p_Sale: "",
+        });
 
     const handleInput = (e) => {
 
@@ -99,13 +105,63 @@ function ProductCreate(){
                 [e.target.name]:e.target.value,
             })
         }
-
     }
 
     // 상품 만들기 누르기
     const createProduct = async (e) => {
 
+        var options = [];
+
+        //옵션 데이터 생성
+        var optionContainer = document.getElementsByClassName("option-container");
+
+        for(let i = 0 ; i < optionContainer.length ; i++){
+
+            var optionName = optionContainer.item(i).getElementsByClassName("optionName").item(0).value;
+            var salePrice = optionContainer.item(i).getElementsByClassName("salePrice").item(0).value;
+            var price = optionContainer.item(i).getElementsByClassName("price").item(0).value;
+            var saleYn = optionContainer.item(i).getElementsByClassName("p_SaleYN").item(0).checked;
+            var yn;
+
+            if(saleYn == true){
+                yn = "Y";
+
+                setProductInfo((prv) => {
+                    prv.p_SaleYN = "Y";
+                    return prv;
+                })
+
+                if(salePrice === ""){
+                    salePrice = "0";
+                }
+
+            }else{
+                yn = "N";
+                salePrice = "0";
+            }
+
+            var tmp = { optionName : optionName, p_Price : price, p_SaleYN : yn, p_Sale : salePrice};
+
+            setOptionInfo((prv) => {
+                prv.optionName = optionName;
+                prv.p_Price = price;
+                prv.p_SaleYN = yn;
+                prv.p_Sale = salePrice;
+                return prv;
+            })
+
+            options.push(tmp);
+        }
+
+        setProductInfo((prv) => {
+            prv.option = options;
+            return prv;
+        })
+
+        console.log(options);
         console.log(productInfo);
+
+        //return;
 
         e.preventDefault();
 
@@ -131,6 +187,31 @@ function ProductCreate(){
                 }
             })
             .catch((e) => { console.log(e); })
+    }
+
+    const plus = (e) => {
+        var optionContainer = document.getElementsByClassName("option-container");
+
+        var newOptionContainer = optionContainer.item(0).cloneNode(true);
+        console.log(newOptionContainer);
+        newOptionContainer.getElementsByClassName("optionName").item(0).value = '';
+        newOptionContainer.getElementsByClassName("salePrice").item(0).value = '';
+        newOptionContainer.getElementsByClassName("price").item(0).value = '';
+        newOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = false;
+
+        document.getElementsByClassName("option-box").item(0).append(newOptionContainer);
+    }
+
+
+    const minus = (e) =>{
+        var element = document.getElementsByClassName("option-box").item(0);
+        var optionContainer = document.getElementsByClassName("option-container");
+
+        if(optionContainer.length < 2){
+            return
+        }
+
+        element.removeChild(optionContainer.item(optionContainer.length - 1));
     }
 
     return(
@@ -167,10 +248,6 @@ function ProductCreate(){
 
                 <div className="sidetosidemargin">&nbsp;</div>
 
-                <div> <label className="user_profile_dt">가격</label>
-                <input className="user_profile_dd" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/></div>
-
-                
                 <div className="category_option"><label>카테고리설정</label>
                 <div><select name="p_Category" onChange={handleInput}>
                     <option value="none">카테고리</option>
@@ -184,7 +261,6 @@ function ProductCreate(){
                     <option value="유제품">음식/유제품</option>
                     <option value="죽">음식/죽</option>
                 </select></div></div>
-            
 
             </div>
             
@@ -194,15 +270,32 @@ function ProductCreate(){
 
                 <div className="sidetosidemargin">&nbsp;</div>
 
-                <div><span className="user_profile_dt"><label>할인가격</label>
+                <div>옵션</div>
+                <div>
+                    <button onClick={plus}> + </button>
+                    <button onClick={minus}> - </button>
+                </div>
 
-                <span className="sale_font"><label>&nbsp;(할인유무</label>
-                <span><input type="radio" name="p_SaleYN" value="Y" onChange={handleInput}/>Y
-                <input type="radio" name="p_SaleYN" value="N" onChange={handleInput}/>N)</span></span>
-                </span>
+                <div className="option-box">
+                    <div className="option-container">
+                                            <span className="user_profile_dt"><label>옵션명</label>
+                        <input className="user_profile_dd optionName" type="text" name="optionName" placeholder={"옵션명"} onChange={handleInput}/>
+                    </span>
 
-                <span className="sale_display"><input className="user_profile_dd" type="text" name="p_Sale" onChange={handleInput}/></span>
-                </div></div>
+                        <div> <label className="user_profile_dt">가격</label>
+                            <input className="user_profile_dd price" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/></div>
+
+                        <div><span className="user_profile_dt"><label>할인가격</label>
+                            <span className="sale_font"><label>&nbsp;(할인유무</label>
+                                    <input className="p_SaleYN" type="checkbox" name="p_SaleYN" value="Y"/>Y)
+                            </span>
+                        </span>
+                            <span className="sale_display"><input className="user_profile_dd salePrice" type="text" name="p_Sale" onChange={handleInput}/></span>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+                </div>
 
                 <button className="btn_margin"type="submit" onClick={createProduct}>제품 만들기</button>
 
