@@ -65,15 +65,8 @@ function ProductCreate(){
         p_DetailCategory:'',
         p_Detail:'',
         p_SaleYN:'',
-        option:[],
+        optionInputs:[],
     });
-
-    const [optionInfo, setOptionInfo] = useState({
-        optionName : "",
-        p_Price : "",
-        p_SaleYN:"",
-        p_Sale: "",
-        });
 
     const handleInput = (e) => {
 
@@ -140,21 +133,13 @@ function ProductCreate(){
                 salePrice = "0";
             }
 
-            var tmp = { optionName : optionName, p_Price : price, p_SaleYN : yn, p_Sale : salePrice};
-
-            setOptionInfo((prv) => {
-                prv.optionName = optionName;
-                prv.p_Price = price;
-                prv.p_SaleYN = yn;
-                prv.p_Sale = salePrice;
-                return prv;
-            })
+            var tmp = { p_Optionname : optionName, p_Price : price, p_SaleYN : yn, p_Sale : salePrice};
 
             options.push(tmp);
         }
 
         setProductInfo((prv) => {
-            prv.option = options;
+            prv.optionInputs = options;
             return prv;
         })
 
