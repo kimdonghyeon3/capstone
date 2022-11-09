@@ -45,8 +45,19 @@ function ProductDetail(){
 
     const[option, SetOption] = useState();
     const[quantity, setQuantity] = useState();
+    const[subscribeCycle, SetSubscribeCycle] = useState();
 
     const quantityHandle = (e) => {
+
+        if(e.target.value <= 0){
+            e.target.value = 0;
+            return;
+        }
+
+        setQuantity(e.target.value);
+    }
+
+    const subscribeCycleHandle = (e) => {
 
         if(e.target.value <= 0){
             e.target.value = 0;
@@ -85,6 +96,23 @@ function ProductDetail(){
             .catch((error) => {
                 console.log(error);
             })
+
+        await axios
+            .post(baseUrl + "/product/detail/image", {
+                p_PDID: pdid
+            },{
+                responseType : 'blob',
+            })
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] } ));
+                console.log(response.data)
+                console.log(url);
+                document.getElementsByClassName("main-image").item(0).src = url;
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     const subscript = async () => {
@@ -115,6 +143,19 @@ function ProductDetail(){
 
 
         const onClickPayment = () => {
+
+            var options = productInfo.p_Options;
+            var select = document.getElementsByClassName("option_name").item(0).value;
+            var productTotalPrice = 0;
+
+            for(var i = 0 ; i < options.length ; i++){
+                if(options[i].p_Optionname === select){
+                    productTotalPrice = options[i].p_Price - options[i].p_Sale;
+                }
+            }
+
+            const price = quantity * subscribeCycle * productTotalPrice;
+
             const {IMP} = window;
             IMP.init("imp26398049")
 
@@ -122,7 +163,7 @@ function ProductDetail(){
                 pg: 'html5_inicis',
                 pay_method: 'card',
                 merchant_uid: `mid${new Date().getTime()}`,
-                amount: productInfo.p_Price,
+                amount: String(price),
                 name: productInfo.p_ProductName,
                 buyer_name: "m_name",
                 buyer_tel: "m_phoneNumber",                     // 구매자 전화번호
@@ -252,7 +293,7 @@ function ProductDetail(){
 
             <div className="top">
                 <div className="left">
-                    <img/>
+                    <img className="main-image"/>
                 </div>
 
                 <div className="right">
@@ -269,7 +310,8 @@ function ProductDetail(){
                     <div className="productitem"> 상품요약설명 </div>
                     <div>{productInfo.p_Detail}</div>
 
-                    <select>
+                    <div>옵션 선택</div>
+                    <select className="option_name">
                         {productInfo.p_Options ? productInfo.p_Options.map( list => {
                             return(
                                 <ProductOptionHtml list={list} key={list.p_Optionname}></ProductOptionHtml>
@@ -278,6 +320,9 @@ function ProductDetail(){
                     </select>
 
                     <div>구독 주기</div>
+                    <input type="number" onChange={subscribeCycleHandle}/>
+
+                    <div>상품 개수</div>
                     <input type="number" onChange={quantityHandle}/>
 
                     <button onClick={subscript}> 구독하기 </button>
