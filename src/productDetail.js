@@ -30,6 +30,9 @@ function ProductDetail(){
         p_Sale: '',
     });
 
+    const[option, SetOption] = useState();
+    const[quantity, setQuantity] = useState();
+
     useEffect(() => {
         getProductInfo();
     },[])
@@ -242,6 +245,14 @@ function ProductDetail(){
                     <div>{productInfo.p_Price - productInfo.p_Sale}</div>
                     <div className="productitem"> 상품요약설명 </div>
                     <div>{productInfo.p_Detail}</div>
+
+                    <select>
+                        <option>옵션1</option>
+                    </select>
+
+                    <div>구독 주기</div>
+                    <input type="number"/>
+
                     <button onClick={subscript}> 구독하기 </button>
                     <button onClick={basket}> 장바구니 </button>
 
