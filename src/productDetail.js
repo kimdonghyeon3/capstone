@@ -87,27 +87,17 @@ function ProductDetail(){
                     p_PhoneNumber: response.data.p_PhoneNumber,
                     p_Price: response.data.p_Price,
                     p_ProductName: response.data.p_ProductName,
+                    p_ImageFileName: response.data.p_ImageFileName,
+                    p_DetailFileName: response.data.p_DetailFileName,
                     p_Sale: response.data.p_Sale,
                     p_Options: response.data.p_Options,
                 })
 
-                console.log(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+                document.getElementsByClassName("main-image").item(0).src = "http://localhost:8080/gen/" + response.data.p_ImageFileName;
+                document.getElementsByClassName("detail-image").item(0).src = "http://localhost:8080/gen/" + response.data.p_DetailFileName;
 
-        await axios
-            .post(baseUrl + "/product/detail/image", {
-                p_PDID: pdid
-            },{
-                responseType : 'blob',
-            })
-            .then((response) => {
-                const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] } ));
                 console.log(response.data)
-                console.log(url);
-                document.getElementsByClassName("main-image").item(0).src = url;
+
 
             })
             .catch((error) => {
@@ -294,6 +284,7 @@ function ProductDetail(){
             <div className="top">
                 <div className="left">
                     <img className="main-image"/>
+                    <img className="detail-image"/>
                 </div>
 
                 <div className="right">

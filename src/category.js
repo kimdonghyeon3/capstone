@@ -8,7 +8,7 @@ import axios from "axios";
 
 function ProductHTML(props){
 
-    const path = props.list.imageFilePath + props.list.imageFileName;
+    const path = props.list.imageFileName;
 
     // console.log(path + " /// " +  typeof path);
 
@@ -16,7 +16,7 @@ function ProductHTML(props){
         <div className="product_container">
             <div className="product">
                 <div className="product_img_div"><Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}><img
-                    src={require("./img/aa.jpg")}
+                    src={"http://localhost:8080/gen/" + path}
                     className="product_img"/>
                 </Link></div>
                 <div className="product_txt">&nbsp; {props.list.productName}
