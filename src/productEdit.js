@@ -206,8 +206,6 @@ function ProductEdit(props){
             </span>
             <span className="sale_display"><input  className="user_profile_dd" type="text" name="p_Sale" onChange={handleInput}/></span></div></div>
 
-
-
             <div> <label>카테고리설정 편집</label>
                 <select name="p_Category" onChange={handleInput}>
                     <option value="none">카테고리</option>
@@ -223,12 +221,7 @@ function ProductEdit(props){
                 </select>
             </div>
 
-
-
-
-
             <button type="submit" onClick={editProduct}>제품 수정하기</button>
-
 
             <Footer/>
         </div>

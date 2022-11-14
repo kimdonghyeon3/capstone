@@ -156,7 +156,7 @@ function ProductDetail(){
                 amount: String(price),
                 name: productInfo.p_ProductName,
                 buyer_name: "m_name",
-                buyer_tel: "m_phoneNumber",                     // 구매자 전화번호
+                buyer_tel: "m_phoneNumber",           // 구매자 전화번호
                 buyer_email: "m_email",               // 구매자 이메일
             };
 
@@ -198,6 +198,20 @@ function ProductDetail(){
                     console.log(res.data.amount);
                     console.log(response.paid_amount);
 
+                    var options = productInfo.p_Options;
+                    var select = document.getElementsByClassName("option_name").item(0).value;
+                    var count = document.getElementsByClassName("option_count").item(0).value;
+                    var cycle = document.getElementsByClassName("subscribe_Cycle").item(0).value;
+                    var productTotalPrice = 0;
+
+                    for(var i = 0 ; i < options.length ; i++){
+                        if(options[i].p_Optionname === select){
+                            productTotalPrice = options[i].p_Price - options[i].p_Sale;
+                        }
+                    }
+
+                    const price = quantity * subscribeCycle * productTotalPrice;
+
                     if (response.paid_amount === parseInt(res.data.amount)) {
                         alert('결제가 완료되었습니다.')
 
@@ -209,11 +223,13 @@ function ProductDetail(){
                         console.log("월");
 
                         const paymentReqDTO = {
-                            imp_uid: response.imp_uid,
-                            p_price: productInfo.p_Price,
+                            p_imp_uid: response.imp_uid,
+                            p_price: productTotalPrice,
                             p_USID: localStorage.getItem("uid"),
                             p_PDID: productInfo.p_PDID,
-                            p_SubscribeCycle: "월",
+                            p_SubscribeCycle: cycle,
+                            p_Count : count,
+                            p_SubscribeName : select,
                         }
 
                         axios
@@ -311,10 +327,10 @@ function ProductDetail(){
                     </select>
 
                     <div>구독 주기</div>
-                    <input type="number" onChange={subscribeCycleHandle}/>
+                    <input className="subscribe_Cycle" type="number" onChange={subscribeCycleHandle}/>
 
                     <div>상품 개수</div>
-                    <input type="number" onChange={quantityHandle}/>
+                    <input className="option_count" type="number" onChange={quantityHandle}/>
 
                     <button onClick={subscript}> 구독하기 </button>
                     <button onClick={basket}> 장바구니 </button>

@@ -9,7 +9,7 @@ import ProductCreate from "./producdtCreate";
 
 function ProductManageHTML(props){
 
-    const path = props.list.imageFilePath + props.list.imageFileName;
+    const path = "http://localhost:8080/gen/" + props.list.imageFileName;
     const navigate = useNavigate();
 
     // console.log(path + " /// " +  typeof path);
@@ -23,7 +23,7 @@ function ProductManageHTML(props){
         <div className="product_container">
             <div className="product">
                 <div className="product_img_div"><Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}><img
-                    src={require("./img/aa.jpg")}
+                    src={path}
                     className="product_img"/>
                 </Link></div>
                 <div className="product_txt">&nbsp; {props.list.productName}
@@ -790,7 +790,6 @@ function User_manage(){
 
             <div className="modecontainer">
             <Link to="/mypage/user/manage" style={{ textDecoration: 'none' }}><span className="nowscribe">현재 구독중인 상품</span></Link>
-            <Link to="/mypage/user/manage" style={{ textDecoration: 'none' }}><span className="pastscribe">과거에 구독했던 상품</span></Link>
             </div>
 
             <div className="product_container_container" id="product_container_container">
