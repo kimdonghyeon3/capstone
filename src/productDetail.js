@@ -45,7 +45,7 @@ function ProductDetail(){
 
     const[option, SetOption] = useState();
     const[quantity, setQuantity] = useState();
-    const[subscribeCycle, SetSubscribeCycle] = useState();
+    const[subscribeCycle, setSubscribeCycle] = useState();
 
     const quantityHandle = (e) => {
 
@@ -64,7 +64,7 @@ function ProductDetail(){
             return;
         }
 
-        setQuantity(e.target.value);
+        setSubscribeCycle(e.target.value);
     }
 
     useEffect(() => {
@@ -153,7 +153,7 @@ function ProductDetail(){
                 pg: 'html5_inicis',
                 pay_method: 'card',
                 merchant_uid: `mid${new Date().getTime()}`,
-                amount: String(price),
+                amount: price,
                 name: productInfo.p_ProductName,
                 buyer_name: "m_name",
                 buyer_tel: "m_phoneNumber",           // 구매자 전화번호
