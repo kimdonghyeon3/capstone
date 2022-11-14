@@ -277,9 +277,9 @@ function ProductDetail(){
             .then((response) => {
                 console.log(response.data);
                 if (response.data.message === 'Success') {
-                    alert("장바구니에 등록하였습니다..")
+                    alert("찜하기에 등록하였습니다..")
                 } else if (response.data.message === 'Failed') {
-                    alert("장바구니에 등록한 상품입니다.")
+                    alert("찜하기에 등록한 상품입니다.")
                 } else {
                     alert("오류났습니다. 새로고침후 ㄲ")
                 }
@@ -330,7 +330,7 @@ function ProductDetail(){
                     <input className="option_count" type="number" onChange={quantityHandle}/>
 
                     <button onClick={subscript}> 구독하기 </button>
-                    <button onClick={basket}> 장바구니 </button>
+                    <button onClick={basket}> 찜하기 </button>
 
                 </div>
             </div>

@@ -749,11 +749,15 @@ function ProductSubscriptHTML(props){
 
     }
 
+    console.log(props.list);
+
     return(
         <div className="manage_container">
-                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img1"/></Link></div>
+                <div className="product_img_div">
+                    <Link className="product_link" to="/product/detail"><img src={"http://localhost:8080/gen/" + props.list.p_ImageFileName} className="product_img1"/>
+                    </Link></div>
                 <div className="manage"> 상품명: {props.list.p_ProductName}
-                    <div className="">상품설명: {props.list.p_Detail}</div>
+                    {/*<div className="">상품설명: {props.list.detail}</div>*/}
                     {/* <div>{"월"}</div> */}
                     <div>가격 : {props.list.p_Price}</div>
                     <button className="cancel_btn"onClick={handleClick}>구독 해지</button>
@@ -796,7 +800,7 @@ function User_manage(){
 
             {subscriptList ? subscriptList.map( list => {
                 return(
-                    <ProductSubscriptHTML list={list} key={list.p_PDID}></ProductSubscriptHTML>
+                    <ProductSubscriptHTML list={list} key={list.p_SSID}></ProductSubscriptHTML>
                 )
             }) : ""}
             </div>
@@ -809,14 +813,14 @@ function ProductBasketHTML(props){
     const baseUrl = "http://localhost:8080";
 
     const handleClick = async () => {
-        console.log("장바구니 해지");
+        console.log("찜하기 해지");
 
         await axios
-            .post(baseUrl + "/mypage/", {
-                p_BSID: props.list.p_BSID,
+            .post(baseUrl + "/mypage/user/basket/withdraw", {
+                p_BSID: props.list.bsid,
             })
             .then((response) => {
-                alert(response.data.p_ProductName + "이 장바구니에서 삭제되었습니다.");
+                alert(response.data.p_ProductName + "이 찜하기에서 삭제되었습니다.");
                 window.location.reload();
             })
             .catch((error) => {
@@ -827,10 +831,10 @@ function ProductBasketHTML(props){
 
     return(
         <div className="manage_container">
-                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={require("./img/aa.jpg")} className="product_img1"/></Link></div>
-                <div className="manage">상품명 : {props.list.p_ProductName}
-                    <div>상품가격 :{props.list.p_Price}</div>
-                    <button className="cancel_btn" onClick={handleClick}>장바구니 해지</button>
+                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={"http://localhost:8080/gen/" + props.list.imageFileName} className="product_img1"/></Link></div>
+                <div className="manage">상품명 : {props.list.productName}
+                    <div>상품가격 :{props.list.price}</div>
+                    <button className="cancel_btn" onClick={handleClick}>찜하기 해지</button>
                 </div>
             </div>
 
@@ -838,7 +842,7 @@ function ProductBasketHTML(props){
 }
 
 function User_bascket(){
-    const [subscriptList, setSubscriptList] = useState();
+    const [basketList, setBasketList] = useState();
 
     const baseUrl = "http://localhost:8080";
 
@@ -847,12 +851,14 @@ function User_bascket(){
     },[]);
 
     async function getUserSubscript(){            //spring 연동 값 받아오기
+        console.log(localStorage.getItem("uid"));
         await axios
             .post(baseUrl + "/mypage/user/basket", {
                 p_USID:localStorage.getItem("uid"),
             })
             .then((response) => {
-                setSubscriptList(response.data)
+                console.log(response.data);
+                setBasketList(response.data);
             })
             .catch((error)=>{
                 console.log(error);
@@ -861,12 +867,12 @@ function User_bascket(){
 
     return(
         <div>
-            <h2 className="user_profile_h2"> 장바구니 관리</h2>
+            <h2 className="user_profile_h2"> 찜하기 관리</h2>
             <hr />
             <div className="product_container_container" id="product_container_container">
-                {subscriptList ? subscriptList.map( list => {
+                {basketList ? basketList.map( list => {
                     return(
-                        <ProductBasketHTML list={list} key={list.p_PDID}></ProductBasketHTML>
+                        <ProductBasketHTML list={list} key={list.pdid}></ProductBasketHTML>
                     )
                 }) : ""}
             </div>
@@ -1105,7 +1111,7 @@ function User(){
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/profile"> 프로필</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/edit"> 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/manage"> 구독 관리</Link></li>
-                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/bascket"> 장바구니</Link></li>
+                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/bascket"> 찜하기</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/delivery"> 배송 조회</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/withdraw"> 회원 탈퇴</Link></li>
                     </ul>
