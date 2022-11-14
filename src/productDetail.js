@@ -199,6 +199,7 @@ function ProductDetail(){
                     console.log(response.paid_amount);
 
                     var options = productInfo.p_Options;
+                    var poid;
                     var select = document.getElementsByClassName("option_name").item(0).value;
                     var count = document.getElementsByClassName("option_count").item(0).value;
                     var cycle = document.getElementsByClassName("subscribe_Cycle").item(0).value;
@@ -207,6 +208,7 @@ function ProductDetail(){
                     for(var i = 0 ; i < options.length ; i++){
                         if(options[i].p_Optionname === select){
                             productTotalPrice = options[i].p_Price - options[i].p_Sale;
+                            poid = options[i].p_POID;
                         }
                     }
 
@@ -215,22 +217,17 @@ function ProductDetail(){
                     if (response.paid_amount === parseInt(res.data.amount)) {
                         alert('결제가 완료되었습니다.')
 
-                        console.log(response.imp_uid);
-                        console.log(productInfo.p_Price);
-                        console.log(logininfo.uid);
-                        console.log("local" + localStorage.getItem("uid"));
-                        console.log(productInfo.p_PDID);
-                        console.log("월");
-
                         const paymentReqDTO = {
                             p_imp_uid: response.imp_uid,
                             p_price: productTotalPrice,
                             p_USID: localStorage.getItem("uid"),
-                            p_PDID: productInfo.p_PDID,
+                            p_POID: poid,
                             p_SubscribeCycle: cycle,
                             p_Count : count,
                             p_SubscribeName : select,
                         }
+
+                        console.log(paymentReqDTO);
 
                         axios
                             .post(baseUrl + "/subscribe/payment", paymentReqDTO)
