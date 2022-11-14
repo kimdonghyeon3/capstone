@@ -280,6 +280,7 @@ function ProductCreate(){
                         <hr/>
                     </div>
                 </div>
+
                 </div>
 
                 <button className="btn_margin"type="submit" onClick={createProduct}>제품 만들기</button>
