@@ -65,7 +65,7 @@ function ProductCreate(){
         p_DetailCategory:'',
         p_Detail:'',
         p_SaleYN:'',
-        optionInputs:[],
+        //optionInputs:[],
     });
 
     const handleInput = (e) => {
@@ -127,7 +127,6 @@ function ProductCreate(){
                 if(salePrice === ""){
                     salePrice = "0";
                 }
-
             }else{
                 yn = "N";
                 salePrice = "0";
@@ -138,10 +137,10 @@ function ProductCreate(){
             options.push(tmp);
         }
 
-        setProductInfo((prv) => {
-            prv.optionInputs = options;
-            return prv;
-        })
+        // setProductInfo((prv) => {
+        //     prv.optionInputs = options;
+        //     return prv;
+        // })
 
         console.log(options);
         console.log(productInfo);
@@ -153,6 +152,7 @@ function ProductCreate(){
         const formData = new FormData();
         formData.append("multipartFile",fileimage);
         formData.append("productReq",new Blob([JSON.stringify(productInfo)], {type:'application/json'}));
+        formData.append("options",new Blob([JSON.stringify(options)], {type:'application/json'}));
         formData.append("detailFile",templateimage);
 
         //이미지 보내기
