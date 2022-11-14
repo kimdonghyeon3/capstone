@@ -97,6 +97,12 @@ function ProductDetail(){
                 document.getElementsByClassName("detail-image").item(0).src = "http://localhost:8080/gen/" + response.data.p_DetailFileName;
 
                 console.log(response.data)
+                console.log(localStorage.getItem("role"))
+                if(localStorage.getItem("role") === "E"){
+                    document.getElementsByClassName("subscribe_btn").item(0).style.display = "none";
+                    document.getElementsByClassName("basket_btn").item(0).style.display = "none";
+                    document.getElementsByClassName("purchase_box").item(0).style.display = "none";
+                }
 
 
             })
@@ -314,23 +320,26 @@ function ProductDetail(){
                     <div className="productitem"> 상품요약설명 </div>
                     <div>{productInfo.p_Detail}</div>
 
-                    <div>옵션 선택</div>
-                    <select className="option_name">
-                        {productInfo.p_Options ? productInfo.p_Options.map( list => {
-                            return(
-                                <ProductOptionHtml list={list} key={list.p_Optionname}></ProductOptionHtml>
-                            )
-                        }) : ""}
-                    </select>
+                    <div className="purchase_box">
+                        <div>옵션 선택</div>
+                        <select className="option_name">
+                            {productInfo.p_Options ? productInfo.p_Options.map( list => {
+                                return(
+                                    <ProductOptionHtml list={list} key={list.p_Optionname}></ProductOptionHtml>
+                                )
+                            }) : ""}
+                        </select>
 
-                    <div>구독 주기</div>
-                    <input className="subscribe_Cycle" type="number" onChange={subscribeCycleHandle}/>
+                        <div>구독 주기</div>
+                        <input className="subscribe_Cycle" type="number" onChange={subscribeCycleHandle}/>
 
-                    <div>상품 개수</div>
-                    <input className="option_count" type="number" onChange={quantityHandle}/>
+                        <div>상품 개수</div>
+                        <input className="option_count" type="number" onChange={quantityHandle}/>
+                    </div>
 
-                    <button onClick={subscript}> 구독하기 </button>
-                    <button onClick={basket}> 찜하기 </button>
+
+                    <button className="subscribe_btn" onClick={subscript}> 구독하기 </button>
+                    <button className="basket_btn" onClick={basket}> 찜하기 </button>
 
                 </div>
             </div>
