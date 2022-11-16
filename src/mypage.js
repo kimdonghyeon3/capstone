@@ -38,7 +38,7 @@ function ProductManageHTML(props){
 }
 //기업페이지
 function Company_profile(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const logininfo = useContext(Userlogin);    //전역변수 관리 변수
 
@@ -111,7 +111,7 @@ function Company_profile(){
 }
 
 function Company_edit(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const logininfo = useContext(Userlogin);
 
@@ -238,7 +238,7 @@ function Company_manage(){
         navigate("/product/create");
     }
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -405,7 +405,7 @@ function Company_deliver(){
 
             <span id="invoiceNumber">운송장번호: </span>
             <input type="text" id="invoiceNumberText" onChange={handleInput} name="invoiceNumberText"/><br/><br/>
-                <button id="myButton1" onClick={trackingDelivery}>택배 조회하기 </button>
+                <div className="myButton1_locate"><button id="myButton1" onClick={trackingDelivery}>택배 조회하기 </button></div>
 
             <br/>
             <br/>
@@ -422,7 +422,7 @@ function Company_deliver(){
 
 function Company_withdraw(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 
@@ -464,7 +464,7 @@ function Company_withdraw(){
             <div className="user_withdraw_text strong"> - 구독 상품 정보</div>
             <div className="user_withdraw_text"> 탈퇴 후 문의주신 내용은 삭제되지 않고 유지됩니다. 문의 내용 삭제를 원하는 경우 반듯이 삭제 요청 후 탈퇴를 신청해주세요.</div>
             <hr/>
-            <div className="user_withdraw_btn_div"><button className="user_withdraw_btn" onClick={handleWithdraw}> V 회원탈퇴</button></div>
+            <div className="user_withdraw_btn_div"><button className="user_withdraw_btn" onClick={handleWithdraw}>회원탈퇴</button></div>
         </div>
     )
 }
@@ -532,7 +532,7 @@ function Company_content(){
 //유저페이지
 function User_profile(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const logininfo = useContext(Userlogin);
 
@@ -596,7 +596,7 @@ function User_profile(){
 
 function User_edit(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [isuserId, setIsuserId] = useState(true);
     const [userId_btn, setUserId_btn] = useState("중복 확인");
@@ -729,7 +729,7 @@ function User_edit(){
 
 function ProductSubscriptHTML(props){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const navigate = useNavigate();
 
     const handleClick = async () => {
@@ -766,7 +766,7 @@ function User_manage(){
 
     const [subscriptList, setSubscriptList] = useState();
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getUserSubscript();
@@ -807,7 +807,7 @@ function User_manage(){
 
 function ProductBasketHTML(props){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const handleClick = async () => {
         console.log("장바구니 해지");
@@ -841,7 +841,7 @@ function ProductBasketHTML(props){
 function User_bascket(){
     const [subscriptList, setSubscriptList] = useState();
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getUserSubscript();
@@ -876,7 +876,7 @@ function User_bascket(){
 }
 
 function User_withdraw(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 
@@ -1047,7 +1047,7 @@ function User_delivery(){
 
             <span id="invoiceNumber">운송장번호: </span>
             <input type="text" id="invoiceNumberText" onChange={handleInput} name="invoiceNumberText"/><br/><br/>
-            <button id="myButton1" onClick={trackingDelivery}>택배 조회하기 </button>
+            <div className="myButton1_locate"><button id="myButton1" onClick={trackingDelivery}>택배 조회하기 </button></div>
 
             <br/>
             <br/>

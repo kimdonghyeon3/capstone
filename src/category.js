@@ -31,7 +31,7 @@ function ProductHTML(props){
 
 function Category_content_main(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -62,7 +62,7 @@ function Category_content_main(){
 }
 
 function Category_content_lifestyle(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -99,7 +99,7 @@ function Category_content_lifestyle(){
 }
 
 function Category_content_content(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -136,7 +136,7 @@ function Category_content_content(){
 }
 
 function Category_content_food(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -223,7 +223,7 @@ function Category_content_best(){
 }
 
 function Category_content_sale_event(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -254,7 +254,7 @@ function Category_content_sale_event(){
 }
 
 function Category_content_search(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
     const url = window.location.pathname.split('/').pop();
@@ -299,7 +299,7 @@ function Category_content_search(){
 }
 
 function HadleSearch(){
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     var productList;
 
@@ -409,7 +409,7 @@ function Category_content_detail(props){
         detail.description = document.getElementById("searchText").value;
     }
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -514,7 +514,7 @@ function Category(){
                             <li className="category_item dropdown"><Link className='category_link' to="/category/main">카테고리 전체보기</Link>
                                 <ul className="category_sub_list">
                                     
-                                    <li> &nbsp;</li>
+                                    <li className="nulla"> &nbsp;</li>
                                     
                                     <li className="category_sub_item"><Link className='category_link' to='/category/lifestyle'>라이프스타일</Link></li>
                                     <li className="category_sub_item"><Link className='category_link' to='/category/content'>컨텐츠</Link></li>
@@ -546,22 +546,20 @@ function Category(){
                                     <li className="category_item"><Link className='category_link'to="/category/sale_event">매거진</Link></li>
                             </ul>
                             <ul className="category_list6">
-                            <li>
-                                <input className="search_bar search__input" type="text" id="searchText" name="searchText" onChange={searchChange} placeholder="Search"/>
-                                {/*<button onClick={HadleSearch}>검색</button>*/}
-                                <Link to={baseUrl+searchInput}>검색</Link>
+                            <li className="search_bar_margin">
+                                <input className="search_bar search__input" type="text" id="searchText" name="searchText" onChange={searchChange} placeholder="Search"></input>
+                                <Link className= "search_bar2" to={baseUrl+searchInput} style={{textDecoration : 'none'}}> <img className= "search_bar2"src={require("./img/view.png")}/></Link>
+
                             </li>
                             </ul>
-
-                        {/*<div className="search"><Link className="link" to="/"><BsSearch/>검색</Link></div>*/}
                     </nav>
 
                 </div>
 
                 <div className="category_layout">
 
-                <hr className="sun2"size="3" width="104%" color="black"/>
-
+                {/* <hr className="sun2"size="3" width="104%" color="red"/> */}
+                 <div className="marginaa"></div>
                 {/* 캐로셀 이미지 참고*/}
                 <div className="carousel">
                     <Carousel id="carousel_container">
@@ -577,16 +575,8 @@ function Category(){
                         <Carousel.Item>
                             <img
                                 className="d-block w-100"
-                                src={require("./img/car2.png")}
+                                src={require("./img/ad3.jpg")}
                                 alt="Second slide"
-                                height="500"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                                className="d-block w-100"
-                                src={require("./img/ad3.png")}
-                                alt="Third slide"
                                 height="500"
                             />
                         </Carousel.Item>

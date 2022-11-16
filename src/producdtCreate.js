@@ -8,7 +8,7 @@ import axios from "axios";
 
 function ProductCreate(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 
@@ -143,33 +143,52 @@ function ProductCreate(){
                 <div className="whole_left">
                 <div className="photo_templet_container">
                 <div className="photo_upload_container">
-                <div> 대표 사진 업로드 </div>
+                <div className="photo_width"> 대표 사진 업로드 
                 <div className="preview_img">
                     {preViewMain && (<img alt="preview" src={preViewMain}/>)}
                 </div>
-                <button onClick={deleteFileImage}> 삭제 </button>
-                <input type="file" accept="image/*" onChange={saveFileImage}/></div>
+                <div className="delete_select_width"><button onClick={deleteFileImage}> 삭제 </button>
+                <input type="file" accept="image/*" onChange={saveFileImage}/></div></div>
 
-                <div className="sidetosidemargin">&nbsp;</div>
-
-                <div><label>템플릿 등록</label>
-                <div className="photo_upload_container">
-                    <div className="preview_img">
-                        {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
-                    </div>
-                    <button onClick={deleteTemplateImage}> 삭제 </button>
-                    <input type="file" accept="image/*" onChange={saveTemplateImage}/>
-                </div></div></div>
-            
-            <div className="assas">
+                <div className="assas">
             <div><label className="user_profile_dt">상품명</label>
                 <input className="user_profile_dd" type="text" name="p_ProductName" onChange={handleInput}/></div>
 
-                <div className="sidetosidemargin">&nbsp;</div>
+                {/* <div className="sidetosidemargin">&nbsp;</div> */}
 
                 <div> <label className="user_profile_dt">가격</label>
                 <input className="user_profile_dd" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/></div>
 
+                <div className="dk_margin"> <label className="user_profile_dt">상품 설명 </label>
+                <textarea className="user_profile_dd" name="p_Detail" onChange={handleInput}></textarea></div>
+
+                
+
+                
+                <div><span className="user_profile_dt"><label>할인가격</label>
+
+                <span className="sale_font"><label>&nbsp;(할인유무</label>
+                <span><input type="radio" name="p_SaleYN" value="Y" onChange={handleInput}/>Y
+                <input type="radio" name="p_SaleYN" value="N" onChange={handleInput}/>N)</span></span>
+                </span>
+
+                <span className="sale_display"><input className="user_profile_dd" type="text" name="p_Sale" onChange={handleInput}/></span>
+                </div></div>
+
+                
+</div>
+            
+                <div className="sidetosidemargin">&nbsp;</div>
+
+                <div>
+                <div className="photo_upload_container">
+                    <div className="photo_width">템플릿 등록
+                    <div className="preview_img">
+                        {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
+                    </div>
+                    <div className='delete_select_width'><button onClick={deleteTemplateImage}> 삭제 </button>
+                    <input type="file" accept="image/*" onChange={saveTemplateImage}/></div></div>
+                
                 
                 <div className="category_option"><label>카테고리설정</label>
                 <div><select name="p_Category" onChange={handleInput}>
@@ -183,28 +202,18 @@ function ProductCreate(){
                     <option value="빵">음식/빵</option>
                     <option value="유제품">음식/유제품</option>
                     <option value="죽">음식/죽</option>
-                </select></div></div>
+                    
+                </select>
+                <button className="btn_margin"type="submit" onClick={createProduct}>등록</button>
+                </div></div></div></div>
+
+                </div>
             
 
-            </div>
             
-            <div className="assas">
-            <div className="dk_margin"> <label className="user_profile_dt">상품 설명 </label>
-                <textarea className="user_profile_dd" name="p_Detail" onChange={handleInput}></textarea></div>
 
-                <div className="sidetosidemargin">&nbsp;</div>
 
-                <div><span className="user_profile_dt"><label>할인가격</label>
 
-                <span className="sale_font"><label>&nbsp;(할인유무</label>
-                <span><input type="radio" name="p_SaleYN" value="Y" onChange={handleInput}/>Y
-                <input type="radio" name="p_SaleYN" value="N" onChange={handleInput}/>N)</span></span>
-                </span>
-
-                <span className="sale_display"><input className="user_profile_dd" type="text" name="p_Sale" onChange={handleInput}/></span>
-                </div></div>
-
-                <button className="btn_margin"type="submit" onClick={createProduct}>제품 만들기</button>
 
                 </div>
             <Footer/>

@@ -9,7 +9,7 @@ import axios from "axios";
 function ProductDetail(){
     //
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const params = useParams();
     const pdid = params.product_pdid;
 
@@ -61,7 +61,7 @@ function ProductDetail(){
 
     const subscript = async () => {
 
-        const baseUrl = "https://frontdoorprivacy.shop";
+        const baseUrl = "http://localhost:8080";
 
         // await axios
         //     .post(baseUrl + "/product/detail/subscribe", {
@@ -135,7 +135,7 @@ function ProductDetail(){
 
                     axios({
                         method: 'post',
-                        url: `https://frontdoorprivacy.shop/verifyIamport/`  + `${imp_uid}`,
+                        url: `http://localhost:8080/verifyIamport/`  + `${imp_uid}`,
                         headers: {
                             'Content-Type' : 'application/json'
                         },

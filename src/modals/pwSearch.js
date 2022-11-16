@@ -7,7 +7,7 @@ import axios from "axios";
 
 const PwSearch = ({show, onHide}) => {
 
-    const baseUrl = "https://frontdoorprivacy.shop"
+    const baseUrl = "http://localhost:8080"
 
     const [findid,setFindId] = useState({
         name:"",
@@ -104,9 +104,8 @@ const PwSearch = ({show, onHide}) => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={onHide}>Close</Button>
                     <Button variant="primary" type="submit" onClick={handleSubmit}>
-                        Submit
+                        submit
                     </Button>
                 </Modal.Footer>
             </Container>

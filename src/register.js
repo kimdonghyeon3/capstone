@@ -37,7 +37,7 @@ function Register_main(){
 }
 function Register_user(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const navigate = useNavigate();
 
@@ -312,7 +312,7 @@ function Register_user(){
                 
                 <div className="tt"><p>아이디 :</p>
                 <div className="sd">  <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="userId" onChange={handleInput}/>                   
-                </div></div>{<div className="ad4">{userIdMessage}</div>} <div><button className="availability" onClick={userid_check}>중복 확인</button></div>
+                </div><div><button className="availability" onClick={userid_check}>중복 확인</button></div></div>{<div className="ad4">{userIdMessage}</div>} 
 
                 <div className="tt"><p>비밀번호 :</p>
                 <div className="sd">  <input className="user_enroll_text" placeholder="비밀번호"  type="text" required={true} name="password" onChange={handleInput}/>
@@ -324,7 +324,7 @@ function Register_user(){
 
                 </div><button className="emailValidate" onClick={email_cert}>코드 발송</button></div>
 
-                <div className="tt"><p>이메일 인증번호 :</p>
+                <div className="tt"><p>인증번호 :</p>
                     <div className="sd">   <input className="user_enroll_text" placeholder="이메일 인증번호"  type="text" required={true} name="code" onChange={handleInput}/>
 
                     </div><button className="emailValidate" onClick={email_check}>확인</button></div>
@@ -338,7 +338,7 @@ function Register_user(){
 }
 function Register_company(){
 
-    const baseUrl = "https://frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const[enroll_company, setEnroll_company] = useState({
         enterpriseName:'',
@@ -707,7 +707,6 @@ function Register_company(){
                 <div className="tt">
                     <p>개업일자 :</p> <div className="sd"><input className="user_enroll_text" placeholder="개업일자(20150405 - 8자리로 입력해 주세요)"  type="text" required={true} name="enterpriseBirth" onChange={companyHandleInput}/>
                 </div><button className="emailValidate" onClick={company_check_submit}>사업자 진위 여부 확인</button></div>
-                <hr/>
                 <br/>
                 <div className="tt">
                     <p>휴대폰번호 :</p> <div className="sd"><input className="user_enroll_text" placeholder="휴대폰 번호"  type="text" required={true} name="phoneNumber" onChange={handleInput} value={enroll_company.phoneNumber}/>
@@ -715,8 +714,10 @@ function Register_company(){
 
                 <div className="tt" > 
                     <p>주소 :</p> <input className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                    </div><div className="ad7">{addressMessage}
                     <button className="post_container" onClick={handleComplete}>우편번호 찾기</button>
+                    </div>
+                    <div className="ad7">{addressMessage}
+                    
                     {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}</div>
                 
                 
@@ -740,7 +741,7 @@ function Register_company(){
                 <div className="register_info"><strong>로그인 정보</strong></div>
                 <div className="tt">
                 <p>아이디 :</p> <div className="sd"> <input className="user_enroll_text" placeholder="아이디"  type="text" required={true} name="enterpriseId" onChange={handleInput}/>
-                    </div></div>{<div className="ad4">{enterpriseIdMessage}</div>}<button className="availability1" onClick={enterpriseId_check}>중복성 검사</button>
+                    </div><button className="availability1" onClick={enterpriseId_check}>중복성 검사</button></div>{<div className="ad4">{enterpriseIdMessage}</div>}
                     
                 
                 <div className="tt">
@@ -758,7 +759,7 @@ function Register_company(){
                     </div><button className="emailValidate" onClick={email_cert}>코드 발송</button></div>
                 {<div className="ad3">{emailMessage}</div>}
 
-                <div className="tt"><p>이메일 인증번호 :</p>
+                <div className="tt"><p>인증번호 :</p>
                     <div className="sd">   <input className="user_enroll_text" placeholder="이메일 인증번호"  type="text" required={true} name="code" onChange={handleInput}/>
 
                     </div><button className="emailValidate" onClick={email_check}>확인</button></div>
@@ -766,7 +767,7 @@ function Register_company(){
 
                 {/**/}
                 
-                <div><button type="submit">회원가입</button></div>
+                <div className="submit_locate"><button type="submit">회원가입</button></div>
             </form>
 
         </div>
