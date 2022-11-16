@@ -104,9 +104,8 @@ const PwSearch = ({show, onHide}) => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={onHide}>Close</Button>
                     <Button variant="primary" type="submit" onClick={handleSubmit}>
-                        Submit
+                        submit
                     </Button>
                 </Modal.Footer>
             </Container>

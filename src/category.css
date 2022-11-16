@@ -15,6 +15,9 @@
     margin-left: -4%;
 
 }
+.marginaa{
+    margin-bottom: 3.5%;
+}
 .category_layout{
     position: top;;
 }
@@ -28,15 +31,15 @@
 /*카테고리 navbar*/
 .category_navbar{
 
-    margin : -2.0% 0% -1.5% 1%;
+    margin : -1.4% 0% -1.5% 1%;
     display:block;
     position: absolute;
     z-index: 10;
     width: 100%;
 }
-.category_container{
+/*.category_container{
     width: 100%;
-}
+}*/
 .category_list1{
     width:15%;
     margin-left: 8%;
@@ -81,7 +84,7 @@
 
 }
 .category_list6{
-    width:15%;
+    width:30%;
     margin-left: 39%;
     margin-top: 0.5rem;
     list-style: none;
@@ -104,13 +107,18 @@
     padding:0;
 
 }
-
+.nulla{
+    margin-top: 0.1px;
+    background-color: white;
+}
 .category_sub_item{
     /* font-weight: 600; */
     text-align: left;
-    padding:10px 3 10px 10px;
+    /* padding:10px 3 10px 10px; */
+    width: 200%;
     font-size: 15px;
-    background:white;
+    padding-top: 3%;
+    /* background:rgb(251, 206, 117); */
     opacity: 0.8;
 
 
@@ -122,9 +130,9 @@
 
 .dropdown:hover .category_sub_list{
     display:block;
-
+    background-color: white;
+    margin-left: -6.5%;
 }
-
 .category_sub_list{
     display: none;
     list-style:none;
@@ -250,12 +258,22 @@
 }
 
 .search_bar{
-    border-top : 1px solid white;
-    border-bottom: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+    border-top : 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
     /*position: absolute;*/
     /*right: 10%;*/
     /*top: 16%;*/
 }
-
+.search_bar2{
+    /* border-top : 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white; */
+    color: black;
+    width: 6%;
+}
+.search_bar_margin{
+    margin-left: 35%
+}

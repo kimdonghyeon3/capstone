@@ -98,6 +98,7 @@ function ProductCreate(){
                 [e.target.name]:e.target.value,
             })
         }
+
     }
 
     // 상품 만들기 누르기

@@ -156,7 +156,8 @@
     margin-bottom: 3%;
 }
 .submit_locate{
-    margin-top: 0%;
+    margin-left: 8.3%;
+    margin-top : 1%;
 }
 .sd{
     margin-left: 7%;
@@ -186,7 +187,7 @@
     margin-right: 11.8%;
     color: gray;
     font-size: 12px;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
 }
 .ad4{
     margin-top: -0.75%;
@@ -230,12 +231,12 @@ p{
 
 .availability{
     position: absolute;
-    top: 85.7%;
+    /* top: 85.7%; */
     left: 71.5%;
 }
 .availability1{
     position: absolute;
-    top: 104.1%;
+    /* top: 104.1%; */
     left: 71.4%;
 }
 .bank_container{
@@ -245,10 +246,10 @@ p{
 .post_container{
     position: absolute;
     left: 71.4%;
-    top: 76.5%;
+    /* top: 76.5%; */
 }
 
 .emailValidate{
     position : absolute;
-    left : 70%;
+    left : 71.5%;
 }
