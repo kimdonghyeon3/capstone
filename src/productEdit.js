@@ -9,7 +9,6 @@ function ProductEdit(props){
 
     const params = useParams();
     const pdid = params.edit_pdid;
-    console.log(pdid);
     // const {productId} = useParams().product_pdid;
     // console.log(productId);
 
@@ -17,7 +16,26 @@ function ProductEdit(props){
     const navigateback = useNavigate();
     const userinfo = useContext(Userlogin);
 
-    const [productInfo, setProductInfo] = useState();
+    const [productInfo, setProductInfo] = useState({
+        category : "",
+        detail : "",
+        detailCategory : "",
+        detailFileName : "",
+        enid : "",
+        imageFileName : "",
+        imageFilePath : "",
+        price : "",
+        productName : "",
+        saleYN : "",
+    });
+
+    const [productOptionInfo, setProductOptionInfo] = useState([
+        {optionname : "",
+            poid : "",
+            price : "",
+            sale : "",
+            saleYN : "",}
+    ]);
 
     //뒤로가기 핸들러
     const back = () => {
@@ -33,7 +51,7 @@ function ProductEdit(props){
     },[]);
 
     async function getProductInfo(){            //spring 연동 값 받아오기
-        console.log(pdid);
+        //console.log(pdid);
         await axios
             .post(baseUrl + "/product/update", {
                 pdid:pdid,
@@ -41,6 +59,63 @@ function ProductEdit(props){
             .then((response) => {
                 console.log(response.data);
                 setProductInfo(response.data);
+
+                document.getElementsByClassName("product_name").item(0).value = response.data.productName;
+                document.getElementsByClassName("product_detail").item(0).value = response.data.detail;
+
+                setPreViewMain("http://localhost:8080/gen/" + response.data.imageFileName);
+                setPreViewTemplate("http://localhost:8080/gen/" + response.data.detailFileName);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+
+        await axios
+            .post(baseUrl + "/productoption/update", {
+                pdid:pdid,
+            })
+            .then((response) => {
+                console.log(response.data);
+                setProductOptionInfo(response.data);
+
+                for(var i = 0 ; i < response.data.length ; i++){
+                    if(i == 0){
+                        var oldOptionContainer = document.getElementsByClassName("option-container").item(0);
+
+                        oldOptionContainer.getElementsByClassName("optionName").item(0).value = response.data[i].optionname;
+                        oldOptionContainer.getElementsByClassName("salePrice").item(0).value = response.data[i].sale;
+                        oldOptionContainer.getElementsByClassName("price").item(0).value = response.data[i].price;
+                        if(response.data[i].saleYN ==="Y"){
+                            oldOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = true;
+                        }else{
+                            oldOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = false;
+                        }
+
+                        continue;
+                    }
+
+                    var optionContainer = document.getElementsByClassName("option-container").item(0);
+
+                    var newOptionContainer = optionContainer.item(0).cloneNode(true);
+                    //console.log(newOptionContainer);
+                    newOptionContainer.getElementsByClassName("optionName").item(0).value = response.data[i].optionname;
+                    newOptionContainer.getElementsByClassName("salePrice").item(0).value = response.data[i].sale;
+                    newOptionContainer.getElementsByClassName("price").item(0).value = response.data[i].price;
+                    if(response.data[i].saleYN ==="Y"){
+                        newOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = true;
+                    }else{
+                        newOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = false;
+                    }
+
+                    document.getElementsByClassName("option-box").item(0).append(newOptionContainer);
+                }
+
+                //데이터를 순회하면서 option 값을 뽑아내
+                //옵션 태그를 만들어야된다.
+                //그러면 옵션 태그 요거를 통채로 만들어야 된다.
+                //그러면 기존에 1개에 있는거에는 값을 넣어주자.
+                //그 후에는 전에거에 복사해서 value 값만 변경해 주면 된다.
+
             })
             .catch((error)=>{
                 console.log(error);
@@ -87,10 +162,8 @@ function ProductEdit(props){
         p_ProductName:'',
         p_Category:'',
         p_DetailCategory:'',
-        p_Price:'',
         p_Detail:'',
         p_SaleYN:'',
-        p_Sale:'',
     });
 
     const handleInput = (e) => {
@@ -123,18 +196,78 @@ function ProductEdit(props){
                 [e.target.name]:e.target.value,
             })
         }
+    }
 
+    const plus = (e) => {
+        var optionContainer = document.getElementsByClassName("option-container");
+
+        var newOptionContainer = optionContainer.item(0).cloneNode(true);
+        //console.log(newOptionContainer);
+        newOptionContainer.getElementsByClassName("optionName").item(0).value = '';
+        newOptionContainer.getElementsByClassName("salePrice").item(0).value = '';
+        newOptionContainer.getElementsByClassName("price").item(0).value = '';
+        newOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = false;
+
+        document.getElementsByClassName("option-box").item(0).append(newOptionContainer);
+    }
+
+
+    const minus = (e) =>{
+        var element = document.getElementsByClassName("option-box").item(0);
+        var optionContainer = document.getElementsByClassName("option-container");
+
+        if(optionContainer.length < 2){
+            return
+        }
+
+        element.removeChild(optionContainer.item(optionContainer.length - 1));
     }
 
     const editProduct = async (e) => {
 
+        var options = [];
+
+        //옵션 데이터 생성
+        var optionContainer = document.getElementsByClassName("option-container");
+
+        for(let i = 0 ; i < optionContainer.length ; i++){
+
+            var optionName = optionContainer.item(i).getElementsByClassName("optionName").item(0).value;
+            var salePrice = optionContainer.item(i).getElementsByClassName("salePrice").item(0).value;
+            var price = optionContainer.item(i).getElementsByClassName("price").item(0).value;
+            var saleYn = optionContainer.item(i).getElementsByClassName("p_SaleYN").item(0).checked;
+            var yn;
+
+            if(saleYn == true){
+                yn = "Y";
+
+                setProductEditInfo((prv) => {
+                    prv.p_SaleYN = "Y";
+                    return prv;
+                })
+
+                if(salePrice === ""){
+                    salePrice = "0";
+                }
+            }else{
+                yn = "N";
+                salePrice = "0";
+            }
+
+            var tmp = { p_PDID :pdid, p_Optionname : optionName, p_Price : price, p_SaleYN : yn, p_Sale : salePrice};
+
+            options.push(tmp);
+        }
+
         console.log(productEditInfo);
+        console.log(options);
 
         e.preventDefault();
 
         const formData = new FormData();
         formData.append("multipartFile",fileimage);
-        formData.append("productReq",new Blob([JSON.stringify(productInfo)], {type:'application/json'}));
+        formData.append("productReq",new Blob([JSON.stringify(productEditInfo)], {type:'application/json'}));
+        formData.append("options",new Blob([JSON.stringify(options)], {type:'application/json'}));
         formData.append("detailFile",templateimage);
 
         //이미지 보내기
@@ -165,6 +298,7 @@ function ProductEdit(props){
                     <hr className="sun"size="3" width="105%" color="black"/></div>
             <div className="photo_templet_container">
             <div className="photo_upload_container">
+
             <div> 대표 사진 편집 </div>
             <div className="preview_img">
                 {preViewMain && (<img alt="preview" src={preViewMain}/>)}
@@ -173,6 +307,8 @@ function ProductEdit(props){
             <input type="file" accept="image/*" onChange={saveFileImage}/></div>
 
             <div className="sidetosidemargin">&nbsp;</div>
+
+                <div> 기존 템플릿 사진</div>
 
             <div><label>템플릿 편집</label>
                 <div className="preview_img">
@@ -184,33 +320,22 @@ function ProductEdit(props){
 
             <div className="assas">
             <div><label className="user_profile_dt">상품명 편집</label>
-                <input  className="user_profile_dd" type="text" name="p_ProductName" onChange={handleInput}/>
+                <input  className="user_profile_dd product_name" type="text" name="p_ProductName" onChange={handleInput}/>
             </div>
             <div className="sidetosidemargin">&nbsp;</div>
-            <div> <label className="user_profile_dt">가격 편집</label>
-                <input  className="user_profile_dd" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/>
-            </div></div>
+            </div>
 
 
             <div className="assas">
             <div className="dk_margin1"> <label className="user_profile_dt">상품 요약 설명 편집</label>
-                <textarea  className="user_profile_dd" name="p_Detail" onChange={handleInput}></textarea>
+                <textarea  className="user_profile_dd product_detail" name="p_Detail" onChange={handleInput}></textarea>
             </div>
             <div className="sidetosidemargin">&nbsp;</div>
-
-
-            <div><span className="user_profile_dt"><label>할인가격</label>
-            <span className="sale_font"><label>&nbsp;(할인유무 편집</label>
-                <span><input type="radio" name="p_SaleYN" value="Y" onChange={handleInput}/>Y
-                <input type="radio" name="p_SaleYN" value="N" onChange={handleInput}/>N)</span></span>
-            </span>
-            <span className="sale_display"><input  className="user_profile_dd" type="text" name="p_Sale" onChange={handleInput}/></span></div></div>
-
-
+            </div>
 
             <div> <label>카테고리설정 편집</label>
                 <select name="p_Category" onChange={handleInput}>
-                    <option value="none">카테고리</option>
+                    <option value={productInfo.detailCategory}>{productInfo.detailCategory}</option>
                     <option value="생활">라이프스타일/생활</option>
                     <option value="멤버쉽">라이프스타일/멤버쉽</option>
                     <option value="건강">라이프스타일/건강</option>
@@ -223,12 +348,35 @@ function ProductEdit(props){
                 </select>
             </div>
 
+            <div>옵션</div>
+            <div>
+                <button onClick={plus}> + </button>
+                <button onClick={minus}> - </button>
+            </div>
 
+            <div className="option-box">
+                <div className="option-container">
+                        <span className="user_profile_dt"><label>옵션명</label>
+                        <input className="user_profile_dd optionName" type="text" name="optionName" placeholder={"옵션명"} onChange={handleInput}/>
+                    </span>
 
+                    <div> <label className="user_profile_dt">가격</label>
+                        <input className="user_profile_dd price" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/>
+                    </div>
 
+                    <div><span className="user_profile_dt"><label>할인가격</label>
+                            <span className="sale_font"><label>&nbsp;(할인유무</label>
+                                    <input className="p_SaleYN" type="checkbox" name="p_SaleYN" value="Y"/>Y)
+                            </span>
+                        </span>
+                        <span className="sale_display"><input className="user_profile_dd salePrice" type="text" name="p_Sale" onChange={handleInput}/>
+                        </span>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
 
             <button type="submit" onClick={editProduct}>제품 수정하기</button>
-
 
             <Footer/>
         </div>

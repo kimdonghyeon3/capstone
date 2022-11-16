@@ -8,7 +8,7 @@ import axios from "axios";
 
 function ProductHTML(props){
 
-    const path = props.list.imageFilePath + props.list.imageFileName;
+    const path = props.list.imageFileName;
 
     // console.log(path + " /// " +  typeof path);
 
@@ -16,7 +16,7 @@ function ProductHTML(props){
         <div className="product_container">
             <div className="product">
                 <div className="product_img_div"><Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}><img
-                    src={require("./img/aa.jpg")}
+                    src={"http://localhost:8080/gen/" + path}
                     className="product_img"/>
                 </Link></div>
                 <div className="product_txt">&nbsp; {props.list.productName}
@@ -173,53 +173,38 @@ function Category_content_food(){
 }
 
 function Category_content_best(){
-     return(<div>
-         <div className="cat_content">
+    const baseUrl = "http://localhost:8080";
 
-             <h2 className="category_name lifestyle"> 라이프 스타일 </h2>
-             {/*상품 리스트*/}
-             <div className="product_container">
-                 <div className="product">
-                     <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                     <h5 className="product_title"> 상품 제목</h5>
-                     <p className="product_des"> 상품 내용 요약</p>
-                     <div className="product_mon"> 월 : 15,000￦</div>
-                     <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                 </div>
+    const [productList, setProductList] = useState();
 
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
 
-             </div>
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        console.log("best 값받아오기")
+        await axios
+            .get(baseUrl + "/category/best")
+            .then((response) => {
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
 
-             <h2 className="category_name content"> 컨텐츠 </h2>
-             {/*상품 리스트*/}
-             <div className="product_container">
-                 <div className="product">
-                     <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                     <h5 className="product_title"> 상품 제목</h5>
-                     <p className="product_des"> 상품 내용 요약</p>
-                     <div className="product_mon"> 월 : 15,000￦</div>
-                     <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                 </div>
-
-
-             </div>
-
-             <h2 className="category_name food"> 음식 </h2>
-             {/*상품 리스트*/}
-             <div className="product_container">
-                 <div className="product">
-                     <div className="product_img_div"><img src={require("./img/product_img.png")} className="product_img"/></div>
-                     <h5 className="product_title"> 상품 제목</h5>
-                     <p className="product_des"> 상품 내용 요약</p>
-                     <div className="product_mon"> 월 : 15,000￦</div>
-                     <div className="product_link_div"><Link className="product_link" to="/product/detail"> 구독하러가기</Link></div>
-                 </div>
-
-
-             </div>
-
-         </div>
-     </div>)
+    return(
+        <div>
+            {/*상품 리스트*/}
+            <div className="product_container_container" id="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
+            </div>
+        </div>
+    )
 }
 
 function Category_content_sale_event(){
@@ -251,6 +236,40 @@ function Category_content_sale_event(){
                 }) : ""}
             </div>
         </div>)
+}
+
+function Category_content_new(){
+    const baseUrl = "http://localhost:8080";
+
+    const [productList, setProductList] = useState();
+
+    useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
+        getProductInfo();
+    },[]);
+
+    async function getProductInfo(){            //spring 연동 값 받아오기
+        await axios
+            .get(baseUrl + "/category/new")
+            .then((response) => {
+                setProductList(response.data)
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+    }
+
+    return(
+        <div>
+            {/*상품 리스트*/}
+            <div className="product_container_container" id="product_container_container">
+                {productList ? productList.map( list => {
+                    return(
+                        <ProductHTML list={list} key={list.pdid}></ProductHTML>
+                    )
+                }) : ""}
+            </div>
+        </div>
+    )
 }
 
 function Category_content_search(){
@@ -452,6 +471,7 @@ const contents = [
     {title:'food', description:<Category_content_food/>},
     {title:'best', description:<Category_content_best/>},
     {title:'sale_event', description:<Category_content_sale_event/>},
+    {title:'new', description:<Category_content_new/>},
     {title:'search', description:<Category_content_search/>}
 ]
 
@@ -532,19 +552,16 @@ function Category(){
                             </li>
                             </ul>
                             <ul className="category_list2">
-                                    <li className="category_item"><Link className='category_link' to="/category/best">베스트</Link></li>
+                                    <li className="category_item"><Link className='category_link' to="/category/best">TOP 10</Link></li>
                             </ul>
                             <ul className="category_list3">
                                     <li className="category_item"><Link className='category_link'to="/category/sale_event">할인/이벤트</Link></li>
                             </ul>
 
                             <ul className="category_list4">
-                                    <li className="category_item"><Link className='category_link'to="/category/sale_event">신상품</Link></li>
+                                    <li className="category_item"><Link className='category_link'to="/category/new">신상품</Link></li>
                             </ul>
 
-                            <ul className="category_list5">
-                                    <li className="category_item"><Link className='category_link'to="/category/sale_event">매거진</Link></li>
-                            </ul>
                             <ul className="category_list6">
                             <li className="search_bar_margin">
                                 <input className="search_bar search__input" type="text" id="searchText" name="searchText" onChange={searchChange} placeholder="Search"></input>
