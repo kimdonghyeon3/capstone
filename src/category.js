@@ -592,7 +592,7 @@ function Category(){
                         <Carousel.Item>
                             <img
                                 className="d-block w-100"
-                                src={require("./img/ad3.jpg")}
+                                src={require("./img/ad3.png")}
                                 alt="Second slide"
                                 height="500"
                             />
