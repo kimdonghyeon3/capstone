@@ -19,6 +19,15 @@ function ProductManageHTML(props){
         navigate(url);
     }
 
+    var productName = props.list.productName;
+    var producdtDetail = props.list.detail;
+    if(productName.length > 10){
+        productName = productName.substring(0,10) + "...";
+    }
+    if(producdtDetail.length > 30){
+        producdtDetail = producdtDetail.substring(0,30) + "...";
+    }
+
     return(
         <div className="product_container">
             <div className="product">
@@ -26,8 +35,8 @@ function ProductManageHTML(props){
                     src={path}
                     className="product_img"/>
                 </Link></div>
-                <div className="product_txt">&nbsp; {props.list.productName}
-                    <div>&nbsp;{props.list.detail}</div>
+                <div className="product_txt">&nbsp; {productName}
+                    <div>&nbsp;{producdtDetail}</div>
                     {/* <div>&nbsp;{"월"}</div> */}
                     <div>&nbsp;{props.list.price}</div>
                     <div><button className="company_product_enroll_btn1"type="button" onClick={productEdit}> 수정하기 </button></div>
@@ -490,7 +499,7 @@ function Company(){
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/profile"> 기업 프로필</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/edit"> 기업 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/manage"> 상품 관리</Link></li>
-                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/deliver"> 배송 조회</Link></li>
+                        {/*<li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/deliver"> 배송 조회</Link></li>*/}
                         {/*<li className="user_navbar_li"><Link className="user_navbar_link" to="/product/create"> 상품 등록</Link></li>*/}
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/company/withdraw"> 회원 탈퇴</Link></li>
                     </ul>
@@ -749,6 +758,11 @@ function ProductSubscriptHTML(props){
 
     }
 
+    var productName = props.list.p_ProductName;
+    if(productName.length > 10){
+        productName = productName.substring(0,10) + "...";
+    }
+
     console.log(props.list);
 
     return(
@@ -756,7 +770,7 @@ function ProductSubscriptHTML(props){
                 <div className="product_img_div">
                     <Link className="product_link" to="/product/detail"><img src={"http://localhost:8080/gen/" + props.list.p_ImageFileName} className="product_img1"/>
                     </Link></div>
-                <div className="manage"> 상품명: {props.list.p_ProductName}
+                <div className="manage"> 상품명: {productName}
                     {/*<div className="">상품설명: {props.list.detail}</div>*/}
                     {/* <div>{"월"}</div> */}
                     <div>가격 : {props.list.p_Price}</div>
@@ -829,10 +843,15 @@ function ProductBasketHTML(props){
 
     }
 
+    var productName = props.list.productName;
+    if(productName.length > 10){
+        productName = productName.substring(0,10) + "...";
+    }
+
     return(
         <div className="manage_container">
                 <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={"http://localhost:8080/gen/" + props.list.imageFileName} className="product_img1"/></Link></div>
-                <div className="manage">상품명 : {props.list.productName}
+                <div className="manage">상품명 : {productName}
                     <div>상품가격 :{props.list.price}</div>
                     <button className="cancel_btn" onClick={handleClick}>찜하기 해지</button>
                 </div>
@@ -1112,7 +1131,7 @@ function User(){
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/edit"> 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/manage"> 구독 관리</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/bascket"> 찜하기</Link></li>
-                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/delivery"> 배송 조회</Link></li>
+                        {/*<li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/delivery"> 배송 조회</Link></li>*/}
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/withdraw"> 회원 탈퇴</Link></li>
                     </ul>
                 </div>

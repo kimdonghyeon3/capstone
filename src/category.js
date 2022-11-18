@@ -10,7 +10,17 @@ function ProductHTML(props){
 
     const path = props.list.imageFileName;
 
+    var productname = props.list.productName;
+    var productDetail = props.list.detail;
+
     // console.log(path + " /// " +  typeof path);
+    if(props.list.productName.length > 10){
+        productname = props.list.productName.substring(0,10) + "...";
+    }
+
+    if(props.list.detail.length > 30){
+        productDetail = props.list.detail.substring(0,30) + "...";
+    }
 
     return(
         <div className="product_container">
@@ -19,8 +29,8 @@ function ProductHTML(props){
                     src={"http://localhost:8080/gen/" + path}
                     className="product_img"/>
                 </Link></div>
-                <div className="product_txt">&nbsp; {props.list.productName}
-                    <div>&nbsp;{props.list.detail}</div>
+                <div className="product_txt">&nbsp; {productname}
+                    <div>&nbsp;{productDetail}</div>
                     <div>&nbsp;{"월"}</div>
                     <div>&nbsp;{props.list.price}</div>
                 </div>
