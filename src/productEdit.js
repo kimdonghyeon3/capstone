@@ -78,6 +78,8 @@ function ProductEdit(props){
                 console.log(response.data);
                 setProductOptionInfo(response.data);
 
+                console.log(response.data.length);
+
                 for(var i = 0 ; i < response.data.length ; i++){
                     if(i == 0){
                         var oldOptionContainer = document.getElementsByClassName("option-container").item(0);
@@ -91,12 +93,14 @@ function ProductEdit(props){
                             oldOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = false;
                         }
 
+                        console.log("000");
+
                         continue;
                     }
 
                     var optionContainer = document.getElementsByClassName("option-container").item(0);
 
-                    var newOptionContainer = optionContainer.item(0).cloneNode(true);
+                    var newOptionContainer = optionContainer.cloneNode(true);
                     //console.log(newOptionContainer);
                     newOptionContainer.getElementsByClassName("optionName").item(0).value = response.data[i].optionname;
                     newOptionContainer.getElementsByClassName("salePrice").item(0).value = response.data[i].sale;
@@ -106,6 +110,8 @@ function ProductEdit(props){
                     }else{
                         newOptionContainer.getElementsByClassName("p_SaleYN").item(0).checked = false;
                     }
+
+                    console.log(newOptionContainer);
 
                     document.getElementsByClassName("option-box").item(0).append(newOptionContainer);
                 }
