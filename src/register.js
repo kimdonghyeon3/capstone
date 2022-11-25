@@ -681,6 +681,15 @@ function Register_company(){
             })
     }
 
+    //이메일 인증 코드 확인
+    const ent_email_check = async (e) => {
+        e.preventDefault();
+
+        setIsEmailCode(true);
+
+        alert("코드 확인 눌림");
+    }
+
     return(
         <div>
             <form onSubmit={handleSubmit} className="user_enroll_form">
@@ -764,8 +773,7 @@ function Register_company(){
                 <div className="tt"><p>인증번호 :</p>
                     <div className="sd">   <input className="user_enroll_text" placeholder="이메일 인증번호"  type="text" required={true} name="code" onChange={handleInput}/>
 
-                    </div><button className="emailValidate" onClick={email_check}>확인</button></div>
-
+                    </div><button className="emailValidate" onClick={ent_email_check}>확인</button></div>
 
                 {/**/}
                 
