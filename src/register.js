@@ -160,7 +160,7 @@ function Register_user(){
             }
         }
 
-        //비밀번호 유효성 검사
+        //비밀번호 유효성 검사//
         if(e.target.name === 'password'){
             if(e.target.value.length < 8){
                 setPasswordmessage('비밀전호는 8글자 이상으로 작성해 주세요');
