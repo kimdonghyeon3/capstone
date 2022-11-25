@@ -8,7 +8,7 @@ import axios from "axios";
 
 function ProductCreate(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 
@@ -208,31 +208,19 @@ function ProductCreate(){
                     <hr className="sun"size="3" width="105%" color="black"/></div>
                     {/* <button className="back_btn" type="button" onClick={back}>뒤로가기</button> */}
                 <div className="whole_left">
-                <div className="photo_templet_container">
-                <div className="photo_upload_container">
-                <div> 대표 사진 업로드 </div>
+                
+               
+                <div className="pen">대표 사진 업로드 </div>
+                <div className="width_jo">
                 <div className="preview_img">
                     {preViewMain && (<img alt="preview" src={preViewMain}/>)}
-                </div>
                 <button onClick={deleteFileImage}> 삭제 </button>
                 <input type="file" accept="image/*" onChange={saveFileImage}/></div>
-
-                <div className="sidetosidemargin">&nbsp;</div>
-
-                <div><label>템플릿 등록</label>
-                <div className="photo_upload_container">
-                    <div className="preview_img">
-                        {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
-                    </div>
-                    <button onClick={deleteTemplateImage}> 삭제 </button>
-                    <input type="file" accept="image/*" onChange={saveTemplateImage}/>
-                </div></div></div>
-            
-            <div className="assas">
-            <div><label className="user_profile_dt">상품명</label>
+                <div className="product_margin">
+                <label >상품명</label>
+            <div>
                 <input className="user_profile_dd" type="text" name="p_ProductName" onChange={handleInput}/></div>
 
-                <div className="sidetosidemargin">&nbsp;</div>
 
                 <div className="category_option"><label>카테고리설정</label>
                 <div><select name="p_Category" onChange={handleInput}>
@@ -248,13 +236,13 @@ function ProductCreate(){
                     <option value="죽">음식/죽</option>
                 </select></div></div>
 
-            </div>
             
-            <div className="assas">
-            <div className="dk_margin"> <label className="user_profile_dt">상품 설명 </label>
-                <textarea className="user_profile_dd" name="p_Detail" onChange={handleInput}></textarea></div>
+            
+           <label >상품 설명 </label>
+            <div> 
+                <textarea  name="p_Detail" onChange={handleInput}></textarea></div>
 
-                <div className="sidetosidemargin">&nbsp;</div>
+                {/* <div className="sidetosidemargin">&nbsp;</div> */}
 
                 <div>옵션</div>
                 <div>
@@ -264,27 +252,38 @@ function ProductCreate(){
 
                 <div className="option-box">
                     <div className="option-container">
-                                            <span className="user_profile_dt"><label>옵션명</label>
+                                        <div><label>옵션명</label></div>
                         <input className="user_profile_dd optionName" type="text" name="optionName" placeholder={"옵션명"} onChange={handleInput}/>
-                    </span>
+                    
 
-                        <div> <label className="user_profile_dt">가격</label>
-                            <input className="user_profile_dd price" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/></div>
+                        <div> <label>가격</label></div>
+                            <input className="user_profile_dd price" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/>
 
-                        <div><span className="user_profile_dt"><label>할인가격</label>
+                        <div><span><label>할인가격</label>
                             <span className="sale_font"><label>&nbsp;(할인유무</label>
                                     <input className="p_SaleYN" type="checkbox" name="p_SaleYN" value="Y"/>Y)
                             </span>
                         </span>
                             <span className="sale_display"><input className="user_profile_dd salePrice" type="text" name="p_Sale" onChange={handleInput}/></span>
                         </div>
-                        <hr/>
                     </div>
                 </div>
 
-                </div>
 
-                <button className="btn_margin"type="submit" onClick={createProduct}>제품 만들기</button>
+
+                </div></div>
+                <div className="sidetosidemargin">&nbsp;</div>
+
+                <div className="lolo">템플릿 등록
+              
+                    <div className="preview_img1">
+                        {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
+                    </div></div>
+                    <button onClick={deleteTemplateImage}> 삭제 </button>
+                    <input type="file" accept="image/*" onChange={saveTemplateImage}/>
+                
+                <div className="btn_lo"><button className="btn_margin"type="submit" onClick={createProduct}>제품 만들기</button></div>
+            
 
                 </div>
             <Footer/>

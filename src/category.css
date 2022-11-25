@@ -1,4 +1,18 @@
+.product_price_st{
+ color: black;
+ margin-left: 2.5%;
+ font-size: 20px;
+ font-weight: bold;
+ /* text-align: center; */
+ margin-top: 1.5%;
 
+}
+.product_name_st{
+    margin-left: 2.5%;
+    font-size: 15px;
+    font-weight: 450;
+    margin-top: 3%;
+}
 .sub_logo{
     font-size: 30px;
     font-style: 'italic';
@@ -50,7 +64,7 @@
 }
 .category_list2{
     width:15%;
-    margin-left: 10%;
+    margin-left: 12%;
     list-style: none;
     display:inline-block;
     position: absolute;
@@ -59,7 +73,7 @@
 }
 .category_list3{
     width:15%;
-    margin-left: 16%;
+    margin-left: 19%;
     list-style: none;
     display:inline-block;
     position: absolute;
@@ -68,7 +82,7 @@
 
 .category_list4{
     width:15%;
-    margin-left: 24.7%;
+    margin-left: 28.2%;
     list-style: none;
     display:inline-block;
     position: absolute;
@@ -174,7 +188,7 @@
     background : lightblue;
 }
 .product_container_container{
-        display:flex;
+    display:flex;
     flex-direction: row;
     flex-wrap : wrap;
 }
@@ -182,17 +196,17 @@
 .product_container{
     position: relative;
     text-align: center;
-    width: 33%;
+    width: 30%;
 }
 .product_txt {
-    position: absolute;
+    /* position: absolute; */
     top: 55%;
     left: 0%;
     /* transform: translate(-50%, 50%); */
     background-color: white;
     width: 98%;
     height: 45%;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0);
     text-align: left;
   }
 .product{
@@ -276,4 +290,7 @@
 }
 .search_bar_margin{
     margin-left: 35%
+}
+.cate_margin{
+    margin-top: 3%;
 }
