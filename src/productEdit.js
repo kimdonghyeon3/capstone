@@ -12,7 +12,7 @@ function ProductEdit(props){
     // const {productId} = useParams().product_pdid;
     // console.log(productId);
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const navigateback = useNavigate();
     const userinfo = useContext(Userlogin);
 
@@ -63,8 +63,8 @@ function ProductEdit(props){
                 document.getElementsByClassName("product_name").item(0).value = response.data.productName;
                 document.getElementsByClassName("product_detail").item(0).value = response.data.detail;
 
-                setPreViewMain("https://www.frontdoorprivacy.shop/gen/" + response.data.imageFileName);
-                setPreViewTemplate("https://www.frontdoorprivacy.shop/gen/" + response.data.detailFileName);
+                setPreViewMain("http://localhost:8080/gen/" + response.data.imageFileName);
+                setPreViewTemplate("http://localhost:8080/gen/" + response.data.detailFileName);
             })
             .catch((error)=>{
                 console.log(error);

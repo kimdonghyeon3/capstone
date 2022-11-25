@@ -20,9 +20,9 @@ function ProductOptionHtml(props){
 
 //상품이 들어왔다? 그러면 해당 상품이 무엇인지 알아야하는 것
 function ProductDetail(){
-    //https://www.frontdoorprivacy.shop
+    //http://localhost:8080
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const params = useParams();
     const pdid = params.product_pdid;
     const logininfo = useContext(Userlogin);
@@ -93,8 +93,8 @@ function ProductDetail(){
                     p_Options: response.data.p_Options,
                 })
 
-                document.getElementsByClassName("main-image").item(0).src = "https://www.frontdoorprivacy.shop/gen/" + response.data.p_ImageFileName;
-                document.getElementsByClassName("detail-image").item(0).src = "https://www.frontdoorprivacy.shop/gen/" + response.data.p_DetailFileName;
+                document.getElementsByClassName("main-image").item(0).src = "http://localhost:8080/gen/" + response.data.p_ImageFileName;
+                document.getElementsByClassName("detail-image").item(0).src = "http://localhost:8080/gen/" + response.data.p_DetailFileName;
 
                 console.log(response.data)
                 console.log(localStorage.getItem("role"))
@@ -113,7 +113,7 @@ function ProductDetail(){
 
     const subscript = async () => {
 
-        const baseUrl = "https://www.frontdoorprivacy.shop";
+        const baseUrl = "http://localhost:8080";
 
         // await axios
         //     .post(baseUrl + "/product/detail/subscribe", {
@@ -190,7 +190,7 @@ function ProductDetail(){
 
                 axios({
                     method: 'post',
-                    url: `https://www.frontdoorprivacy.shop/verifyIamport/`  + `${imp_uid}`,
+                    url: `http://localhost:8080/verifyIamport/`  + `${imp_uid}`,
                     headers: {
                         'Content-Type' : 'application/json'
                     },

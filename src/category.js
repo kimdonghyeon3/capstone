@@ -26,7 +26,7 @@ function ProductHTML(props){
         <div className="product_container">
             <div className="product">
                 <div className="product_img_div"><Link className="product_link" target="_blank" to={"/product/detail/" + props.list.pdid}><img
-                    src={"https://www.frontdoorprivacy.shop/gen/" + path}
+                    src={"http://localhost:8080/gen/" + path}
                     className="product_img"/>
                 </Link></div>
                 <div className="product_txt"> 
@@ -43,7 +43,7 @@ function ProductHTML(props){
 
 function Category_content_main(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -74,7 +74,7 @@ function Category_content_main(){
 }
 
 function Category_content_lifestyle(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -111,7 +111,7 @@ function Category_content_lifestyle(){
 }
 
 function Category_content_content(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -148,7 +148,7 @@ function Category_content_content(){
 }
 
 function Category_content_food(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -185,7 +185,7 @@ function Category_content_food(){
 }
 
 function Category_content_best(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -220,7 +220,7 @@ function Category_content_best(){
 }
 
 function Category_content_sale_event(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -251,7 +251,7 @@ function Category_content_sale_event(){
 }
 
 function Category_content_new(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -285,7 +285,7 @@ function Category_content_new(){
 }
 
 function Category_content_search(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
     const url = window.location.pathname.split('/').pop();
@@ -330,7 +330,7 @@ function Category_content_search(){
 }
 
 function HadleSearch(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     var productList;
 
@@ -440,7 +440,7 @@ function Category_content_detail(props){
         detail.description = document.getElementById("searchText").value;
     }
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 

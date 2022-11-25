@@ -37,7 +37,7 @@ function Register_main(){
 }
 function Register_user(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const navigate = useNavigate();
 
@@ -281,6 +281,8 @@ function Register_user(){
     const email_check = async (e) => {
         e.preventDefault();
 
+        setIsemailCert(true);
+
         alert("코드 확인 눌림");
     }
 
@@ -338,7 +340,7 @@ function Register_user(){
 }
 function Register_company(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const[enroll_company, setEnroll_company] = useState({
         enterpriseName:'',

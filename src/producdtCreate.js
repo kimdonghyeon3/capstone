@@ -8,7 +8,7 @@ import axios from "axios";
 
 function ProductCreate(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 

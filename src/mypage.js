@@ -9,7 +9,7 @@ import ProductCreate from "./producdtCreate";
 
 function ProductManageHTML(props){
 
-    const path = "https://www.frontdoorprivacy.shop/gen/" + props.list.imageFileName;
+    const path = "http://localhost:8080/gen/" + props.list.imageFileName;
     const navigate = useNavigate();
 
     // console.log(path + " /// " +  typeof path);
@@ -47,7 +47,7 @@ function ProductManageHTML(props){
 }
 //기업페이지
 function Company_profile(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const logininfo = useContext(Userlogin);    //전역변수 관리 변수
 
@@ -120,7 +120,7 @@ function Company_profile(){
 }
 
 function Company_edit(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const logininfo = useContext(Userlogin);
 
@@ -247,7 +247,7 @@ function Company_manage(){
         navigate("/product/create");
     }
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [productList, setProductList] = useState();
 
@@ -431,7 +431,7 @@ function Company_deliver(){
 
 function Company_withdraw(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 
@@ -541,7 +541,7 @@ function Company_content(){
 //유저페이지
 function User_profile(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const logininfo = useContext(Userlogin);
 
@@ -605,7 +605,7 @@ function User_profile(){
 
 function User_edit(){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const [isuserId, setIsuserId] = useState(true);
     const [userId_btn, setUserId_btn] = useState("중복 확인");
@@ -738,7 +738,7 @@ function User_edit(){
 
 function ProductSubscriptHTML(props){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const navigate = useNavigate();
 
     const handleClick = async () => {
@@ -768,7 +768,7 @@ function ProductSubscriptHTML(props){
     return(
         <div className="manage_container">
                 <div className="product_img_div">
-                    <Link className="product_link" to="/product/detail"><img src={"https://www.frontdoorprivacy.shop/gen/" + props.list.p_ImageFileName} className="product_img1"/>
+                    <Link className="product_link" to="/product/detail"><img src={"http://localhost:8080/gen/" + props.list.p_ImageFileName} className="product_img1"/>
                     </Link></div>
                 <div className="manage"> 상품명: {productName}
                     {/*<div className="">상품설명: {props.list.detail}</div>*/}
@@ -784,7 +784,7 @@ function User_manage(){
 
     const [subscriptList, setSubscriptList] = useState();
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getUserSubscript();
@@ -824,7 +824,7 @@ function User_manage(){
 
 function ProductBasketHTML(props){
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const handleClick = async () => {
         console.log("찜하기 해지");
@@ -850,7 +850,7 @@ function ProductBasketHTML(props){
 
     return(
         <div className="manage_container">
-                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={"https://www.frontdoorprivacy.shop/gen/" + props.list.imageFileName} className="product_img1"/></Link></div>
+                <div className="product_img_div"><Link className="product_link" to="/product/detail"><img src={"http://localhost:8080/gen/" + props.list.imageFileName} className="product_img1"/></Link></div>
                 <div className="manage">상품명 : {productName}
                     <div>상품가격 :{props.list.price}</div>
                     <button className="cancel_btn" onClick={handleClick}>찜하기 해지</button>
@@ -863,7 +863,7 @@ function ProductBasketHTML(props){
 function User_bascket(){
     const [basketList, setBasketList] = useState();
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     useEffect(()=>{                         //첫 페이지 시작시 값 1번만 실행
         getUserSubscript();
@@ -900,7 +900,7 @@ function User_bascket(){
 }
 
 function User_withdraw(){
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
 
     const userinfo = useContext(Userlogin);
 
