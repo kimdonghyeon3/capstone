@@ -135,7 +135,6 @@
     font-weight: bold;
     margin-left: 6.3vw;
 }
-
 /* 유저 manage*/
 .cancel_btn{
     font-size : 1rem;
@@ -249,7 +248,9 @@
     margin-left: 8.5vw;
     margin-top: 1vw;
 }
-
+.bask_con{
+    width: 150%;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

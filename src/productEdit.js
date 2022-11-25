@@ -12,7 +12,7 @@ function ProductEdit(props){
     // const {productId} = useParams().product_pdid;
     // console.log(productId);
 
-    const baseUrl = "https://www.frontdoorprivacy.shop";
+    const baseUrl = "http://localhost:8080";
     const navigateback = useNavigate();
     const userinfo = useContext(Userlogin);
 
@@ -63,8 +63,8 @@ function ProductEdit(props){
                 document.getElementsByClassName("product_name").item(0).value = response.data.productName;
                 document.getElementsByClassName("product_detail").item(0).value = response.data.detail;
 
-                setPreViewMain("https://www.frontdoorprivacy.shop/gen/" + response.data.imageFileName);
-                setPreViewTemplate("https://www.frontdoorprivacy.shop/gen/" + response.data.detailFileName);
+                setPreViewMain("http://localhost:8080/gen/" + response.data.imageFileName);
+                setPreViewTemplate("http://localhost:8080/gen/" + response.data.detailFileName);
             })
             .catch((error)=>{
                 console.log(error);
@@ -296,45 +296,26 @@ function ProductEdit(props){
 
             <div className="locate1"><div className="register_box"><strong>상품 수정</strong></div>
                     <hr className="sun"size="3" width="105%" color="black"/></div>
-            <div className="photo_templet_container">
-            <div className="photo_upload_container">
 
-            <div> 대표 사진 편집 </div>
+            <div className="whole_left">
+            <div className="pen"> 대표 사진 편집 </div>
+            <div className="width_jo">
             <div className="preview_img">
                 {preViewMain && (<img alt="preview" src={preViewMain}/>)}
-            </div>
-            <button onClick={deleteFileImage}> 삭제 </button>
+                <button onClick={deleteFileImage}> 삭제 </button>
             <input type="file" accept="image/*" onChange={saveFileImage}/></div>
 
-            <div className="sidetosidemargin">&nbsp;</div>
-
-                <div> 기존 템플릿 사진</div>
-
-            <div><label>템플릿 편집</label>
-                <div className="preview_img">
-                    {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
-                </div>
-                <button onClick={deleteTemplateImage}> 삭제 </button>
-                <input type="file" accept="image/*" onChange={saveTemplateImage}/>
-            </div></div>
-
-            <div className="assas">
-            <div><label className="user_profile_dt">상품명 편집</label>
-                <input  className="user_profile_dd product_name" type="text" name="p_ProductName" onChange={handleInput}/>
-            </div>
-            <div className="sidetosidemargin">&nbsp;</div>
-            </div>
+            <div className="product_margin">
+            <label>상품명 편집</label>
+                <div><input  className="user_profile_dd product_name" type="text" name="p_ProductName" onChange={handleInput}/></div>
+            
 
 
-            <div className="assas">
-            <div className="dk_margin1"> <label className="user_profile_dt">상품 요약 설명 편집</label>
-                <textarea  className="user_profile_dd product_detail" name="p_Detail" onChange={handleInput}></textarea>
-            </div>
-            <div className="sidetosidemargin">&nbsp;</div>
-            </div>
+  
 
-            <div> <label>카테고리설정 편집</label>
-                <select name="p_Category" onChange={handleInput}>
+
+            <div className="category_option"> <label>카테고리설정 편집</label>
+                <div><select name="p_Category" onChange={handleInput}>
                     <option value={productInfo.detailCategory}>{productInfo.detailCategory}</option>
                     <option value="생활">라이프스타일/생활</option>
                     <option value="멤버쉽">라이프스타일/멤버쉽</option>
@@ -345,9 +326,12 @@ function ProductEdit(props){
                     <option value="빵">음식/빵</option>
                     <option value="유제품">음식/유제품</option>
                     <option value="죽">음식/죽</option>
-                </select>
-            </div>
-
+                </select></div></div>
+            
+                <label>상품 설명 편집</label>
+            <div> 
+                <textarea  className="user_profile_dd product_detail" name="p_Detail" onChange={handleInput}></textarea></div>
+            
             <div>옵션</div>
             <div>
                 <button onClick={plus}> + </button>
@@ -356,28 +340,34 @@ function ProductEdit(props){
 
             <div className="option-box">
                 <div className="option-container">
-                        <span className="user_profile_dt"><label>옵션명</label>
+                        <div><label>옵션명</label></div>
                         <input className="user_profile_dd optionName" type="text" name="optionName" placeholder={"옵션명"} onChange={handleInput}/>
-                    </span>
 
-                    <div> <label className="user_profile_dt">가격</label>
+
+                    <div> <label>가격</label></div>
                         <input className="user_profile_dd price" type="text" name="p_Price" placeholder={"가격"} onChange={handleInput}/>
-                    </div>
+                    
 
-                    <div><span className="user_profile_dt"><label>할인가격</label>
+                    <div><label>할인가격</label>
                             <span className="sale_font"><label>&nbsp;(할인유무</label>
                                     <input className="p_SaleYN" type="checkbox" name="p_SaleYN" value="Y"/>Y)
                             </span>
-                        </span>
-                        <span className="sale_display"><input className="user_profile_dd salePrice" type="text" name="p_Sale" onChange={handleInput}/>
-                        </span>
+                        
+                        <span className="sale_display"><input className="user_profile_dd salePrice" type="text" name="p_Sale" onChange={handleInput}/></span>
                     </div>
-                    <hr/>
                 </div>
+            </div></div>
             </div>
+            
+<div className="lolo"><label>템플릿 편집</label>
+    <div className="preview_img1">
+        {preViewTemplate && (<img alt="preview1" src={preViewTemplate}/>)}
+    </div></div>
+    <button onClick={deleteTemplateImage}> 삭제 </button>
+    <input type="file" accept="image/*" onChange={saveTemplateImage}/>
 
-            <button type="submit" onClick={editProduct}>제품 수정하기</button>
 
+                    <div  className="btn_lo"><button type="submit" onClick={editProduct}>제품 수정하기</button></div></div>
             <Footer/>
         </div>
     )

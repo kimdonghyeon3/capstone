@@ -1,20 +1,39 @@
 .container{
     /*display:flex;*/
 }
-
+.lolo{
+    overflow-y: scroll;
+    margin-top: 5%;
+    /* max-width: 75%; */
+}
 .top{
     display:flex;
+    margin-bottom: 5%;
 }
 
 .left{
     float:left;
+    /* width: 100%; */
 }
-
+.main-image{
+    width: 35vw;
+    height: 35vw;
+}
 .right{
-    float:right;
+    margin-left: 10%;
 }
 
 .productitem{
     font-weight: bold;
+    width: 50%;
     font-size: 1.5rem;
+}
+.productinfo_st{
+    width: 65%;
+}
+.detail-image{
+    width: 100%;
+}
+.detail_margin{
+    margin-top: 5%;
 }
