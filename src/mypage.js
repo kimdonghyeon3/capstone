@@ -297,14 +297,17 @@ function Company_deliver(){
     const [t_code, sett_code] = useState("");
     const [t_invoice, sett_invoice] = useState("");
 
-    //myKey에는 내가 적용한 key 넣으면됨
-    var myKey = "";
+    var myKey = "X3b21Qy5sOJPcURYw002DQ";
+
 
     async function getDeliverList(){            //spring 연동 값 받아오기
+        //myKey에는 내가 적용한 key 넣으면됨
+
         await axios
-            .get("http://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey, {
-                p_USID:localStorage.getItem("uid"),
-            })
+            .get("http://info.sweettracker.co.kr/api/v1/companylist?t_key="+myKey
+                , {
+                p_USID:localStorage.getItem("uid"),}
+            )
             .then((response) => {
                 console.log(response);
                 // 방법 1. JSON.parse 이용하기
@@ -955,7 +958,7 @@ function User_delivery(){
     const [t_invoice, sett_invoice] = useState("");
 
     //myKey에는 내가 적용한 key 넣으면됨
-    var myKey = "";
+    var myKey = "X3b21Qy5sOJPcURYw002DQ";
 
     async function getDeliverList(){            //spring 연동 값 받아오기
         await axios
@@ -1131,7 +1134,7 @@ function User(){
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/edit"> 프로필 수정</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/manage"> 구독 관리</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/bascket"> 찜하기</Link></li>
-                        {/*<li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/delivery"> 배송 조회</Link></li>*/}
+                        <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/delivery"> 배송 조회</Link></li>
                         <li className="user_navbar_li"><Link className="user_navbar_link" to="/mypage/user/withdraw"> 회원 탈퇴</Link></li>
                     </ul>
                 </div>

@@ -164,6 +164,7 @@ function ProductEdit(props){
 
     //나머지 입력 처리
     const [productEditInfo, setProductEditInfo] = useState({
+        p_PDID:pdid,
         p_ENID:userinfo.uid,
         p_ProductName:'',
         p_Category:'',
@@ -203,6 +204,7 @@ function ProductEdit(props){
             })
         }
     }
+
 
     const plus = (e) => {
         var optionContainer = document.getElementsByClassName("option-container");
@@ -265,6 +267,61 @@ function ProductEdit(props){
             options.push(tmp);
         }
 
+        // <div className="category_option"> <label>카테고리설정 편집</label>
+        //     <div><select name="p_Category" onChange={handleInput}>
+        //         <option value={productInfo.detailCategory}>{productInfo.detailCategory}</option>
+        //         <option value="생활">라이프스타일/생활</option>
+        //         <option value="멤버쉽">라이프스타일/멤버쉽</option>
+        //         <option value="건강">라이프스타일/건강</option>
+        //         <option value="도서">컨텐츠/도서</option>
+        //         <option value="음악">컨텐츠/음악</option>
+        //         <option value="영상">컨텐츠/영상</option>
+        //         <option value="빵">음식/빵</option>
+        //         <option value="유제품">음식/유제품</option>
+        //         <option value="죽">음식/죽</option>
+        //     </select></div></div>
+        //
+        // <label>상품 설명 편집</label>
+        // <div>
+        //     <textarea  className="user_profile_dd product_detail" name="p_Detail" onChange={handleInput}></textarea></div>
+
+        var optiondd = document.getElementsByClassName("p_Category").item(0);
+
+        console.log(optiondd);
+
+        var select = optiondd.options[optiondd.selectedIndex].value;
+
+        console.log(select);
+
+        if(select === '생활' || select === '건강' || select === '멤버쉽'){
+            console.log("dafdafdsf");
+            setProductEditInfo({
+                ...productEditInfo,
+                ['p_Category']:"라이프스타일",
+                ['p_DetailCategory']:select,
+            })
+        }else if(select === '도서' || select === '음악' || select === '영상'){
+            setProductEditInfo({
+                ...productEditInfo,
+                ['p_Category']:"컨텐츠",
+                ['p_DetailCategory']:select,
+            })
+        }else if(select === '빵' || select === '유제품' || select === '죽'){
+            setProductEditInfo({
+                ...productInfo,
+                ['p_Category']:"음식",
+                ['p_DetailCategory']:select,
+            })
+        }
+
+        var ddetail = document.getElementsByClassName("product_detail").item(0).value;
+
+        setProductEditInfo({
+            ...productEditInfo,
+            p_Detail: ddetail
+        })
+
+
         console.log(productEditInfo);
         console.log(options);
 
@@ -317,11 +374,8 @@ function ProductEdit(props){
             
 
 
-  
-
-
             <div className="category_option"> <label>카테고리설정 편집</label>
-                <div><select name="p_Category" onChange={handleInput}>
+                <div><select className="p_Category" name="p_Category" onChange={handleInput}>
                     <option value={productInfo.detailCategory}>{productInfo.detailCategory}</option>
                     <option value="생활">라이프스타일/생활</option>
                     <option value="멤버쉽">라이프스타일/멤버쉽</option>
